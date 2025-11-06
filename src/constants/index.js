@@ -192,6 +192,14 @@ const testimonials = [
     company: "devRoot",
     image: "https://i.postimg.cc/3rfhk8GH/vas-Cs-Mm-G3Acgy.png",
   },
+  {
+    testimonial:
+      "من افضل المبرمجين اللي تعاملت معهم يتميز بلمساته المختلفه وتنظيم رهيب للملفات وطريقة احترافية في إدارة الاكواد تضمن ان المشروع يطلع بأفضل اداء ممكن. صحيح احيانا ياخذ وقت في بعض المشاريع المعقدة بس النتيجة النهائيه دائما مبهره وتستحق الانتظار..زبدة الرأي شخص متعاون، فاهم شغله، ويتعامل باحتراف عالي اتمنى له كل التوفيق والنجاح في مسيرته.",
+    name: "Khaton",
+    designation: "CEO",
+    company: "Vision Art Studio",
+    image: "https://i.postimg.cc/BQJPmvGH/761ddea508fe5379a52801b7510399cb.png",
+  },
 ];
 
 const projects = [

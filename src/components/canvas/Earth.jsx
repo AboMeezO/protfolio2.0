@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
@@ -7,28 +7,36 @@ import CanvasLoader from "../Loader";
 const Earth = () => {
   const earth = useGLTF("./planet/scene.gltf");
   const [isValid, setIsValid] = useState(true);
+  const hasValidatedRef = useRef(false);
+  const sceneRef = useRef(null);
 
-  // Add validation to ensure the model is properly loaded
+  // Add validation to ensure the model is properly loaded - only run once per scene
   useEffect(() => {
-    if (earth.scene) {
-      // Validate the geometry to prevent NaN errors
-      earth.scene.traverse((child) => {
-        if (child.geometry && child.geometry.attributes.position) {
-          const positions = child.geometry.attributes.position.array;
-          // Check for NaN values in positions
-          for (let i = 0; i < positions.length; i++) {
-            if (isNaN(positions[i])) {
-              console.warn(
-                "Found NaN in Earth geometry positions, skipping render"
-              );
-              setIsValid(false);
-              return;
+    if (earth.scene && earth.scene !== sceneRef.current) {
+      // Only validate if this is a new scene object
+      sceneRef.current = earth.scene;
+      
+      if (!hasValidatedRef.current) {
+        hasValidatedRef.current = true;
+        // Validate the geometry to prevent NaN errors
+        earth.scene.traverse((child) => {
+          if (child.geometry && child.geometry.attributes.position) {
+            const positions = child.geometry.attributes.position.array;
+            // Check for NaN values in positions
+            for (let i = 0; i < positions.length; i++) {
+              if (isNaN(positions[i])) {
+                console.warn(
+                  "Found NaN in Earth geometry positions, skipping render"
+                );
+                setIsValid(false);
+                return;
+              }
             }
           }
-        }
-      });
+        });
+      }
     }
-  }, [earth]);
+  }, [earth.scene]);
 
   // Don't render if model isn't loaded properly or has invalid geometry
   if (!earth.scene || !isValid) {

@@ -2,14 +2,24 @@
  * Utility functions for validating 3D models and preventing NaN geometry errors
  */
 
+// Cache validation results to avoid re-validating the same scene
+const validationCache = new WeakMap();
+
 /**
  * Validates a Three.js scene for NaN values in geometry positions
+ * Uses caching to avoid redundant validation of the same scene object
  * @param {THREE.Scene} scene - The Three.js scene to validate
  * @returns {Object} - Validation result with isValid boolean and details
  */
 export const validateScene = (scene) => {
   if (!scene) {
     return { isValid: false, errors: ["Scene is null or undefined"] };
+  }
+
+  // Check cache first to avoid expensive re-validation
+  const cached = validationCache.get(scene);
+  if (cached) {
+    return cached;
   }
 
   const errors = [];
@@ -31,10 +41,15 @@ export const validateScene = (scene) => {
     }
   });
 
-  return {
+  const result = {
     isValid: !hasNaN,
     errors: errors.length > 0 ? errors : [],
   };
+
+  // Cache the result for future calls
+  validationCache.set(scene, result);
+
+  return result;
 };
 
 /**
