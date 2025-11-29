@@ -1,55 +1,64 @@
-import React from "react";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
+import Timeline from "@mui/lab/Timeline";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import TimelineDot from "@mui/lab/TimelineDot";
 import { motion } from "framer-motion";
-
-import "react-vertical-timeline-component/style.min.css";
 
 import { styles } from "../styles";
 import { experiences } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
-const ExperienceCard = ({ experience }) => {
+const ExperienceCard = ({ experience, isLast }) => {
   return (
-    <VerticalTimelineElement
-      contentStyle={{
-        background: "#1d1836",
-        color: "#fff",
-      }}
-      contentArrowStyle={{ borderRight: "7px solid  #232631" }}
-      date={experience.date}
-      iconStyle={{ background: experience.iconBg }}
-      icon={
-        <div className="flex justify-center items-center w-full h-full">
+    <TimelineItem>
+      <TimelineSeparator sx={{}}>
+        <TimelineDot
+          sx={{
+            bgcolor: "#D3D3D3",
+            width: 75,
+            height: 75,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            overflow: "hidden",
+            border: "5px solid white",
+          }}
+        >
           <img
             src={experience.icon}
             alt={experience.company_name}
-            className="w-[60%] h-[60%] object-contain rounded-md"
+            className="w-[60%] h-[60%] object-contain rounded-md mx-auto"
           />
+        </TimelineDot>
+        {!isLast && <TimelineConnector />}
+      </TimelineSeparator>
+      <TimelineContent>
+        <div className="bg-[#1d1836] p-4 rounded-lg">
+          <h3 className="text-white text-[24px] font-bold">
+            {experience.title}
+          </h3>
+          <p
+            className="text-secondary text-[16px] font-semibold"
+            style={{ margin: 0 }}
+          >
+            {experience.company_name} — {experience.date}
+          </p>
+          <ul className="mt-3 list-disc ml-5 space-y-2">
+            {experience.points.map((point, index) => (
+              <li
+                key={`experience-point-${index}`}
+                className="text-white-100 text-[14px] pl-1 tracking-wider"
+              >
+                {point}
+              </li>
+            ))}
+          </ul>
         </div>
-      }>
-      <div>
-        <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
-        <p
-          className="text-secondary text-[16px] font-semibold"
-          style={{ margin: 0 }}>
-          {experience.company_name}
-        </p>
-      </div>
-
-      <ul className="mt-5 list-disc ml-5 space-y-2">
-        {experience.points.map((point, index) => (
-          <li
-            key={`experience-point-${index}`}
-            className="text-white-100 text-[14px] pl-1 tracking-wider">
-            {point}
-          </li>
-        ))}
-      </ul>
-    </VerticalTimelineElement>
+      </TimelineContent>
+    </TimelineItem>
   );
 };
 
@@ -65,15 +74,16 @@ const Experience = () => {
         </h2>
       </motion.div>
 
-      <div className="mt-20 flex flex-col">
-        <VerticalTimeline>
+      <div className="mt-20">
+        <Timeline position="alternate">
           {experiences.map((experience, index) => (
             <ExperienceCard
               key={`experience-${index}`}
               experience={experience}
+              isLast={index === experiences.length - 1}
             />
           ))}
-        </VerticalTimeline>
+        </Timeline>
       </div>
     </>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Tilt } from "react-tilt";
+import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
@@ -19,17 +19,17 @@ const ProjectCard = ({
   return (
     <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
       <Tilt
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
+        tiltMaxAngleX={20}
+        tiltMaxAngleY={20}
+        perspective={900}
+        transitionSpeed={800}
+        scale={1.02}
         className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
       >
         <div className="relative w-full h-[230px]">
           <img
             src={image}
-            alt="project_image"
+            alt={name}
             className="w-full h-full object-cover rounded-2xl"
           />
 
@@ -82,11 +82,11 @@ const Works = () => {
           name: repo.name,
           description: repo.description || "No description",
           tags: [{ name: "github", color: "text-blue-400" }],
-          image: `https://raw.githubusercontent.com/AboMeezo/${repo.name}/main/${repo.name}.png`,
+          image: `https://raw.githubusercontent.com/AboMeezO/${repo.name}/main/${repo.name}.png`,
           source_code_link: repo.html_url,
         }));
 
-        setProjects([...staticProjects, ...githubProjects]);
+        setProjects((prev) => [...prev, ...githubProjects]);
       } catch (err) {
         console.error("Failed to fetch GitHub projects", err);
       }
@@ -98,8 +98,8 @@ const Works = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} `}>My work</p>
-        <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
+        <p className={styles.sectionSubText}>My work</p>
+        <h2 className={styles.sectionHeadText}>Projects.</h2>
       </motion.div>
 
       <div className="w-full flex">
