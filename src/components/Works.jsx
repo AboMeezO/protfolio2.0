@@ -7,7 +7,7 @@ import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects as staticProjects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
-
+// import "react-parallax-tilt/ParallaxEffect.demozap.css";
 const ProjectCard = ({
   index,
   name,
@@ -23,10 +23,10 @@ const ProjectCard = ({
         tiltMaxAngleY={20}
         perspective={900}
         transitionSpeed={800}
-        scale={1.02}
-        className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
+        scale={1.05}
+        className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full background-stripes parallax-effect"
       >
-        <div className="relative w-full h-[230px]">
+        <div className="relative w-full h-[230px] inner-element">
           <img
             src={image}
             alt={name}
