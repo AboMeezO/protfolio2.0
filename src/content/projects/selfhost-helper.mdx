@@ -1,0 +1,45 @@
+---
+title: "SelfHost Helper"
+description: "A high-performance desktop cockpit for managing local development processes, monitoring resources, and secure tunneling."
+date: "2024-08-05"
+tags: ["Desktop App", "DevTools", "Productivity"]
+tech: ["Electron", "React", "Vite", "SQLite", "Sequelize", "Monaco Editor", "Tailwind CSS", "Cloudflare Tunnels"]
+features: [
+  "Centralized process lifecycle management",
+  "Draggable grid-based resource monitoring",
+  "Integrated Monaco-powered code editor",
+  "One-click Cloudflare service tunneling",
+  "Full-text project search via ripgrep integration"
+]
+cover: "/src/assets/herobg.png"
+featured: true
+links:
+  - label: "GitHub"
+    href: "https://github.com/DevRoots-Studio/SelfHost-Helper"
+gallery:
+  - type: image
+    src: "/src/assets/herobg.png"
+    alt: "SelfHost Helper Dashboard"
+    caption: "The central command center for all your local projects."
+---
+
+## Why This Exists
+
+Modern development workflows are fragmented, often requiring a dozen terminal windows and various monitoring tools. **SelfHost Helper** eliminates this chaos, bringing process management, resource tracking, and coding into a single high-performance workspace.
+
+## The Cockpit Experience
+
+The heart of the application is the **Overview Hub**—a customizable workspace where you can drag and resize smart tiles to build your ideal monitoring center.
+
+### Core Capabilities:
+- **Live Telemetry**: Real-time CPU and RAM tracking with sparkline charts for instant diagnostics.
+- **Dev Suite Integration**: A full-featured environment powered by the **Monaco Editor** (the engine behind VS Code), featuring built-in Git tools and blazing-fast search.
+- **Instant Exposure**: Securely expose local services to the global internet via integrated **Cloudflare Tunnels**, no firewall configuration required.
+
+## Technical Architecture
+
+Built as an **Electron** desktop application, it provides full native system integration. It utilizes a **React** frontend for a high-performance, responsive UI and **SQLite** for reliable local data persistence.
+
+## Philosophy
+
+SelfHost Helper is built on the belief that local development shouldn't feel scattered. It’s about providing one interface to rule them all, giving developers professional precision over their local environments.
