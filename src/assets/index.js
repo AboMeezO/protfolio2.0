@@ -31,7 +31,14 @@ import discord from "./discord.png";
 import java from "./java.png";
 import Electron from "./Electron.png";
 
+import carrent from "./carrent.png";
+import jobit from "./jobit.png";
+import tripguide from "./tripguide.png";
+
 export {
+  carrent,
+  jobit,
+  tripguide,
   Electron,
   java,
   python,
