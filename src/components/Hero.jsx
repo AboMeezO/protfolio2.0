@@ -18,11 +18,10 @@ const Hero = () => {
 
         <div>
           <h1 className={`${styles.heroHeadText} text-white`}>
-            Hi, I'm <span className="text-[#915EFF]">AboTasneem</span>
+            Hi, I'm <span className="text-[#915EFF]">Mohammad</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            I develop 3D visuals, user <br className="sm:block hidden" />
-            interfaces and web applications
+            A Full Stack Web Developer Based in Irbid, Jordan
           </p>
         </div>
       </div>
