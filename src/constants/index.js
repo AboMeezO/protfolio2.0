@@ -2,23 +2,19 @@ import {
   mobile,
   backend,
   web,
-  javascript,
-  html,
-  css,
   reactjs,
   tailwind,
   nodejs,
-  mongodb,
   git,
-  threejs,
   MeezOStudios,
   MeezOCraft,
   MeezOSystem,
   freelancing,
-  python,
   discord,
   Electron,
-  aref,
+  docker,
+  typescript,
+  java,
 } from "../assets";
 export const navLinks = [
   {
@@ -52,71 +48,245 @@ const services = [
 
 const technologies = [
   {
-    name: "HTML 5",
-    icon: html,
-    experience: "3+ years building semantic, accessible websites",
-  },
-  {
-    name: "CSS 3",
-    icon: css,
-    experience: "3+ years crafting responsive layouts and animations",
-  },
-  {
-    name: "JavaScript",
-    icon: javascript,
-    experience: "3+ years developing interactive web applications",
-  },
-
-  {
-    name: "React JS",
+    name: "React",
     icon: reactjs,
-    experience: "2+ years building dynamic SPAs and component libraries",
+    iconKey: "react",
+    shortLabel: "React",
+    experience: "Advanced interface architecture and component systems",
   },
   {
-    name: "React Native",
-    icon: reactjs,
-    experience: "1+ years developing cross-platform mobile apps",
+    name: "Next.js",
+    iconKey: "nextdotjs",
+    shortLabel: "Next",
+    experience: "Full-stack React applications and app router workflows",
   },
   {
-    name: "Discord JS",
-    icon: discord,
-    experience: "3+ years building scalable bot architectures",
+    name: "TanStack Start",
+    iconKey: "tanstack",
+    shortLabel: "TS",
+    experience: "Modern React full-stack routing and data workflows",
   },
   {
-    name: "Electron JS",
-    icon: Electron,
-    experience: "2+ years building cross-platform desktop applications",
+    name: "TanStack Router",
+    iconKey: "tanstack",
+    shortLabel: "TR",
+    experience: "Type-safe client routing and nested application structure",
   },
-
   {
-    name: "Python",
-    icon: python,
-    experience: "3+ years developing scripts and automation tools",
+    name: "GSAP",
+    iconKey: "gsap",
+    shortLabel: "GSAP",
+    experience: "High-control motion systems and timeline animation",
+  },
+  {
+    name: "Framer Motion",
+    iconKey: "framer",
+    shortLabel: "FM",
+    experience: "Declarative UI motion and interaction choreography",
+  },
+  {
+    name: "React Query",
+    iconKey: "reactquery",
+    shortLabel: "RQ",
+    experience: "Server-state orchestration and client caching",
+  },
+  {
+    name: "TanStack Query",
+    iconKey: "tanstack",
+    shortLabel: "TQ",
+    experience: "Typed async data flows and resilient fetch state",
   },
   {
     name: "Tailwind CSS",
     icon: tailwind,
-    experience: "2+ years building modern, utility-first interfaces",
+    iconKey: "tailwindcss",
+    shortLabel: "TW",
+    experience: "Utility-first styling inside constrained design systems",
   },
   {
-    name: "Node JS",
+    name: "Jotai",
+    shortLabel: "J",
+    experience: "Atomic state modeling for focused React surfaces",
+  },
+  {
+    name: "shadcn/ui",
+    iconKey: "shadcnui",
+    shortLabel: "UI",
+    experience: "Composable UI primitives and app-facing design systems",
+  },
+  {
+    name: "Barba.js",
+    shortLabel: "B",
+    experience: "Navigation transitions and page-flow animation",
+  },
+  {
+    name: "NestJS",
+    iconKey: "nestjs",
+    shortLabel: "Nest",
+    experience: "Structured backend services and modular server design",
+  },
+  {
+    name: "ExpressJS",
     icon: nodejs,
-    experience: "2+ years building REST APIs and microservices",
+    iconKey: "express",
+    shortLabel: "Ex",
+    experience: "Lean APIs and custom middleware-driven backends",
   },
   {
-    name: "MongoDB",
-    icon: mongodb,
-    experience: "2+ years designing NoSQL database architectures",
+    name: "Prisma ORM",
+    iconKey: "prisma",
+    shortLabel: "Pr",
+    experience: "Type-safe database access and schema workflows",
   },
   {
-    name: "Three JS",
-    icon: threejs,
-    experience: "1+ years creating 3D web experiences",
+    name: "Sequelize ORM",
+    iconKey: "sequelize",
+    shortLabel: "Sq",
+    experience: "Relational modeling and query abstraction",
   },
   {
-    name: "git",
+    name: "Zod",
+    iconKey: "zod",
+    shortLabel: "Z",
+    experience: "Runtime validation and contract enforcement",
+  },
+  {
+    name: "Passport.js",
+    iconKey: "passport",
+    shortLabel: "P",
+    experience: "Authentication strategies and session/token flows",
+  },
+  {
+    name: "Discord.js",
+    icon: discord,
+    iconKey: "discord",
+    shortLabel: "D",
+    experience: "Bot platforms, command systems, and community tooling",
+  },
+  {
+    name: "SQLite",
+    iconKey: "sqlite",
+    shortLabel: "SQL",
+    experience: "Embedded data layers and lightweight persistence",
+  },
+  {
+    name: "PostgreSQL",
+    iconKey: "postgresql",
+    shortLabel: "PG",
+    experience: "Relational data design and production query workflows",
+  },
+  {
+    name: "Docker",
+    icon: docker,
+    iconKey: "docker",
+    shortLabel: "DK",
+    experience: "Containerized development and deployment packaging",
+  },
+  {
+    name: "Railway",
+    iconKey: "railway",
+    shortLabel: "RW",
+    experience: "Managed deployment pipelines and hosted services",
+  },
+  {
+    name: "GitHub CI",
+    iconKey: "githubactions",
+    shortLabel: "CI",
+    experience: "Automated checks, workflows, and release pipelines",
+  },
+  {
+    name: "Vercel",
+    iconKey: "vercel",
+    shortLabel: "V",
+    experience: "Frontend hosting, previews, and edge deployment",
+  },
+  {
+    name: "ReviveNode",
+    shortLabel: "RN",
+    experience: "Node hosting and operational deployment management",
+  },
+  {
+    name: "Electron.js",
+    icon: Electron,
+    iconKey: "electron",
+    shortLabel: "El",
+    experience: "Desktop applications with web-native stacks",
+  },
+  {
+    name: "Git",
     icon: git,
-    experience: "3+ years using version control in team environments",
+    iconKey: "git",
+    shortLabel: "Git",
+    experience: "Version control, branching, and collaborative delivery",
+  },
+  {
+    name: "TypeScript",
+    icon: typescript,
+    iconKey: "typescript",
+    shortLabel: "TS",
+    experience: "Typed application architecture across frontend and backend",
+  },
+  {
+    name: "Java",
+    icon: java,
+    shortLabel: "J",
+    experience: "Server plugins, tooling, and strongly typed application logic",
+  },
+];
+
+const technologyCategories = [
+  {
+    name: "Frontend",
+    items: technologies.filter((technology) =>
+      [
+        "React",
+        "Next.js",
+        "TanStack Start",
+        "TanStack Router",
+        "GSAP",
+        "Framer Motion",
+        "React Query",
+        "TanStack Query",
+        "Tailwind CSS",
+        "Jotai",
+        "shadcn/ui",
+        "Barba.js",
+      ].includes(technology.name)
+    ),
+  },
+  {
+    name: "Backend",
+    items: technologies.filter((technology) =>
+      [
+        "NestJS",
+        "ExpressJS",
+        "Prisma ORM",
+        "Sequelize ORM",
+        "Zod",
+        "Passport.js",
+        "Discord.js",
+      ].includes(technology.name)
+    ),
+  },
+  {
+    name: "Data",
+    items: technologies.filter((technology) =>
+      ["SQLite", "PostgreSQL"].includes(technology.name)
+    ),
+  },
+  {
+    name: "Deployments",
+    items: technologies.filter((technology) =>
+      ["Docker", "Railway", "GitHub CI", "Vercel", "ReviveNode"].includes(
+        technology.name
+      )
+    ),
+  },
+  {
+    name: "Tooling",
+    items: technologies.filter((technology) =>
+      ["Electron.js", "Git", "TypeScript", "Java"].includes(technology.name)
+    ),
   },
 ];
 
@@ -268,4 +438,4 @@ const projects = [
   },
 ];
 
-export { services, technologies, experiences, testimonials, projects };
+export { services, technologies, technologyCategories, experiences, testimonials, projects };
