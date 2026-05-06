@@ -4,18 +4,25 @@ import { staggerContainer } from "../../utils/motion";
 import { StarsCanvas, ErrorBoundary } from "../";
 
 const PageWrapper = ({ children }) => (
-  <div className="relative z-0 bg-primary min-h-screen">
-    <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
+  <div className="relative z-0 bg-primary min-h-screen w-full">
+    {/* Fixed Background Layer with forced fixed attachment */}
+    <div 
+      className="fixed inset-0 z-[-1] bg-hero-pattern bg-cover bg-no-repeat bg-center bg-fixed" 
+      style={{ height: '100vh', width: '100vw' }}
+    />
+    
+    <div className="relative z-10 w-full overflow-x-hidden">
       <motion.main
         variants={staggerContainer()}
         initial="hidden"
         animate="show"
-        className={`${styles.padding} max-w-7xl mx-auto relative z-0 pt-[120px]`}
+        className={`${styles.padding} w-full relative z-0 pt-[120px] pb-20`}
       >
         {children}
       </motion.main>
     </div>
-    <div className="relative z-0">
+    
+    <div className="fixed inset-0 z-[-1] pointer-events-none">
       <ErrorBoundary>
         <StarsCanvas />
       </ErrorBoundary>
