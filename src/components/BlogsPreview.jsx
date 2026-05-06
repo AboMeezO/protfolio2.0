@@ -33,7 +33,12 @@ const BlogsPreview = () => {
 
       <div className="mt-20 flex flex-wrap gap-7">
         {latestBlogs.map((blog, index) => (
-          <BlogCard key={blog.slug} blog={blog} index={index} />
+          <motion.div
+            key={blog.slug}
+            variants={fadeIn("up", "spring", index * 0.2, 0.75)}
+          >
+            <BlogCard blog={blog} />
+          </motion.div>
         ))}
       </div>
     </>
