@@ -15,6 +15,9 @@ import {
   docker,
   typescript,
   java,
+  carrent,
+  jobit,
+  tripguide,
 } from "../assets";
 export const navLinks = [
   {
@@ -292,47 +295,50 @@ const technologyCategories = [
 
 const experiences = [
   {
-    title: "Web Development",
+    title: "Full-Stack Web Developer",
     company_name: "X-Tag",
     icon: freelancing,
     iconBg: "#E6DEDD",
     date: "2018 - 2019",
     points: [
-      "Began my journey in web development at X-Tag, a small company where I honed my skills in creating responsive and visually engaging websites.",
-      "Gained hands-on experience with the basics of web technology while working alongside a team, laying the foundation for my future in the field.",
+      "Started as a Junior Developer focusing on responsive web interfaces and core JavaScript logic.",
+      "Collaborated with design teams to translate UI/UX mockups into high-performance, accessible web components.",
     ],
   },
   {
-    title: "Web Development (Freelance)",
-    company_name: "Freelance",
+    title: "Senior Freelance Developer",
+    company_name: "Independent",
     icon: freelancing,
     iconBg: "#E6DEDD",
     date: "2019 - 2022",
     points: [
-      "Worked independently as a freelance front-end developer, managing projects and connecting directly with clients.",
-      "Expanded my expertise in front-end technologies and adapted to various project requirements, mastering essential tools and frameworks.",
+      "Engineered end-to-end solutions for diverse clients, from startups to established businesses.",
+      "Specialized in modern React ecosystems, implementing advanced state management and real-time features.",
+      "Built reputation for delivering complex projects on tight deadlines while maintaining high code quality.",
     ],
   },
   {
-    title: "Game Development",
+    title: "Game & Engine Developer",
     company_name: "Freelance",
     icon: MeezOCraft,
     iconBg: "#E6DEDD",
     date: "2022 - 2024",
     points: [
-      "Specialized in creating and optimizing Minecraft servers and custom plugins during my venture into game development.",
-      "Blended creativity with technical skills to build unique gaming experiences and enhance server functionality for players.",
+      "Pivoted into low-level systems and game engine logic, specializing in Minecraft server architecture.",
+      "Developed custom Java plugins and automated systems to handle thousands of concurrent players.",
+      "Optimized server performance and network protocols to ensure a lag-free gaming experience.",
     ],
   },
   {
-    title: "The Dream Came True",
+    title: "Founder & Lead Architect",
     company_name: "MeezO Studios",
     icon: MeezOStudios,
     iconBg: "#E6DEDD",
     date: "2022 - Present",
     points: [
-      "Established MeezO Studios, a software company exploring diverse fields like web development, mobile apps, game development, and AI-driven projects.",
-      "Tackled innovative projects, pushing boundaries, and bringing ideas to life across different tech landscapes.",
+      "Founded a software studio focused on pushing technical boundaries in Web, AI, and Gaming.",
+      "Leading a team to build innovative products like the Discord Bot Builder and high-speed headless platforms.",
+      "Architecting scalable cloud infrastructures and modular systems used by thousands of users worldwide.",
     ],
   },
 ];
@@ -374,67 +380,172 @@ const testimonials = [
 
 const projects = [
   {
-    name: "MeezO MC",
+    name: "DevRoots Studio v2",
     description:
-      " MeezO MC is a unique Minecraft server custom-coded by MeezO Studios. It features custom plugins and special features that enhance the gaming experience and make it fun and unique. ",
+      "A production-ready, full-stack application powering an agency platform, user dashboard, and a Discord Bot Builder store. Features modular architecture with NestJS and React.",
     tags: [
       {
-        name: "minecraft",
+        name: "React",
         color: "blue-text-gradient",
       },
       {
-        name: "plugins",
+        name: "NestJS",
         color: "green-text-gradient",
       },
       {
-        name: "gaming",
+        name: "Prisma",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: MeezOStudios,
+    source_code_link: "https://github.com/AboMeezO",
+  },
+  {
+    name: "EV King V2",
+    description:
+      "A premium headless digital storefront for electric vehicles. Features custom inventory management, financial tools, and ultra-fast performance with React 19 and NestJS.",
+    tags: [
+      {
+        name: "React19",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "TailwindV4",
+        color: "green-text-gradient",
+      },
+      {
+        name: "PostgreSQL",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: tripguide,
+    source_code_link: "https://github.com/AboMeezO",
+  },
+  {
+    name: "Sentinel (PayPal Bot)",
+    description:
+      "An enterprise financial orchestration layer for Discord. Handles PayPal invoices, real-time balance tracking, and secure transaction processing with AES-256 encryption.",
+    tags: [
+      {
+        name: "Discord.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "PayPal-API",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Security",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: backend,
+    source_code_link: "https://github.com/AboMeezO",
+  },
+  {
+    name: "SelfHost Helper",
+    description:
+      "A desktop cockpit for local development. Combines process management, resource monitoring, a VS Code-powered editor, and Cloudflare tunneling into one app.",
+    tags: [
+      {
+        name: "Electron",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Monaco",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Vite",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: Electron,
+    source_code_link: "https://github.com/DevRoots-Studio/SelfHost-Helper",
+  },
+  {
+    name: "Bot-TV System",
+    description:
+      "High-fidelity media streaming platform for Discord. Overcomes platform constraints to deliver synchronized HD video and audio using FFmpeg and headless orchestration.",
+    tags: [
+      {
+        name: "FFmpeg",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Puppeteer",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Automation",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: carrent,
+    source_code_link: "https://github.com/AboMeezO",
+  },
+  {
+    name: "D.js Starter Template",
+    description:
+      "A modern Discord.js starter template featuring CommandKit, built-in SQLite/Sequelize support, and a clean modular architecture for rapid bot development.",
+    tags: [
+      {
+        name: "Discord.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "CommandKit",
+        color: "green-text-gradient",
+      },
+      {
+        name: "SQLite",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: jobit,
+    source_code_link: "https://github.com/AboMeezO/D.js-Starter-Files",
+  },
+  {
+    name: "MeezO System",
+    description:
+      "MeezO System is a free Discord bot that offers all the features you might need, including those never implemented in any other bot! Perfect for server management and engagement.",
+    tags: [
+      {
+        name: "Discord",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Bot",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Automation",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: MeezOSystem,
+    source_code_link: "https://github.com/AboMeezO",
+  },
+  {
+    name: "MeezO MC",
+    description:
+      "A unique Minecraft server custom-coded by MeezO Studios. Features custom plugins and special mechanics that enhance the gaming experience for a unique community.",
+    tags: [
+      {
+        name: "Minecraft",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Java",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Plugins",
         color: "pink-text-gradient",
       },
     ],
     image: MeezOCraft,
     source_code_link: "https://discord.gg/pqbHtVm2Ne",
-  },
-  {
-    name: "MeezO System",
-    description:
-      "MeezO System is a free Discord bot that offers all the features you might need, including those never implemented in any other bot! If you're looking for a way to manage your server or engage users more efficiently, this bot is the perfect solution.",
-    tags: [
-      {
-        name: "discord",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "bot",
-        color: "green-text-gradient",
-      },
-      {
-        name: "automation",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: MeezOSystem,
-    source_code_link: "", // Source code link not available yet
-  },
-  {
-    name: "MeezO Studios",
-    description:
-      "MeezO Studios is an online store offering a variety of gaming-related products. Here you can find all the unique merchandise you need. ",
-    tags: [
-      {
-        name: "store",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "gaming",
-        color: "green-text-gradient",
-      },
-      {
-        name: "merchandise",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: MeezOStudios,
-    source_code_link: "https://discord.gg/eqcHfpDAC3",
   },
 ];
 
