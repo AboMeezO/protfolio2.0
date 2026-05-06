@@ -8,7 +8,7 @@ import SectionCta from "./ui/SectionCta";
 import { fadeIn, textVariant } from "../utils/motion";
 
 const Works = () => {
-  const featuredProjects = projects.filter((project) => project.featured).slice(0, 3);
+  const featuredProjects = projects.filter((project) => project.featured).slice(0, 6);
 
   return (
     <>
@@ -35,9 +35,14 @@ const Works = () => {
         </motion.p>
       </div>
 
-      <div className="mt-20 flex flex-wrap gap-7">
+      <div className="mt-20 flex flex-wrap gap-4 justify-center">
         {featuredProjects.map((project, index) => (
-          <ProjectCard key={project.slug} index={index} project={project} />
+          <motion.div
+            key={project.slug}
+            variants={fadeIn("up", "spring", index * 0.2, 0.75)}
+          >
+            <ProjectCard project={project} />
+          </motion.div>
         ))}
       </div>
     </>

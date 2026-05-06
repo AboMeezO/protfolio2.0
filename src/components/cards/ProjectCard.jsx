@@ -5,57 +5,74 @@ import { fadeIn } from "../../utils/motion";
 
 const tagColors = ["blue-text-gradient", "green-text-gradient", "pink-text-gradient"];
 
-const ProjectCard = ({ index = 0, project }) => {
+const ProjectCard = ({ project, onTagClick, activeTags = [] }) => {
   const cover = project.cover || project.gallery?.[0]?.src;
 
   return (
-    <motion.div variants={fadeIn("up", "spring", index * 0.2, 0.75)}>
-      <Tilt
-        tiltMaxAngleX={20}
-        tiltMaxAngleY={20}
-        perspective={900}
-        transitionSpeed={800}
-        scale={1.05}
-        className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full background-stripes parallax-effect"
-      >
-        <Link to={`/projects/${project.slug}`} className="block">
-          <div className="relative w-full h-[230px] inner-element">
-            {cover ? (
-              <img
-                src={cover}
-                alt={project.title}
-                loading="lazy"
-                className="w-full h-full object-cover rounded-2xl"
-              />
-            ) : (
-              <div className="w-full h-full rounded-2xl green-pink-gradient p-[1px]">
-                <div className="w-full h-full bg-tertiary rounded-2xl flex justify-center items-center">
-                  <p className="text-secondary text-[14px]">No preview</p>
-                </div>
+    <Tilt
+      tiltMaxAngleX={20}
+      tiltMaxAngleY={20}
+      perspective={900}
+      transitionSpeed={800}
+      scale={1.05}
+      className="bg-tertiary p-4 rounded-2xl sm:w-[360px] w-full background-stripes parallax-effect group"
+    >
+      <Link to={`/projects/${project.slug}`} className="block">
+        <div className="relative w-full h-[230px] inner-element overflow-hidden rounded-2xl">
+          {cover ? (
+            <img
+              src={cover}
+              alt={project.title}
+              loading="lazy"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+          ) : (
+            <div className="w-full h-full rounded-2xl green-pink-gradient p-[1px]">
+              <div className="w-full h-full bg-tertiary rounded-2xl flex justify-center items-center">
+                <p className="text-secondary text-[14px]">No preview</p>
               </div>
-            )}
-          </div>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500" />
+        </div>
 
-          <div className="mt-5">
-            <h3 className="text-white font-bold text-[24px]">{project.title}</h3>
-            <p className="mt-2 text-secondary text-[14px]">
-              {project.description}
-            </p>
-          </div>
+        <div className="mt-5">
+          <p className="text-secondary text-[14px]">{project.date}</p>
+          <h3 className="text-white font-bold text-[24px] group-hover:text-purple-400 transition-colors duration-300">
+            {project.title}
+          </h3>
+          <p className="mt-2 text-secondary text-[14px] line-clamp-3">
+            {project.description}
+          </p>
+        </div>
+      </Link>
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            {(project.tags || []).map((tag, tagIndex) => (
-              <p
-                key={`${project.slug}-${tag}`}
-                className={`text-[14px] ${tagColors[tagIndex % tagColors.length]}`}
-              >
-                #{tag}
-              </p>
-            ))}
-          </div>
-        </Link>
-      </Tilt>
-    </motion.div>
+      <div className="mt-4 flex flex-wrap gap-2">
+        {(project.tags || []).map((tag) => {
+          const tagName = typeof tag === "string" ? tag : tag.name;
+          const isActive = activeTags.includes(tagName);
+          
+          return (
+            <button
+              key={`${project.slug}-${tagName}`}
+              onClick={(e) => {
+                if (onTagClick) {
+                  e.preventDefault();
+                  onTagClick(tagName);
+                }
+              }}
+              className={`text-[12px] px-2 py-0.5 rounded-md border transition-all duration-300 ${
+                isActive
+                  ? "bg-violet-gradient border-transparent text-white"
+                  : "bg-primary/30 border-white/5 text-secondary hover:text-white hover:border-white/20"
+              }`}
+            >
+              #{tagName}
+            </button>
+          );
+        })}
+      </div>
+    </Tilt>
   );
 };
 
