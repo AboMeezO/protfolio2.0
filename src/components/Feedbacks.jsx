@@ -5,6 +5,7 @@ import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
 import { testimonials } from "../constants";
+import Marquee from "./ui/Marquee";
 
 const FeedbackCard = ({
   index,
@@ -14,12 +15,7 @@ const FeedbackCard = ({
   company,
   image,
 }) => (
-  <motion.div
-    variants={fadeIn("", "spring", index * 0.5, 0.75)}
-    initial="hidden"
-    animate="show"
-    viewport={{ once: false, amount: 0.25 }}
-    className="bg-black-200 p-10 rounded-3xl xs:w-[320px] w-full">
+  <div className="bg-black-200 p-10 rounded-3xl xs:w-[320px] w-full shrink-0">
     <p className="text-white font-black text-[48px]">"</p>
 
     <div className="mt-1">
@@ -42,23 +38,35 @@ const FeedbackCard = ({
         />
       </div>
     </div>
-  </motion.div>
+  </div>
 );
 
 const Feedbacks = () => {
   return (
-    <div className={`mt-12 bg-black-100 rounded-[20px]`}>
-      <div
-        className={`bg-tertiary rounded-2xl ${styles.padding} min-h-[300px]`}>
+    <div className={`mt-12 bg-transparent`}>
+      <div className={`${styles.padding} min-h-[300px]`}>
         <motion.div variants={textVariant()}>
           <p className={styles.sectionSubText}>What others say</p>
           <h2 className={styles.sectionHeadText}>Testimonials.</h2>
         </motion.div>
       </div>
-      <div className={`-mt-20 pb-14 ${styles.paddingX} flex flex-wrap gap-7`}>
-        {testimonials.map((testimonial, index) => (
-          <FeedbackCard key={testimonial.name} index={index} {...testimonial} />
-        ))}
+
+      <div className={`-mt-20 pb-14 relative overflow-hidden`}>
+        {/* Edge Blur & Shadow Masks - Responsive Widths */}
+        <div className="absolute inset-y-0 left-0 w-12 sm:w-32 bg-gradient-to-r from-primary to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-12 sm:w-32 bg-gradient-to-l from-primary to-transparent z-10 pointer-events-none" />
+
+        <Marquee 
+          pauseOnHover 
+          duration="20s" 
+          gap="2rem"
+          className="sm:gap-8"
+        >
+          {testimonials.map((testimonial, index) => (
+            <FeedbackCard key={testimonial.name} index={index} {...testimonial} />
+          ))}
+        </Marquee>
+
       </div>
     </div>
   );
