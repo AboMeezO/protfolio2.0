@@ -1,12 +1,12 @@
 ## Content Edits:
 
-- Update my name
-- paragraph and sentences in the whole website
-- update the thr constants files as needed
+- [x] Update my name
+- [x] paragraph and sentences in the whole website
+- [x] update the constants files as needed
 
 ## Code Updates:
 
-- projects in the @works section
-- update packages as needed
-- make sure the site is responsive
-- make the site more optimized
+- [x] projects in the @works section
+- [x] update packages as needed
+- [x] make sure the site is responsive
+- [x] make the site more optimized
