@@ -49,11 +49,14 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
       >
-        I'm a skilled software developer with experience in TypeScript and
-        JavaScript, and expertise in frameworks like React, Node.js, and
-        Three.js. I'm a quick learner and collaborate closely with clients to
-        create efficient, scalable, and user-friendly solutions that solve
-        real-world problems. Let's work together to bring your ideas to life!
+        I'm a passionate Full-Stack Developer and Software Engineer with a focus
+        on building high-performance web applications, desktop tools, and
+        community-driven automation. With deep expertise in the React and NestJS
+        ecosystems, I specialize in creating scalable architectures that bridge
+        complex backend logic with premium, interactive user interfaces. Whether
+        it's developing enterprise-grade financial systems or high-speed headless
+        platforms, I thrive on turning ambitious ideas into polished,
+        production-ready reality.
       </motion.p>
 
       <div className="mt-20 flex flex-wrap gap-10">

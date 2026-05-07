@@ -2,23 +2,22 @@ import {
   mobile,
   backend,
   web,
-  javascript,
-  html,
-  css,
   reactjs,
   tailwind,
   nodejs,
-  mongodb,
   git,
-  threejs,
   MeezOStudios,
   MeezOCraft,
   MeezOSystem,
   freelancing,
-  python,
   discord,
   Electron,
-  aref,
+  docker,
+  typescript,
+  java,
+  carrent,
+  jobit,
+  tripguide,
 } from "../assets";
 export const navLinks = [
   {
@@ -52,117 +51,294 @@ const services = [
 
 const technologies = [
   {
-    name: "HTML 5",
-    icon: html,
-    experience: "3+ years building semantic, accessible websites",
-  },
-  {
-    name: "CSS 3",
-    icon: css,
-    experience: "3+ years crafting responsive layouts and animations",
-  },
-  {
-    name: "JavaScript",
-    icon: javascript,
-    experience: "3+ years developing interactive web applications",
-  },
-
-  {
-    name: "React JS",
+    name: "React",
     icon: reactjs,
-    experience: "2+ years building dynamic SPAs and component libraries",
+    iconKey: "react",
+    shortLabel: "React",
+    experience: "Advanced interface architecture and component systems",
   },
   {
-    name: "React Native",
-    icon: reactjs,
-    experience: "1+ years developing cross-platform mobile apps",
+    name: "Next.js",
+    iconKey: "nextdotjs",
+    shortLabel: "Next",
+    experience: "Full-stack React applications and app router workflows",
   },
   {
-    name: "Discord JS",
-    icon: discord,
-    experience: "3+ years building scalable bot architectures",
+    name: "TanStack Start",
+    iconKey: "tanstack",
+    shortLabel: "TS",
+    experience: "Modern React full-stack routing and data workflows",
   },
   {
-    name: "Electron JS",
-    icon: Electron,
-    experience: "2+ years building cross-platform desktop applications",
+    name: "TanStack Router",
+    iconKey: "tanstack",
+    shortLabel: "TR",
+    experience: "Type-safe client routing and nested application structure",
   },
-
   {
-    name: "Python",
-    icon: python,
-    experience: "3+ years developing scripts and automation tools",
+    name: "GSAP",
+    iconKey: "gsap",
+    shortLabel: "GSAP",
+    experience: "High-control motion systems and timeline animation",
+  },
+  {
+    name: "Framer Motion",
+    iconKey: "framer",
+    shortLabel: "FM",
+    experience: "Declarative UI motion and interaction choreography",
+  },
+  {
+    name: "React Query",
+    iconKey: "reactquery",
+    shortLabel: "RQ",
+    experience: "Server-state orchestration and client caching",
+  },
+  {
+    name: "TanStack Query",
+    iconKey: "tanstack",
+    shortLabel: "TQ",
+    experience: "Typed async data flows and resilient fetch state",
   },
   {
     name: "Tailwind CSS",
     icon: tailwind,
-    experience: "2+ years building modern, utility-first interfaces",
+    iconKey: "tailwindcss",
+    shortLabel: "TW",
+    experience: "Utility-first styling inside constrained design systems",
   },
   {
-    name: "Node JS",
+    name: "Jotai",
+    shortLabel: "J",
+    experience: "Atomic state modeling for focused React surfaces",
+  },
+  {
+    name: "shadcn/ui",
+    iconKey: "shadcnui",
+    shortLabel: "UI",
+    experience: "Composable UI primitives and app-facing design systems",
+  },
+  {
+    name: "Barba.js",
+    shortLabel: "B",
+    experience: "Navigation transitions and page-flow animation",
+  },
+  {
+    name: "NestJS",
+    iconKey: "nestjs",
+    shortLabel: "Nest",
+    experience: "Structured backend services and modular server design",
+  },
+  {
+    name: "ExpressJS",
     icon: nodejs,
-    experience: "2+ years building REST APIs and microservices",
+    iconKey: "express",
+    shortLabel: "Ex",
+    experience: "Lean APIs and custom middleware-driven backends",
   },
   {
-    name: "MongoDB",
-    icon: mongodb,
-    experience: "2+ years designing NoSQL database architectures",
+    name: "Prisma ORM",
+    iconKey: "prisma",
+    shortLabel: "Pr",
+    experience: "Type-safe database access and schema workflows",
   },
   {
-    name: "Three JS",
-    icon: threejs,
-    experience: "1+ years creating 3D web experiences",
+    name: "Sequelize ORM",
+    iconKey: "sequelize",
+    shortLabel: "Sq",
+    experience: "Relational modeling and query abstraction",
   },
   {
-    name: "git",
+    name: "Zod",
+    iconKey: "zod",
+    shortLabel: "Z",
+    experience: "Runtime validation and contract enforcement",
+  },
+  {
+    name: "Passport.js",
+    iconKey: "passport",
+    shortLabel: "P",
+    experience: "Authentication strategies and session/token flows",
+  },
+  {
+    name: "Discord.js",
+    icon: discord,
+    iconKey: "discord",
+    shortLabel: "D",
+    experience: "Bot platforms, command systems, and community tooling",
+  },
+  {
+    name: "SQLite",
+    iconKey: "sqlite",
+    shortLabel: "SQL",
+    experience: "Embedded data layers and lightweight persistence",
+  },
+  {
+    name: "PostgreSQL",
+    iconKey: "postgresql",
+    shortLabel: "PG",
+    experience: "Relational data design and production query workflows",
+  },
+  {
+    name: "Docker",
+    icon: docker,
+    iconKey: "docker",
+    shortLabel: "DK",
+    experience: "Containerized development and deployment packaging",
+  },
+  {
+    name: "Railway",
+    iconKey: "railway",
+    shortLabel: "RW",
+    experience: "Managed deployment pipelines and hosted services",
+  },
+  {
+    name: "GitHub CI",
+    iconKey: "githubactions",
+    shortLabel: "CI",
+    experience: "Automated checks, workflows, and release pipelines",
+  },
+  {
+    name: "Vercel",
+    iconKey: "vercel",
+    shortLabel: "V",
+    experience: "Frontend hosting, previews, and edge deployment",
+  },
+  {
+    name: "ReviveNode",
+    shortLabel: "RN",
+    experience: "Node hosting and operational deployment management",
+  },
+  {
+    name: "Electron.js",
+    icon: Electron,
+    iconKey: "electron",
+    shortLabel: "El",
+    experience: "Desktop applications with web-native stacks",
+  },
+  {
+    name: "Git",
     icon: git,
-    experience: "3+ years using version control in team environments",
+    iconKey: "git",
+    shortLabel: "Git",
+    experience: "Version control, branching, and collaborative delivery",
+  },
+  {
+    name: "TypeScript",
+    icon: typescript,
+    iconKey: "typescript",
+    shortLabel: "TS",
+    experience: "Typed application architecture across frontend and backend",
+  },
+  {
+    name: "Java",
+    icon: java,
+    shortLabel: "J",
+    experience: "Server plugins, tooling, and strongly typed application logic",
+  },
+];
+
+const technologyCategories = [
+  {
+    name: "Frontend",
+    items: technologies.filter((technology) =>
+      [
+        "React",
+        "Next.js",
+        "TanStack Start",
+        "TanStack Router",
+        "GSAP",
+        "Framer Motion",
+        "React Query",
+        "TanStack Query",
+        "Tailwind CSS",
+        "Jotai",
+        "shadcn/ui",
+        "Barba.js",
+      ].includes(technology.name)
+    ),
+  },
+  {
+    name: "Backend",
+    items: technologies.filter((technology) =>
+      [
+        "NestJS",
+        "ExpressJS",
+        "Prisma ORM",
+        "Sequelize ORM",
+        "Zod",
+        "Passport.js",
+        "Discord.js",
+      ].includes(technology.name)
+    ),
+  },
+  {
+    name: "Data",
+    items: technologies.filter((technology) =>
+      ["SQLite", "PostgreSQL"].includes(technology.name)
+    ),
+  },
+  {
+    name: "Deployments",
+    items: technologies.filter((technology) =>
+      ["Docker", "Railway", "GitHub CI", "Vercel", "ReviveNode"].includes(
+        technology.name
+      )
+    ),
+  },
+  {
+    name: "Tooling",
+    items: technologies.filter((technology) =>
+      ["Electron.js", "Git", "TypeScript", "Java"].includes(technology.name)
+    ),
   },
 ];
 
 const experiences = [
   {
-    title: "Web Development",
+    title: "Full-Stack Web Developer",
     company_name: "X-Tag",
     icon: freelancing,
     iconBg: "#E6DEDD",
     date: "2018 - 2019",
     points: [
-      "Began my journey in web development at X-Tag, a small company where I honed my skills in creating responsive and visually engaging websites.",
-      "Gained hands-on experience with the basics of web technology while working alongside a team, laying the foundation for my future in the field.",
+      "Started as a Junior Developer focusing on responsive web interfaces and core JavaScript logic.",
+      "Collaborated with design teams to translate UI/UX mockups into high-performance, accessible web components.",
     ],
   },
   {
-    title: "Web Development (Freelance)",
-    company_name: "Freelance",
+    title: "Senior Freelance Developer",
+    company_name: "Independent",
     icon: freelancing,
     iconBg: "#E6DEDD",
     date: "2019 - 2022",
     points: [
-      "Worked independently as a freelance front-end developer, managing projects and connecting directly with clients.",
-      "Expanded my expertise in front-end technologies and adapted to various project requirements, mastering essential tools and frameworks.",
+      "Engineered end-to-end solutions for diverse clients, from startups to established businesses.",
+      "Specialized in modern React ecosystems, implementing advanced state management and real-time features.",
+      "Built reputation for delivering complex projects on tight deadlines while maintaining high code quality.",
     ],
   },
   {
-    title: "Game Development",
+    title: "Game & Engine Developer",
     company_name: "Freelance",
     icon: MeezOCraft,
     iconBg: "#E6DEDD",
     date: "2022 - 2024",
     points: [
-      "Specialized in creating and optimizing Minecraft servers and custom plugins during my venture into game development.",
-      "Blended creativity with technical skills to build unique gaming experiences and enhance server functionality for players.",
+      "Pivoted into low-level systems and game engine logic, specializing in Minecraft server architecture.",
+      "Developed custom Java plugins and automated systems to handle thousands of concurrent players.",
+      "Optimized server performance and network protocols to ensure a lag-free gaming experience.",
     ],
   },
   {
-    title: "The Dream Came True",
+    title: "Founder & Lead Architect",
     company_name: "MeezO Studios",
     icon: MeezOStudios,
     iconBg: "#E6DEDD",
     date: "2022 - Present",
     points: [
-      "Established MeezO Studios, a software company exploring diverse fields like web development, mobile apps, game development, and AI-driven projects.",
-      "Tackled innovative projects, pushing boundaries, and bringing ideas to life across different tech landscapes.",
+      "Founded a software studio focused on pushing technical boundaries in Web, AI, and Gaming.",
+      "Leading a team to build innovative products like the Discord Bot Builder and high-speed headless platforms.",
+      "Architecting scalable cloud infrastructures and modular systems used by thousands of users worldwide.",
     ],
   },
 ];
@@ -204,68 +380,173 @@ const testimonials = [
 
 const projects = [
   {
-    name: "MeezO MC",
+    name: "DevRoots Studio v2",
     description:
-      " MeezO MC is a unique Minecraft server custom-coded by MeezO Studios. It features custom plugins and special features that enhance the gaming experience and make it fun and unique. ",
+      "A production-ready, full-stack application powering an agency platform, user dashboard, and a Discord Bot Builder store. Features modular architecture with NestJS and React.",
     tags: [
       {
-        name: "minecraft",
+        name: "React",
         color: "blue-text-gradient",
       },
       {
-        name: "plugins",
+        name: "NestJS",
         color: "green-text-gradient",
       },
       {
-        name: "gaming",
+        name: "Prisma",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: MeezOStudios,
+    source_code_link: "https://github.com/AboMeezO",
+  },
+  {
+    name: "EV King V2",
+    description:
+      "A premium headless digital storefront for electric vehicles. Features custom inventory management, financial tools, and ultra-fast performance with React 19 and NestJS.",
+    tags: [
+      {
+        name: "React19",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "TailwindV4",
+        color: "green-text-gradient",
+      },
+      {
+        name: "PostgreSQL",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: tripguide,
+    source_code_link: "https://github.com/AboMeezO",
+  },
+  {
+    name: "Sentinel (PayPal Bot)",
+    description:
+      "An enterprise financial orchestration layer for Discord. Handles PayPal invoices, real-time balance tracking, and secure transaction processing with AES-256 encryption.",
+    tags: [
+      {
+        name: "Discord.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "PayPal-API",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Security",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: backend,
+    source_code_link: "https://github.com/AboMeezO",
+  },
+  {
+    name: "SelfHost Helper",
+    description:
+      "A desktop cockpit for local development. Combines process management, resource monitoring, a VS Code-powered editor, and Cloudflare tunneling into one app.",
+    tags: [
+      {
+        name: "Electron",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Monaco",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Vite",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: Electron,
+    source_code_link: "https://github.com/DevRoots-Studio/SelfHost-Helper",
+  },
+  {
+    name: "Bot-TV System",
+    description:
+      "High-fidelity media streaming platform for Discord. Overcomes platform constraints to deliver synchronized HD video and audio using FFmpeg and headless orchestration.",
+    tags: [
+      {
+        name: "FFmpeg",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Puppeteer",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Automation",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: carrent,
+    source_code_link: "https://github.com/AboMeezO",
+  },
+  {
+    name: "D.js Starter Template",
+    description:
+      "A modern Discord.js starter template featuring CommandKit, built-in SQLite/Sequelize support, and a clean modular architecture for rapid bot development.",
+    tags: [
+      {
+        name: "Discord.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "CommandKit",
+        color: "green-text-gradient",
+      },
+      {
+        name: "SQLite",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: jobit,
+    source_code_link: "https://github.com/AboMeezO/D.js-Starter-Files",
+  },
+  {
+    name: "MeezO System",
+    description:
+      "MeezO System is a free Discord bot that offers all the features you might need, including those never implemented in any other bot! Perfect for server management and engagement.",
+    tags: [
+      {
+        name: "Discord",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Bot",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Automation",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: MeezOSystem,
+    source_code_link: "https://github.com/AboMeezO",
+  },
+  {
+    name: "MeezO MC",
+    description:
+      "A unique Minecraft server custom-coded by MeezO Studios. Features custom plugins and special mechanics that enhance the gaming experience for a unique community.",
+    tags: [
+      {
+        name: "Minecraft",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Java",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Plugins",
         color: "pink-text-gradient",
       },
     ],
     image: MeezOCraft,
     source_code_link: "https://discord.gg/pqbHtVm2Ne",
   },
-  {
-    name: "MeezO System",
-    description:
-      "MeezO System is a free Discord bot that offers all the features you might need, including those never implemented in any other bot! If you're looking for a way to manage your server or engage users more efficiently, this bot is the perfect solution.",
-    tags: [
-      {
-        name: "discord",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "bot",
-        color: "green-text-gradient",
-      },
-      {
-        name: "automation",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: MeezOSystem,
-    source_code_link: "", // Source code link not available yet
-  },
-  {
-    name: "MeezO Studios",
-    description:
-      "MeezO Studios is an online store offering a variety of gaming-related products. Here you can find all the unique merchandise you need. ",
-    tags: [
-      {
-        name: "store",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "gaming",
-        color: "green-text-gradient",
-      },
-      {
-        name: "merchandise",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: MeezOStudios,
-    source_code_link: "https://discord.gg/eqcHfpDAC3",
-  },
 ];
 
-export { services, technologies, experiences, testimonials, projects };
+export { services, technologies, technologyCategories, experiences, testimonials, projects };

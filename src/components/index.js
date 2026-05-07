@@ -15,8 +15,10 @@ import Contact from "./Contact";
 import CanvasLoader from "./Loader";
 import EasterEgg from "./EasterEgg";
 import ErrorBoundary from "./ErrorBoundary";
+import BlogsPreview from "./BlogsPreview";
 
 export {
+  BlogsPreview,
   EasterEgg,
   Hero,
   Navbar,
