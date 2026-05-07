@@ -45,7 +45,7 @@ const Lightbox = ({ items, activeIndex, onClose, onMove }) => {
         variants={fadeIn("", "", 0, 0.3)}
         initial="hidden"
         animate="show"
-        className="bg-tertiary rounded-2xl p-5 max-w-7xl w-full"
+        className="bg-tertiary rounded-2xl p-5 max-w-screen-2xl w-full"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="relative w-full h-[70vh]">

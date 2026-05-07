@@ -19,7 +19,7 @@ const ProjectDetail = () => {
 
   return (
     <PageWrapper>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-screen-2xl mx-auto">
         <Seo title={project.title} description={project.description} />
         <motion.div variants={textVariant()}>
           <p className={styles.sectionSubText}>Project</p>
