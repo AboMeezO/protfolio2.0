@@ -1,46 +1,118 @@
 ---
-title: "Bot-TV Streaming System"
-description: "A production-grade media orchestration platform for real-time, high-fidelity video injection into the Discord ecosystem."
-date: "2024-11-20"
-category: "Discord Bots"
+title: "Bot - TV System"
+description: "A production-grade media orchestration platform designed to bridge high-definition digital content with the Discord ecosystem through real-time injection."
+date: "2026-05-07"
+category: "Media & Streaming"
 techStack:
-  ["Node.js", "Discord.js", "FFmpeg", "Puppeteer", "Chromium", "HLS", "Docker"]
-openSource: false
-tags: ["Media", "Streaming", "Automation"]
-tech:
-  ["Node.js", "Discord.js", "FFmpeg", "Puppeteer", "Chromium", "HLS", "Docker"]
+  [
+    "Node.js 24+",
+    "Discord.js v14",
+    "Discord-Selfbot-v13",
+    "Puppeteer",
+    "FFmpeg",
+    "yt-dlp",
+    "SQLite",
+  ]
+openSource: true
+tags:
+  [
+    "streaming",
+    "discord-bot",
+    "media-injection",
+    "automation",
+    "headless-browser",
+  ]
+tech: ["Node.js", "ESM", "Puppeteer", "FFmpeg", "Docker", "CommandKit"]
 features:
   [
-    "Direct-to-voice high-definition video injection",
-    "Advanced anti-bot bypass & header emulation",
-    "Headless browser-based stream extraction",
-    "Real-time transcoding & stream optimization",
-    "Deterministic session & cookie management",
+    "Multi-source Resolution (Movies, TV, IPTV, Sports, YouTube)",
+    "Dual-Account Streaming Architecture (Main Bot + Self-Bot)",
+    "Headless Browser Orchestration for Anti-Bot Bypass",
+    "Modern Discord Components v2 UI Design System",
+    "Real-time Media Injection & Synchronized Playback",
+    "Automated Session Persistence & Cookie Management",
+    "Layered, Decoupled Architectural Framework",
   ]
 cover: "/src/assets/projects/bot-tv/thumbnail.png"
 featured: true
-links: []
+links:
+  - label: "Project Repository"
+    href: "https://github.com/DevRoots/bot-tv-system"
+  - label: "Documentation"
+    href: "https://github.com/DevRoots/bot-tv-system/blob/main/README.md"
 gallery:
   - type: image
-    src: "/src/assets/herobg.png"
-    alt: "Bot-TV Streaming Engine"
-    caption: "A sophisticated engineering solution for real-time media synchronization."
+    src: "/src/assets/projects/bot-tv/thumbnail.png"
+    alt: "Movie Search Interface"
+    caption: "High-fidelity search and detail panels for cinematic content."
 ---
 
-## Project Overview
+# Project Presentation: Bot - TV System
 
-The **Bot-TV System** is a high-fidelity media streaming architecture designed to bridge digital content with Discord. It represents a complex engineering solution to the problem of real-time media resolution, synchronization, and injection within high-latency networked environments.
+## Executive Summary
 
-## Technical Foundation
+The **Bot - TV System** is more than just a media player; it is a sophisticated **Media Orchestration Platform** designed to solve the complex challenge of delivering high-definition, real-time content directly into the Discord ecosystem. By bridging the gap between external content providers and Discord's voice/video infrastructure, we provide users with a seamless, high-fidelity viewing experience that was previously impossible within the platform's standard limitations.
 
-The system is built on an asynchronous, event-driven Node.js architecture. It leverages **FFmpeg** for real-time transcoding and **Puppeteer** for headless browser orchestration, allowing it to navigate complex web security and extract high-value streams.
+---
 
-### Engineering Challenges & Solutions:
+## Core Capabilities
 
-- **Anti-Bot Bypass**: Implementing deterministic header injection and identity emulation to bypass aggressive platform detection.
-- **Dynamic Resolution**: A three-stage extraction pipeline that falls back to full browser emulation for high-security content targets.
-- **Stream Injection**: Utilizing low-level drivers for direct voice-channel video delivery, ensuring synchronized audio and video.
+### 📽️ Universal Media Resolution
 
-## Operational Excellence
+Our system doesn't just link to content—it **resolves** it. Whether it's the latest blockbuster movie, a live sports event, a global IPTV channel, or a YouTube video, the Bot - TV System utilizes a multi-layered extraction pipeline to identify and isolate the highest quality raw stream manifests.
 
-Designed for professional deployment, the system is fully containerized with **Docker**, ensuring environment parity for its many native dependencies (FFmpeg, Chromium). It provides a stable, high-performance solution that overcomes the inherent platform constraints of both Discord and external content providers.
+### 🚀 High-Fidelity Injection
+
+Leveraging a unique **Dual-Account Architecture**, we separate user interaction from media delivery. While the main bot handles commands and UI, a dedicated "Self-Bot" performs direct-to-voice video injection. This ensures a stable, synchronized stream with minimal latency and maximum visual clarity.
+
+### 🛡️ Advanced Anti-Bot Bypass
+
+The modern web is filled with aggressive anti-bot measures. Our system employs **Headless Browser Orchestration** via Puppeteer to mimic human behavior, handle complex JavaScript challenges, and extract session cookies automatically. This ensures uninterrupted access to content that typically blocks automated requests.
+
+---
+
+## Technical Excellence
+
+### The Architecture
+
+The project follows a **Decoupled Layered Architecture**, ensuring that each component—from the UI interaction layer to the underlying FFmpeg transcoding engine—operates independently and reliably.
+
+- **Interaction Layer:** Built on a custom fork of CommandKit for robust slash command and component routing.
+- **Coordination Layer:** Manages global state, playback queues, and synchronization between the bot and the streaming driver.
+- **Resolution Pipeline:** A three-stage process (Direct -> Metadata -> Browser) that guarantees the highest success rates in the industry.
+
+### The Stack
+
+- **Runtime:** Node.js 24+ (ECMAScript Modules)
+- **Engine:** FFmpeg for real-time transcoding and optimization.
+- **Automation:** Puppeteer-Core & Chromium for browser emulation.
+- **Persistence:** SQLite via Sequelize for lightweight, reliable data management.
+- **Logging:** Professional-grade Winston logging for real-time diagnostics.
+
+---
+
+## Modern User Experience
+
+We have moved beyond simple embeds. The Bot - TV System utilizes **Discord Components v2**, providing a modern, card-based UI that feels native to the platform.
+
+- **Dynamic Control Panels:** Persistent, editable panels for pausing, resuming, and switching content.
+- **Media Galleries:** Visual grids for browsing search results.
+- **Smart Navigation:** Intuitive season and episode selectors for TV series.
+
+---
+
+## Operational Integrity
+
+The system is designed for **Production Environments**.
+
+- **Dockerized:** Fully containerized for easy deployment and environment parity.
+- **Optimized Builds:** Built with `esbuild` for maximum performance.
+- **Resource Management:** Aggressive caching and lazy-loading to ensure the bot remains lean even under heavy load.
+
+---
+
+## Conclusion
+
+The **Bot - TV System** represents the pinnacle of automated media distribution on Discord. It combines advanced networking, headless automation, and a polished user interface to deliver a world-class streaming solution.
+
+_Developed with passion and technical precision by @DevRoots/AboTasneem._

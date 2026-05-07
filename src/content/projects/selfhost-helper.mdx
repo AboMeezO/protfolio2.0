@@ -1,44 +1,42 @@
 ---
 title: "SelfHost Helper"
-description: "A high-performance desktop cockpit for managing local development processes, monitoring resources, and secure tunneling."
-date: "2024-08-05"
-category: "Tools & Templates"
+description: "The ultimate unified command center for modern developers—consolidating process management, real-time monitoring, code editing, and secure connectivity into a single, high-performance desktop environment."
+date: "2026-05-07"
+category: "Developer Experience (DX)"
+version: "0.40.0"
+author: "@DevRoots/AboMeezO"
 techStack:
   [
     "Electron",
-    "React",
-    "Vite",
-    "SQLite",
-    "Sequelize",
+    "React (Vite)",
+    "Node.js",
+    "SQLite + Sequelize",
+    "Tailwind CSS v4",
     "Monaco Editor",
-    "Tailwind CSS",
     "Cloudflare Tunnels",
+    "Jotai",
+    "Radix UI",
+    "XTerm.js",
+    "simple-git",
+    "chokidar",
   ]
 openSource: true
-tags: ["Desktop App", "DevTools", "Productivity"]
-tech:
-  [
-    "Electron",
-    "React",
-    "Vite",
-    "SQLite",
-    "Sequelize",
-    "Monaco Editor",
-    "Tailwind CSS",
-    "Cloudflare Tunnels",
-  ]
+license: "ISC"
+tags: ["Desktop App", "Productivity", "Full-stack", "DevOps", "Node.js"]
 features:
   [
-    "Centralized process lifecycle management",
-    "Draggable grid-based resource monitoring",
-    "Integrated Monaco-powered code editor",
-    "One-click Cloudflare service tunneling",
-    "Full-text project search via ripgrep integration",
+    "Unified Project Lifecycle: Start, stop, and monitor all services from one tray-integrated dashboard.",
+    "Dynamic Cockpit UI: A draggable, resizable widget-based overview for real-time telemetry and control.",
+    "Integrated Dev Environment: Full-featured Monaco editor with Git support and ripgrep-powered global search.",
+    "Zero-Config Tunneling: Instant public URLs for local services via native Cloudflare Tunnel integration.",
+    "Deep Resource Diagnostics: Per-process tree tracking and high-resolution historical performance charts.",
+    "Custom Media Protocol: Secure, high-performance local asset serving via specialized media:// schemes.",
+    "Intelligent Backup & Restore: Automated configuration snapshots to ensure environment persistence.",
   ]
 cover: "/src/assets/projects/selfhost-helper/thumbnail.png"
 featured: true
 links:
-  - label: "GitHub"
+  - label: "GitHub Repository"
     href: "https://github.com/DevRoots-Studio/SelfHost-Helper"
 gallery:
   - type: image
@@ -47,44 +45,92 @@ gallery:
     caption: "SelfHost Helper Project Thumbnail"
   - type: image
     src: "/src/assets/projects/selfhost-helper/1.png"
-    alt: "SelfHost Helper Home Page"
-    caption: "SelfHost Helper Home Page."
+    alt: "Main Dashboard"
+    caption: "Central hub for organizing and managing all development projects."
   - type: image
     src: "/src/assets/projects/selfhost-helper/2.png"
-    alt: "SelfHost Helper Server Overview Tab"
-    caption: "Server Overview Tab."
+    alt: "The Cockpit (Overview)"
+    caption: "Customizable widget-based monitoring center for live project feedback."
   - type: image
     src: "/src/assets/projects/selfhost-helper/3.png"
-    alt: "SelfHost Helper Server Code Editor Tab"
-    caption: "Server Code Editor Tab."
+    alt: "Integrated Editor"
+    caption: "Powerful Monaco-based editor with integrated Git and search capabilities."
   - type: image
     src: "/src/assets/projects/selfhost-helper/4.png"
-    alt: "SelfHost Helper Server Tunnel Configuration Tab"
-    caption: "Server Tunnel Configuration Tab."
+    alt: "Resource Monitoring"
+    caption: "Detailed historical tracking of CPU and Memory consumption."
   - type: image
     src: "/src/assets/projects/selfhost-helper/5.png"
-    alt: "SelfHost Helper Server Resources Monitor Tab"
-    caption: "Server Resources Monitor Tab."
+    alt: "Tunnel Management"
+    caption: "Securely share local services with the world in a single click."
 ---
 
-## Why This Exists
+# SelfHost Helper: Your Project Command Center
 
-Modern development workflows are fragmented, often requiring a dozen terminal windows and various monitoring tools. **SelfHost Helper** eliminates this chaos, bringing process management, resource tracking, and coding into a single high-performance workspace.
+Welcome to the future of local development. **SelfHost Helper** is not just a tool; it's a productivity multiplier designed to eliminate the friction of modern software engineering. By consolidating the fragmented landscape of terminals, editors, and monitors, we provide developers with a **unified cockpit** for their entire project ecosystem.
 
-## The Cockpit Experience
+## Executive Presentation
 
-The heart of the application is the **Overview Hub**—a customizable workspace where you can drag and resize smart tiles to build your ideal monitoring center.
+Imagine a world where you don't have to switch between five terminal windows, a browser for metrics, a separate Git client, and complex firewall settings just to share your work.
 
-### Core Capabilities:
+**SelfHost Helper** brings all these disparate elements into a single, high-performance desktop application. Whether you are managing a complex microservices architecture or a simple frontend app, our platform gives you the professional precision and real-time visibility needed to build faster and with more confidence.
 
-- **Live Telemetry**: Real-time CPU and RAM tracking with sparkline charts for instant diagnostics.
-- **Dev Suite Integration**: A full-featured environment powered by the **Monaco Editor** (the engine behind VS Code), featuring built-in Git tools and blazing-fast search.
-- **Instant Exposure**: Securely expose local services to the global internet via integrated **Cloudflare Tunnels**, no firewall configuration required.
+---
 
-## Technical Architecture
+## Core Pillars of the Platform
 
-Built as an **Electron** desktop application, it provides full native system integration. It utilizes a **React** frontend for a high-performance, responsive UI and **SQLite** for reliable local data persistence.
+### 1. The Unified Lifecycle Manager
 
-## Philosophy
+Control is everything. Our system integrates directly with the OS to manage process trees, not just individual pids.
 
-SelfHost Helper is built on the belief that local development shouldn't feel scattered. It’s about providing one interface to rule them all, giving developers professional precision over their local environments.
+- **Graceful Control**: Start, stop, and restart projects with a single click.
+- **System Tray Integration**: Manage your environment even when the main window is hidden.
+- **Auto-Start Intelligence**: Ensure your critical services are always running on boot.
+
+### 2. The Interactive Cockpit (Overview Hub)
+
+Don't just run your code—understand it. The Overview Hub is a fully customizable workspace featuring:
+
+- **Modular Widgets**: Drag and resize live metric tiles, mini-consoles, and quick-action buttons.
+- **Real-Time Telemetry**: Instant visual feedback on CPU, Memory, and process health via high-performance sparklines.
+- **Direct Interaction**: Send standard input directly to your running processes without leaving the view.
+
+### 3. Integrated Development Suite
+
+Why leave the app to make a quick change? We’ve embedded the world-class **Monaco Editor** (the engine behind VS Code) to provide:
+
+- **Full Version Control**: Integrated Git panel for staging, committing, and tracking changes.
+- **Blazing-Fast Search**: Native `ripgrep` integration allows you to search across millions of lines of code instantly.
+- **LSP Support**: Intelligent code completion and diagnostics for a professional editing experience.
+
+### 4. Connectivity Without Complexity
+
+Sharing your local work should be effortless. With integrated **Cloudflare Tunnels**, you can:
+
+- **Instant Exposure**: Generate secure public URLs for local ports in seconds.
+- **Zero Firewall Hassle**: No port forwarding, no DNS headaches—just a secure tunnel to the global internet.
+
+---
+
+## Under the Hood: Technical Excellence
+
+**SelfHost Helper** is built on a foundation of modern, robust technologies carefully selected for performance and reliability:
+
+- **Desktop Core**: **Electron** provides deep system integration, allowing us to manage process groups and system-level resources effectively.
+- **High-Performance UI**: A **React** frontend powered by **Vite** ensures the interface remains fluid even when processing thousands of log lines per second.
+- **State Management**: Using **Jotai** for atomic, reactive state updates across the entire application.
+- **Robust Persistence**: **SQLite** and **Sequelize** handle all project configurations, history, and settings with industrial-grade reliability.
+- **Styling Mastery**: **Tailwind CSS v4** delivers a beautiful, consistent, and "glassmorphic" aesthetic that feels native to modern operating systems.
+- **Specialized Services**: Custom-built services for **Process Tree Management**, **Filesystem Watching**, and a specialized **Media Protocol** (`media://`) for secure asset serving.
+
+---
+
+## Why Choose SelfHost Helper?
+
+In an era of "Tool Fatigue," we offer **consolidation**.
+
+- **Reduce Cognitive Load**: One interface for everything.
+- **Boost Performance**: Native desktop apps outperform browser tabs for system-intensive tasks.
+- **Enhance Security**: Local-first data storage and secure, credential-based tunneling.
+
+**SelfHost Helper** is more than a manager; it's the professional upgrade your local development environment deserves.

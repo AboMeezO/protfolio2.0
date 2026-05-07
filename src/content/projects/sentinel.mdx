@@ -1,66 +1,97 @@
 ---
-title: "PayPal-Discord Bot"
-description: "An enterprise-grade financial orchestration layer for Discord, bridging community engagement with professional PayPal commerce."
-date: "2024-06-10"
-category: "Discord Bots"
+title: "PayPal Bot"
+description: "The Enterprise Financial Ecosystem for Discord"
+date: "2026-05-07"
+category: "Discord Bot"
 techStack:
   [
+    "TypeScript",
     "NestJS",
-    "Discord.js",
-    "Prisma",
-    "AES-256-GCM",
-    "PayPal API",
+    "Discord.js v14",
+    "Prisma ORM",
+    "PostgreSQL",
     "Docker",
-    "Turborepo",
+    "AES-256-GCM Encryption",
   ]
 openSource: false
-tags: ["FinTech", "Discord", "Security"]
-tech:
-  [
-    "NestJS",
-    "Discord.js",
-    "Prisma",
-    "AES-256-GCM",
-    "PayPal API",
-    "Docker",
-    "Turborepo",
-  ]
+tags: ["FinTech", "Discord Bot", "PayPal Integration", "Automation"]
 features:
   [
-    "Military-grade credential encryption",
-    "Real-time PayPal balance auditing",
-    "Automated dynamic invoicing from Discord",
-    "Multi-tenant shop infrastructure",
-    "Verified IPN/Webhook processing hub",
+    "Enterprise-Grade PayPal Orchestration",
+    "Military-Grade Credential Vaulting (AES-256-GCM)",
+    "Multi-Tenant Multi-Shop Architecture",
+    "Real-time IPN Webhook Processing Hub",
+    "Dynamic Invoice & Template Management",
   ]
 cover: "/src/assets/projects/bot-paypal/thumbnail.png"
 featured: true
 links: []
 gallery:
   - type: image
-    src: "/src/assets/herobg.png"
-    alt: "Sentinel Command Interface"
-    caption: "A unified, professional command suite for financial management."
+    src: "/src/assets/projects/bot-paypal/thumbnail.png"
+    alt: "PayPal Bot Financial Dashboard"
+    caption: "A unified command interface for enterprise-grade commerce within Discord."
 ---
 
-## Vision and Paradigm
+## Project Overview
 
-Sentinel is a comprehensive financial orchestration layer designed to transform Discord into a professional storefront. It provides the robust infrastructure required to handle high-stakes financial transactions with the precision and reliability of a dedicated banking interface.
+**PayPal Bot** is not merely a Discord bot; it is a comprehensive financial orchestration layer designed to bridge the gap between enterprise-grade commerce and modern community engagement. In an era where digital communities are the new storefronts, PayPal Bot provides the robust infrastructure required to handle high-stakes financial transactions with the precision and reliability of a dedicated banking interface.
+
+The vision behind PayPal Bot was to eliminate the friction between Discord-based operations and PayPal's global financial network. By centralizing invoice management, real-time balance tracking, and secure transaction processing within a single, unified command interface, PayPal Bot empowers organizations to scale their operations without compromising on professional standards or security.
 
 ## Architectural Excellence
 
-The system is built upon a distributed monorepo architecture, ensuring maximum reliability and scale.
+PayPal Bot is built upon a distributed monorepo architecture, leveraging the strengths of a modular design to ensure maximum reliability and maintainability.
 
-### Core Pillars:
+### 1. The Core API (NestJS)
 
-- **NestJS API**: The authoritative source of truth, managing complex PayPal orchestrations and secure credential vaulting.
-- **Discord Intelligence**: A sophisticated interaction engine providing a seamless, interactive UI for financial management.
-- **Security Foundation**: Implementing industry-leading cryptographic standards like **AES-256-GCM** to protect sensitive merchant data.
+The heart of the system is a high-performance backend built on the NestJS framework. It serves as the authoritative source of truth, managing:
 
-## Enterprise-Grade Features
+- **Complex PayPal API Orchestrations:** Seamless communication with PayPal's global infrastructure.
+- **Secure Credential Vaulting:** Industry-standard protection for sensitive API keys.
+- **Multi-tenant Shop Management:** Isolated configurations for multiple Discord guilds.
+- **Real-time Webhook Processing:** An intelligent "IPN Hub" for instantaneous payment confirmation.
 
-Sentinel goes beyond simple payments. It offers a suite of tools for professional financial management, including real-time balance auditing, automated invoice lifecycle tracking, and a multi-tenant infrastructure that supports isolated shops across different servers.
+### 2. The Discord Intelligence Layer (Discord.js)
 
-## Operational Integrity
+The frontend of the system is a sophisticated Discord interaction engine. It provides a seamless user experience through:
 
-By centralizing invoice management and real-time transaction tracking within Discord, Sentinel empowers organizations to scale their operations without compromising on professional standards. It is the definitive choice for communities that demand the highest standards of security and functionality.
+- **Advanced Slash Command Implementations:** Intuitive commands for all financial operations.
+- **Interactive UI Components:** Real-time data visualization and interactive forms.
+- **Secure Bridge Communication:** A dedicated protocol for safe data transfer between the bot and API.
+
+### 3. The Data Persistence Layer (Prisma)
+
+Utilizing Prisma ORM, PayPal Bot maintains a type-safe interface with the underlying database. This ensures data integrity across thousands of transactions and multi-shop configurations.
+
+## Unrivaled Security Paradigm
+
+Security is not a feature of PayPal Bot; it is its foundation. We employ industry-leading cryptographic standards to ensure that sensitive financial data and credentials remain impenetrable.
+
+- **Military-Grade Encryption:** All PayPal credentials are protected using **AES-256-GCM**. This provides both confidentiality and authenticity, ensuring that data cannot be decrypted or tampered with without the master system key.
+- **Secure Credential Vaulting:** PayPal Bot never stores raw credentials. Every piece of sensitive information is encrypted at the application level before it ever touches the database.
+- **HMAC Verification and IPN Validation:** Every incoming PayPal Instant Payment Notification (IPN) is rigorously validated against PayPal's servers to prevent spoofing.
+
+## Enterprise-Grade Feature Suite
+
+PayPal Bot offers a suite of tools designed for professional-grade financial management:
+
+### Dynamic Invoicing Engine
+
+- **Automated Creation:** Generate professional PayPal invoices directly from Discord slash commands.
+- **Real-time Lifecycle Tracking:** Monitor invoice status from 'Draft' to 'Paid' with instantaneous updates.
+- **Template Management:** Create and manage reusable invoice templates to standardize billing.
+
+### Financial Analytics and Intelligence
+
+- **Real-time Balance Auditing:** Access up-to-the-minute balance information across multiple PayPal accounts.
+- **Transaction History:** Retrieve and filter historical transaction data for accounting and auditing purposes.
+
+### Multi-Tenant Infrastructure
+
+- **Guild-Based Isolation:** Support for multiple shops across different Discord servers, each with its own isolated credentials.
+- **Granular Admin Controls:** Assign specific users as shop administrators to ensure financial controls are only accessible to authorized personnel.
+
+## Summary
+
+Choosing **PayPal Bot** is an investment in professional excellence. It provides a complete financial ecosystem designed to grow with your organization, offering the reliability, security, and scalability required by modern digital enterprises.
