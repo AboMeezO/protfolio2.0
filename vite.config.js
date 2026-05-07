@@ -46,25 +46,13 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (!id.includes("node_modules")) return undefined;
-          if (id.includes("three") || id.includes("@react-three")) {
-            return "three";
-          }
-          if (id.includes("framer-motion")) {
-            return "motion";
-          }
-          if (id.includes("@mdx-js") || id.includes("remark") || id.includes("rehype")) {
-            return "mdx";
-          }
-          if (id.includes("@barba")) {
-            return "barba";
-          }
-          if (id.includes("react") || id.includes("react-router-dom")) {
-            return "react";
-          }
-          return "vendor";
-        },
+        // manualChunks(id) {
+        //   if (!id.includes("node_modules")) return undefined;
+        //   if (id.includes("react") || id.includes("react-router-dom") || id.includes("react-dom")) {
+        //     return "react-vendor";
+        //   }
+        //   return "vendor";
+        // },
       },
     },
   },

@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { styles } from "../../styles";
 import { staggerContainer } from "../../utils/motion";
-import { StarsCanvas, ErrorBoundary } from "../";
+import { StarsCanvas } from "../canvas";
+import ErrorBoundary from "../ErrorBoundary";
 
 const PageWrapper = ({ children }) => (
   <div className="relative z-0 bg-primary min-h-screen w-full">
