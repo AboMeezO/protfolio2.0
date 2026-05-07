@@ -43,7 +43,7 @@ const Contact = () => {
           to_email: "abomeezo2@gmail.com",
           message: form.message,
         },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
       )
       .then(
         () => {
@@ -61,7 +61,7 @@ const Contact = () => {
           console.error(error);
 
           alert("Ahh, something went wrong. Please try again.");
-        }
+        },
       );
   };
 
@@ -122,6 +122,88 @@ const Contact = () => {
             {loading ? "Sending..." : "Send"}
           </button>
         </form>
+
+        <div className="mt-10 flex flex-col gap-4">
+          <p className="text-white font-medium text-[18px]">Connect with me:</p>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="https://github.com/AboMeezO"
+              target="_blank"
+              rel="noreferrer"
+              className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#915eff] transition-all text-[14px]"
+            >
+              <img
+                src="/src/assets/github.png"
+                alt="github"
+                className="w-5 h-5 object-contain"
+              />
+              GitHub
+            </a>
+            <a
+              href="https://discord.com/invite/C62mj58Q2D"
+              target="_blank"
+              rel="noreferrer"
+              className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#915eff] transition-all text-[14px]"
+            >
+              <img
+                src="/src/assets/discord.png"
+                alt="discord"
+                className="w-5 h-5 object-contain"
+              />
+              Discord
+            </a>
+            <a
+              href="https://www.linkedin.com/in/mohammad-jalamneh/"
+              target="_blank"
+              rel="noreferrer"
+              className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#0077B5] transition-all text-[14px]"
+            >
+              <img
+                src="https://cdn.simpleicons.org/linkedin"
+                alt="linkedin"
+                className="w-5 h-5 object-contain"
+              />
+              LinkedIn
+            </a>
+            <a
+              href="https://youtube.com/@abomeezo"
+              target="_blank"
+              rel="noreferrer"
+              className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#FF0000] transition-all text-[14px]"
+            >
+              <img
+                src="https://cdn.simpleicons.org/youtube"
+                alt="youtube"
+                className="w-5 h-5 object-contain"
+              />
+              YouTube
+            </a>
+            <a
+              href="https://instagram.com/abomeezo"
+              target="_blank"
+              rel="noreferrer"
+              className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#E4405F] transition-all text-[14px]"
+            >
+              <img
+                src="https://cdn.simpleicons.org/instagram"
+                alt="instagram"
+                className="w-5 h-5 object-contain"
+              />
+              Instagram
+            </a>
+            <a
+              href="mailto:abomeezo2@gmail.com"
+              className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#915eff] transition-all text-[14px]"
+            >
+              <img
+                src="https://cdn.simpleicons.org/gmail"
+                alt="email"
+                className="w-5 h-5 object-contain"
+              />
+              Email
+            </a>
+          </div>
+        </div>
       </motion.div>
 
       <motion.div
