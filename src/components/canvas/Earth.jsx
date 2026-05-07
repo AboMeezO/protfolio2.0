@@ -55,7 +55,7 @@ const Moon = ({ radius, speed, offset = 0, tilt = 0.2 }) => {
 };
 
 const Earth = () => {
-  const earth = useGLTF("./planet/scene.gltf");
+  const earth = useGLTF("/planet/scene.gltf");
   const [isValid, setIsValid] = useState(true);
   const sceneRef = useRef(null);
 
@@ -67,14 +67,20 @@ const Earth = () => {
       earth.scene.traverse((child) => {
         if (child.geometry && child.geometry.attributes.position) {
           const positions = child.geometry.attributes.position.array;
+          let hasNaNInChild = false;
           for (let i = 0; i < positions.length; i++) {
             if (isNaN(positions[i])) {
               foundNaN = true;
+              hasNaNInChild = true;
               break;
             }
           }
-          if (!foundNaN) {
-            child.geometry.computeBoundingSphere();
+          if (!hasNaNInChild) {
+            try {
+              child.geometry.computeBoundingSphere();
+            } catch (e) {
+              console.warn("Could not compute bounding sphere for child", child.name);
+            }
           }
         }
       });

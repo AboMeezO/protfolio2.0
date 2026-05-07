@@ -10,7 +10,7 @@ import CanvasLoader from "../Loader";
 import { validateScene, logModelError } from "../../utils/modelValidator";
 
 const Computers = ({ isMobile }) => {
-  const computer = useGLTF("./desktop_pc/scene.gltf");
+  const computer = useGLTF("/desktop_pc/scene.gltf");
   const [isValid, setIsValid] = useState(true);
 
   // Add validation to ensure the model is properly loaded

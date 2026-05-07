@@ -3,7 +3,32 @@ import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
+import { siLinkedin, siYoutube, siInstagram, siGmail } from "simple-icons";
+import { github, discord } from "../assets";
 import EarthCanvas from "./canvas/Earth";
+
+const socialIcons = {
+  linkedin: undefined,
+  youtube: siYoutube,
+  instagram: siInstagram,
+  gmail: siGmail,
+};
+
+const SimpleIcon = ({ name, color }) => {
+  const icon = socialIcons[name];
+  if (!icon) return null;
+  return (
+    <svg
+      role="img"
+      viewBox="0 0 24 24"
+      fill={`#${icon.hex}`}
+      className="w-5 h-5 object-contain"
+    >
+      <title>{icon.title}</title>
+      <path d={icon.path} />
+    </svg>
+  );
+};
 import ErrorBoundary from "./ErrorBoundary";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
@@ -133,7 +158,7 @@ const Contact = () => {
               className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#915eff] transition-all text-[14px]"
             >
               <img
-                src="/src/assets/github.png"
+                src={github}
                 alt="github"
                 className="w-5 h-5 object-contain"
               />
@@ -146,7 +171,7 @@ const Contact = () => {
               className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#915eff] transition-all text-[14px]"
             >
               <img
-                src="/src/assets/discord.png"
+                src={discord}
                 alt="discord"
                 className="w-5 h-5 object-contain"
               />
@@ -158,11 +183,7 @@ const Contact = () => {
               rel="noreferrer"
               className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#0077B5] transition-all text-[14px]"
             >
-              <img
-                src="https://cdn.simpleicons.org/linkedin"
-                alt="linkedin"
-                className="w-5 h-5 object-contain"
-              />
+              <SimpleIcon name="linkedin" />
               LinkedIn
             </a>
             <a
@@ -171,11 +192,7 @@ const Contact = () => {
               rel="noreferrer"
               className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#FF0000] transition-all text-[14px]"
             >
-              <img
-                src="https://cdn.simpleicons.org/youtube"
-                alt="youtube"
-                className="w-5 h-5 object-contain"
-              />
+              <SimpleIcon name="youtube" />
               YouTube
             </a>
             <a
@@ -184,22 +201,14 @@ const Contact = () => {
               rel="noreferrer"
               className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#E4405F] transition-all text-[14px]"
             >
-              <img
-                src="https://cdn.simpleicons.org/instagram"
-                alt="instagram"
-                className="w-5 h-5 object-contain"
-              />
+              <SimpleIcon name="instagram" />
               Instagram
             </a>
             <a
               href="mailto:abomeezo2@gmail.com"
               className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#915eff] transition-all text-[14px]"
             >
-              <img
-                src="https://cdn.simpleicons.org/gmail"
-                alt="email"
-                className="w-5 h-5 object-contain"
-              />
+              <SimpleIcon name="gmail" />
               Email
             </a>
           </div>

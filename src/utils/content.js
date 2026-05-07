@@ -1,22 +1,15 @@
-import {
-  AboMeezO,
-  MeezOCraft,
-  MeezOStudios,
-  MeezOSystem,
-} from "../assets";
 import heroBackground from "../assets/herobg.png";
 
 const blogModules = import.meta.glob("../content/blogs/*.mdx", { eager: true });
 const projectModules = import.meta.glob("../content/projects/*.mdx", {
   eager: true,
 });
-const assetUrls = {
-  "../assets/AboMeezO.jpg": AboMeezO,
-  "../assets/MeezOCraft.jpg": MeezOCraft,
-  "../assets/MeezoStudios.gif": MeezOStudios,
-  "../assets/MeezOSystem.jpg": MeezOSystem,
-  "../assets/herobg.png": heroBackground,
-};
+
+// Dynamically map all assets in src/assets/ to their hashed production URLs
+const allAssets = import.meta.glob([
+  "../assets/*.{png,jpg,jpeg,gif,svg,webp}",
+  "../assets/**/*.{png,jpg,jpeg,gif,svg,webp}"
+], { eager: true, import: 'default' });
 
 const slugFromPath = (path) =>
   path
@@ -26,10 +19,14 @@ const slugFromPath = (path) =>
 
 const resolveAsset = (src) => {
   if (!src || src.startsWith("http") || src.startsWith("/assets/")) return src;
-  if (!src.startsWith("/src/assets/")) return src;
-
-  const key = src.replace("/src/assets/", "../assets/");
-  return assetUrls[key] || src;
+  
+  // Handle paths like "/src/assets/..." from MDX frontmatter
+  if (src.startsWith("/src/assets/")) {
+    const key = src.replace("/src/assets/", "../assets/");
+    return allAssets[key] || src;
+  }
+  
+  return src;
 };
 
 const normalizeGallery = (gallery = []) =>

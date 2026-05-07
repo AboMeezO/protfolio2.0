@@ -6,27 +6,26 @@ import * as random from "maath/random/dist/maath-random.esm";
 const Stars = (props) => {
   const ref = useRef();
   const [sphere] = useState(() => {
-    try {
-      // Generate sphere with validation
-      const positions = random.inSphere(new Float32Array(5000), {
-        radius: 1.2,
-      });
+    // Generate 1500 points (4500 coordinates)
+    const count = 4500;
+    const positions = new Float32Array(count);
+    const radius = 1.2;
 
-      // Validate positions to prevent NaN values
-      for (let i = 0; i < positions.length; i++) {
-        if (isNaN(positions[i])) {
-          console.warn("Found NaN in star positions, using fallback");
-          // Return a simple fallback sphere
-          return new Float32Array(5000).map(() => (Math.random() - 0.5) * 2.4);
-        }
-      }
+    for (let i = 0; i < count; i += 3) {
+      let x, y, z, d2;
+      do {
+        x = Math.random() * 2 - 1;
+        y = Math.random() * 2 - 1;
+        z = Math.random() * 2 - 1;
+        d2 = x * x + y * y + z * z;
+      } while (d2 > 1 || d2 === 0);
 
-      return positions;
-    } catch (error) {
-      console.error("Error generating star positions:", error);
-      // Fallback to simple random positions
-      return new Float32Array(5000).map(() => (Math.random() - 0.5) * 2.4);
+      const d = Math.sqrt(d2);
+      positions[i] = (x / d) * radius;
+      positions[i + 1] = (y / d) * radius;
+      positions[i + 2] = (z / d) * radius;
     }
+    return positions;
   });
 
   useFrame((state, delta) => {
