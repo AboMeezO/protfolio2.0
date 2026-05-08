@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
-import { siLinkedin, siYoutube, siInstagram, siGmail } from "simple-icons";
+import { siYoutube, siInstagram, siGmail } from "simple-icons";
 import { github, discord } from "../assets";
 import EarthCanvas from "./canvas/Earth";
 

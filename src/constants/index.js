@@ -18,6 +18,8 @@ import {
   carrent,
   jobit,
   tripguide,
+  selfhost,
+  DevRoots,
 } from "../assets";
 export const navLinks = [
   {
@@ -254,7 +256,7 @@ const technologyCategories = [
         "Jotai",
         "shadcn/ui",
         "Barba.js",
-      ].includes(technology.name)
+      ].includes(technology.name),
     ),
   },
   {
@@ -268,77 +270,78 @@ const technologyCategories = [
         "Zod",
         "Passport.js",
         "Discord.js",
-      ].includes(technology.name)
+      ].includes(technology.name),
     ),
   },
   {
     name: "Data",
     items: technologies.filter((technology) =>
-      ["SQLite", "PostgreSQL"].includes(technology.name)
+      ["SQLite", "PostgreSQL"].includes(technology.name),
     ),
   },
   {
     name: "Deployments",
     items: technologies.filter((technology) =>
       ["Docker", "Railway", "GitHub CI", "Vercel", "ReviveNode"].includes(
-        technology.name
-      )
+        technology.name,
+      ),
     ),
   },
   {
     name: "Tooling",
     items: technologies.filter((technology) =>
-      ["Electron.js", "Git", "TypeScript", "Java"].includes(technology.name)
+      ["Electron.js", "Git", "TypeScript", "Java"].includes(technology.name),
     ),
   },
 ];
 
 const experiences = [
   {
-    title: "Full-Stack Web Developer",
-    company_name: "X-Tag",
-    icon: freelancing,
-    iconBg: "#E6DEDD",
-    date: "2018 - 2019",
-    points: [
-      "Started as a Junior Developer focusing on responsive web interfaces and core JavaScript logic.",
-      "Collaborated with design teams to translate UI/UX mockups into high-performance, accessible web components.",
-    ],
-  },
-  {
-    title: "Senior Freelance Developer",
-    company_name: "Independent",
+    title: "Early Programming Exploration",
+    company_name: "Self-learning Phase",
     icon: freelancing,
     iconBg: "#E6DEDD",
     date: "2019 - 2022",
     points: [
-      "Engineered end-to-end solutions for diverse clients, from startups to established businesses.",
-      "Specialized in modern React ecosystems, implementing advanced state management and real-time features.",
-      "Built reputation for delivering complex projects on tight deadlines while maintaining high code quality.",
+      "Started learning programming in an unstructured way while still in school, exploring different paths without a clear direction.",
+      "Initially experimented with Java after randomly discovering it online, before shifting focus toward web development.",
+      "Transitioned into frontend development after being guided by a software developer family member, which later led into full-stack development.",
     ],
   },
   {
-    title: "Game & Engine Developer",
+    title: "Full-Stack Web Developer",
     company_name: "Freelance",
-    icon: MeezOCraft,
-    iconBg: "#E6DEDD",
-    date: "2022 - 2024",
-    points: [
-      "Pivoted into low-level systems and game engine logic, specializing in Minecraft server architecture.",
-      "Developed custom Java plugins and automated systems to handle thousands of concurrent players.",
-      "Optimized server performance and network protocols to ensure a lag-free gaming experience.",
-    ],
-  },
-  {
-    title: "Founder & Lead Architect",
-    company_name: "MeezO Studios",
-    icon: MeezOStudios,
+    icon: freelancing,
     iconBg: "#E6DEDD",
     date: "2022 - Present",
     points: [
-      "Founded a software studio focused on pushing technical boundaries in Web, AI, and Gaming.",
-      "Leading a team to build innovative products like the Discord Bot Builder and high-speed headless platforms.",
-      "Architecting scalable cloud infrastructures and modular systems used by thousands of users worldwide.",
+      "Working independently as a freelance developer building web applications and custom software systems.",
+      "Focused on React and NestJS ecosystems while continuously experimenting with modern tools like the TanStack ecosystem.",
+      "Building real-world projects as a way to learn through practice rather than formal work experience, improving by solving actual problems.",
+    ],
+  },
+  {
+    title: "Self-Hosted Tools & Systems Builder",
+    company_name: "Personal Projects",
+    icon: selfhost,
+    iconBg: "#E6DEDD",
+    date: "Ongoing",
+    points: [
+      "Built and maintained personal tools focused on improving the way I use software in daily workflows.",
+      "Created a self-hosted helper desktop application to simplify and automate parts of the self-hosting process.",
+      "Most projects originate from practical problems I run into and a tendency to simplify or remove repetitive work.",
+    ],
+  },
+  {
+    title: "devRoot",
+    company_name: "Independent Project",
+    icon: DevRoots,
+    iconBg: "#E6DEDD",
+    date: "Present",
+    points: [
+      "Started devRoot as an independent initiative to push myself into real-world software development through responsibility and execution.",
+      "Building and managing everything alone, from development to planning and execution, as a learning-driven environment.",
+      "Expanding beyond coding into broader areas like product thinking and basic business understanding through hands-on experience.",
     ],
   },
 ];
@@ -549,4 +552,11 @@ const projects = [
   },
 ];
 
-export { services, technologies, technologyCategories, experiences, testimonials, projects };
+export {
+  services,
+  technologies,
+  technologyCategories,
+  experiences,
+  testimonials,
+  projects,
+};

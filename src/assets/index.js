@@ -34,11 +34,14 @@ import Electron from "./Electron.png";
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
-
+import selfhost from "./selfhost.png";
+import DevRoots from "./DevRoots.gif";
 export {
   carrent,
   jobit,
   tripguide,
+  selfhost,
+  DevRoots,
   Electron,
   java,
   python,

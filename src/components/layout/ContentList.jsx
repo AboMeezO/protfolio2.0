@@ -298,7 +298,7 @@ const ContentList = ({
 
             <motion.div
               layout
-              className="flex flex-wrap gap-4 justify-center lg:justify-start"
+              className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
             >
               <AnimatePresence>
                 {filteredItems.map((item) => (

@@ -35,11 +35,12 @@ const Works = () => {
         </motion.p>
       </div>
 
-      <div className="mt-20 flex flex-wrap gap-4 justify-center">
+      <div className="mt-10 sm:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-7">
         {featuredProjects.map((project, index) => (
           <motion.div
             key={project.slug}
-            variants={fadeIn("up", "spring", index * 0.2, 0.75)}
+            variants={fadeIn("up", "spring", index * 0.1, 0.75)}
+            className="h-full"
           >
             <ProjectCard project={project} />
           </motion.div>

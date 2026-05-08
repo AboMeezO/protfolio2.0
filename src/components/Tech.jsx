@@ -369,8 +369,7 @@ const Tech = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
       >
-        A layered orbital map of the stack, spread across uneven shells so the
-        system feels more like a live orbit than a rigid diagram.
+        This is what I've learned and what I use to build and ship your software:
       </motion.p>
 
       <motion.div

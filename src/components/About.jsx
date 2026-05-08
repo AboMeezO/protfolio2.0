@@ -49,14 +49,18 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
       >
-        I'm a passionate Full-Stack Developer and Software Engineer with a focus
-        on building high-performance web applications, desktop tools, and
-        community-driven automation. With deep expertise in the React and NestJS
-        ecosystems, I specialize in creating scalable architectures that bridge
-        complex backend logic with premium, interactive user interfaces. Whether
-        it's developing enterprise-grade financial systems or high-speed headless
-        platforms, I thrive on turning ambitious ideas into polished,
-        production-ready reality.
+        I’m a full-stack web developer who enjoys building web applications,
+        desktop tools, and custom software with a strong focus on performance,
+        scalability, and user experience. I mainly work with technologies around
+        the React and NestJS ecosystems, and recently started exploring the
+        TanStack ecosystem because I really like the direction it’s heading and
+        the way it approaches modern web development. Most of my current work
+        revolves around building projects, experimenting with new ideas, and
+        creating solutions for problems I personally deal with. A lot of the
+        things I build come from me being lazy and wanting to make the way I use
+        software simpler, faster, and less annoying. One example of that is a
+        self-hosted helper desktop app I’ve been working on to make the
+        self-hosting process easier and more manageable.
       </motion.p>
 
       <div className="mt-20 flex flex-wrap gap-10">

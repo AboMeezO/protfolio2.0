@@ -31,11 +31,12 @@ const BlogsPreview = () => {
         </motion.p>
       </div>
 
-      <div className="mt-20 flex flex-wrap gap-7">
+      <div className="mt-10 sm:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-7">
         {latestBlogs.map((blog, index) => (
           <motion.div
             key={blog.slug}
-            variants={fadeIn("up", "spring", index * 0.2, 0.75)}
+            variants={fadeIn("up", "spring", index * 0.1, 0.75)}
+            className="h-full"
           >
             <BlogCard blog={blog} />
           </motion.div>
