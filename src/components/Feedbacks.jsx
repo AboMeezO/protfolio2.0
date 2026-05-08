@@ -15,7 +15,7 @@ const FeedbackCard = ({
   company,
   image,
 }) => (
-  <div className="bg-black-200 p-6 sm:p-10 rounded-3xl xs:w-[320px] w-full shrink-0">
+  <div className="bg-black-200 p-6 sm:p-10 rounded-3xl w-[280px] xs:w-[320px] shrink-0">
     <p className="text-white font-black text-[32px] sm:text-[48px]">"</p>
 
     <div className="mt-1">
@@ -47,7 +47,7 @@ const FeedbackCard = ({
 const Feedbacks = () => {
   return (
     <div className={`mt-12 bg-transparent`}>
-      <div className={`${styles.padding} min-h-[300px]`}>
+      <div className={`min-h-[300px]`}>
         <motion.div variants={textVariant()}>
           <p className={styles.sectionSubText}>What others say</p>
           <h2 className={styles.sectionHeadText}>Testimonials.</h2>
@@ -56,10 +56,10 @@ const Feedbacks = () => {
 
       <div className={`-mt-20 pb-14 relative overflow-hidden`}>
         {/* Edge Blur & Shadow Masks - Responsive Widths */}
-        <div className="absolute inset-y-0 left-0 w-8 sm:w-32 bg-gradient-to-r from-primary to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-8 sm:w-32 bg-gradient-to-l from-primary to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-6 sm:w-32 bg-gradient-to-r from-primary to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-6 sm:w-32 bg-gradient-to-l from-primary to-transparent z-10 pointer-events-none" />
 
-        <Marquee pauseOnHover duration="20s" gap="2rem" className="sm:gap-8">
+        <Marquee pauseOnHover duration="30s" gap="1.5rem" className="sm:gap-8">
           {testimonials.map((testimonial, index) => (
             <FeedbackCard
               key={testimonial.name}
