@@ -25,6 +25,7 @@ const mdxFrontmatter = () => ({
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   // base: mode === "production" ? "/abomeezo/" : "/",
+  base: "/",
   plugins: [
     mdxFrontmatter(),
     mdx({
@@ -37,7 +38,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: true,
     port: 5163,
-    allowedHosts: true
+    allowedHosts: true,
   },
   preview: {
     host: true,
