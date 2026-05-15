@@ -4,7 +4,7 @@ import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
 import { siYoutube, siInstagram, siGmail } from "simple-icons";
-import { github, discord } from "../assets";
+import { github } from "../assets";
 import EarthCanvas from "./canvas/Earth";
 
 const socialIcons = {
@@ -163,19 +163,6 @@ const Contact = () => {
                 className="w-5 h-5 object-contain"
               />
               GitHub
-            </a>
-            <a
-              href="https://discord.com/invite/C62mj58Q2D"
-              target="_blank"
-              rel="noreferrer"
-              className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#915eff] transition-all text-[14px]"
-            >
-              <img
-                src={discord}
-                alt="discord"
-                className="w-5 h-5 object-contain"
-              />
-              Discord
             </a>
             <a
               href="https://www.linkedin.com/in/mohammad-jalamneh/"
