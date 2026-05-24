@@ -183,7 +183,7 @@ const Contact = () => {
               YouTube
             </a>
             <a
-              href="https://instagram.com/abomeezo"
+              href="https://www.instagram.com/abotasneem_/"
               target="_blank"
               rel="noreferrer"
               className="bg-tertiary py-2 px-4 rounded-xl flex items-center gap-2 text-white font-bold shadow-md shadow-primary hover:text-[#E4405F] transition-all text-[14px]"
