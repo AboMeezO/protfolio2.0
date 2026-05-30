@@ -1,27 +1,15 @@
-# Heading 1
+# Not yet.
 
-## Heading 2
+I came here to write something honest.
 
-### Heading 3
+Something heavy enough to deserve being hidden, and quiet enough to survive being found.
 
-#### Heading 4
+But the words are not ready.
 
-##### Heading 5
+They are still somewhere in the dark, unfinished, circling the same old places, refusing to become beautiful just because I need them to.
 
-###### Heading 6
+So for now, this room stays empty.
 
-_Italic_
-_Bold_
-**Bold and Italic**
-~~Strikethrough~~
+Not abandoned.
 
-[Link](https://www.google.com)
-[Link with title](https://www.google.com "Google")
-
-Inline code: `console.log("Hello World");`
-
-Block code:
-
-```javascript
-console.log("Hello World");
-```
+Just not safe to open yet.

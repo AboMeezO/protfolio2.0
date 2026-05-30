@@ -86,11 +86,21 @@ const EasterEgg = ({ secretCode, mdFilePath }) => {
 
   return (
     <div className="easter-egg-card">
-      <div className="cardContent">
-        <ReactMarkdown>{markdownContent}</ReactMarkdown>
-        <button className="closeBtn" onClick={() => setShowCard(false)}>
-          Close
-        </button>
+      <div className="easter-egg-card__frame">
+        <div className="cardContent">
+          <button
+            type="button"
+            className="closeBtn"
+            aria-label="Close hidden message"
+            onClick={() => setShowCard(false)}
+          >
+            <span />
+            <span />
+          </button>
+          <div className="easter-egg-card__content">
+            <ReactMarkdown>{markdownContent}</ReactMarkdown>
+          </div>
+        </div>
       </div>
     </div>
   );
