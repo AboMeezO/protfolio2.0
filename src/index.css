@@ -345,7 +345,7 @@
 
 @layer components {
   .bg-hero-pattern {
-    background-image: url("./assets/herobg.png");
+    background-image: url("./assets/herobg.webp");
   }
 }
 

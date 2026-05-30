@@ -20,7 +20,7 @@ import threejs from "./tech/threejs.svg";
 import typescript from "./tech/typescript.png";
 
 import AboMeezO from "./AboMeezO.jpg";
-import MeezOStudios from "./MeezoStudios.gif";
+import MeezOStudios from "./MeezoStudios.webp";
 import MeezOCraft from "./MeezOCraft.jpg";
 import MeezOSystem from "./MeezOSystem.jpg";
 import freelancing from "./freelancing.png";
@@ -31,11 +31,11 @@ import discord from "./discord.png";
 import java from "./java.png";
 import Electron from "./Electron.png";
 
-import carrent from "./carrent.png";
-import jobit from "./jobit.png";
-import tripguide from "./tripguide.png";
+import carrent from "./carrent.webp";
+import jobit from "./jobit.webp";
+import tripguide from "./tripguide.webp";
 import selfhost from "./selfhost.png";
-import DevRoots from "./DevRoots.gif";
+import DevRoots from "./DevRoots.webp";
 export {
   carrent,
   jobit,
