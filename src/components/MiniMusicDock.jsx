@@ -12,7 +12,7 @@ const tracks = [
   { label: "Where It Was Lost", src: "/audio/where-it-was-lost.mp3" },
   {
     label: "Whispered Memories",
-    src: "/audio/whispered-memories-piano-and-cello-.mp3",
+    src: "/audio/whispered-memories-piano-and-cello.mp3",
   },
 ];
 
