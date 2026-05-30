@@ -3,7 +3,7 @@ module.exports = {
     {
       name: "Portfolio",
       script: "npm",
-      args: "run dev", // تشغيل سكربت dev الذي يشغل vite
+      args: "run dev",
       watch: true,
     },
   ],

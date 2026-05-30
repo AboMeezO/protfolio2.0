@@ -348,20 +348,12 @@ const experiences = [
 
 const testimonials = [
   {
-    testimonial:
-      "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
-    name: "Sara Lee",
-    designation: "CFO",
-    company: "Acme Co",
-    image: "https://randomuser.me/api/portraits/women/4.jpg",
-  },
-  {
     testimonial: "طاقم عمل ممتاز وا سرعه الرد مذهله ايضا شكرا لابو ميزو",
     name: "Rox",
     designation: "CEO",
     company: "LEX Network",
     image:
-      "https://cdn.discordapp.com/avatars/1045257962568032326/711278a13ff894fe5d06b4a713c948d1.webp?size=1024",
+      "https://i.pinimg.com/originals/98/1d/6b/981d6b2e0ccb5e968a0618c8d47671da.jpg",
   },
   {
     testimonial:

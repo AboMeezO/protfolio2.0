@@ -36,7 +36,7 @@ const FeedbackCard = ({
         <img
           src={image}
           alt={`feedback_by-${name}`}
-          crossOrigin="anonymous"
+          // crossOrigin="anonymous"
           className="w-10 h-10 rounded-full object-cover"
         />
       </div>
