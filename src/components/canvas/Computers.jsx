@@ -4,7 +4,6 @@ import {
   OrbitControls,
   Preload,
   useGLTF,
-  CameraControls,
 } from "@react-three/drei";
 import CanvasLoader from "../Loader";
 import { validateScene, logModelError } from "../../utils/modelValidator";
@@ -86,7 +85,7 @@ const ComputersCanvas = () => {
       shadows
       dpr={[1, 2]}
       camera={{ position: [20, 3, 5], fov: 25 }}
-      gl={{ preserveDrawingBuffer: true }}
+      gl={{ preserveDrawingBuffer: false }}
       onError={(error) => {
         console.error("Canvas error:", error);
         setHasError(true);

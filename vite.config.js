@@ -47,14 +47,8 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        // manualChunks(id) {
-        //   if (!id.includes("node_modules")) return undefined;
-        //   if (id.includes("react") || id.includes("react-router-dom") || id.includes("react-dom")) {
-        //     return "react-vendor";
-        //   }
-        //   return "vendor";
-        // },
       },
     },
+    chunkSizeWarningLimit: 1100,
   },
 }));

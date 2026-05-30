@@ -1,22 +1,14 @@
 import Tilt from "react-parallax-tilt";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { fadeIn } from "../../utils/motion";
-import { useMediaQuery, useTheme } from "@mui/material";
-
-const tagColors = ["blue-text-gradient", "green-text-gradient", "pink-text-gradient"];
 
 const BlogCard = ({ blog, onTagClick, activeTags = [] }) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
   return (
     <Tilt
-      tiltMaxAngleX={isMobile ? 10 : 20}
-      tiltMaxAngleY={isMobile ? 10 : 20}
+      tiltMaxAngleX={16}
+      tiltMaxAngleY={16}
       perspective={900}
       transitionSpeed={800}
-      scale={isMobile ? 1.02 : 1.05}
+      scale={1.03}
       className="bg-tertiary p-4 sm:p-5 rounded-2xl w-full h-full background-stripes parallax-effect group flex flex-col border border-white/5"
     >
       <Link to={`/blogs/${blog.slug}`} className="block flex-1">

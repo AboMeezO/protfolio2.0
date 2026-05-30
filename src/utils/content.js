@@ -1,11 +1,8 @@
-import heroBackground from "../assets/herobg.png";
-
 const blogModules = import.meta.glob("../content/blogs/*.mdx", { eager: true });
 const projectModules = import.meta.glob("../content/projects/*.mdx", {
   eager: true,
 });
 
-// Dynamically map all assets in src/assets/ to their hashed production URLs
 const allAssets = import.meta.glob([
   "../assets/*.{png,jpg,jpeg,gif,svg,webp}",
   "../assets/**/*.{png,jpg,jpeg,gif,svg,webp}"

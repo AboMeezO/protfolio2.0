@@ -1,58 +1,8 @@
-import React, { Suspense, useEffect, useState, useRef, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF, useTexture } from "@react-three/drei";
-import * as THREE from "three";
+import React, { Suspense, useEffect, useState, useRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../Loader";
-
-const Moon = ({ radius, speed, offset = 0, tilt = 0.2 }) => {
-  const ref = useRef();
-
-  // High-fidelity textures from the provided example
-  const [moonTexture, displacementMap] = useTexture([
-    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/17271/lroc_color_poles_1k.jpg",
-    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/17271/ldem_3_8bit.jpg",
-  ]);
-
-  useFrame((state) => {
-    const t = state.clock.getElapsedTime() * speed + offset;
-
-    // Elliptical orbit
-    const x = Math.cos(t) * radius;
-    const z = Math.sin(t) * radius;
-    const y = Math.sin(t) * (radius * tilt);
-
-    if (ref.current) {
-      ref.current.position.set(x, y, z);
-      ref.current.rotation.y += 0.002;
-      ref.current.rotation.x += 0.0001;
-
-      // Dynamic depth scaling
-      const zFactor = (z + radius) / (2 * radius);
-      const scaleFactor = 0.85 + zFactor * 0.45;
-      ref.current.scale.set(scaleFactor, scaleFactor, scaleFactor);
-    }
-  });
-
-  return (
-    <mesh ref={ref} castShadow receiveShadow>
-      <sphereGeometry args={[0.35, 64, 64]} />
-      {/* Implementing the exact material settings from the example */}
-      <meshPhongMaterial
-        map={moonTexture}
-        displacementMap={displacementMap}
-        displacementScale={0.06}
-        bumpMap={displacementMap}
-        bumpScale={0.04}
-        reflectivity={0}
-        shininess={0}
-        color={0xffffff}
-      />
-      {/* Subtle point light attached to the moon for that "lunar glow" */}
-      <pointLight intensity={0.5} distance={3} color="#ffffff" />
-    </mesh>
-  );
-};
 
 const Earth = () => {
   const earth = useGLTF("/planet/scene.gltf");
@@ -121,7 +71,7 @@ const EarthCanvas = () => {
       shadows
       frameloop="always"
       dpr={[1, 2]}
-      gl={{ preserveDrawingBuffer: true, antialias: true }}
+      gl={{ preserveDrawingBuffer: false, antialias: true }}
       camera={{
         fov: 45,
         near: 0.1,
@@ -152,9 +102,6 @@ const EarthCanvas = () => {
         />
 
         <Earth />
-
-        {/* The Moon - Closer radius and procedural realism */}
-        {/* <Moon radius={2.2} speed={0.3} tilt={0.15} /> */}
       </Suspense>
     </Canvas>
   );

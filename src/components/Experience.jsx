@@ -1,10 +1,26 @@
 import { motion } from "framer-motion";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import { styles } from "../styles";
 import { experiences } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
+
+const useIsNarrowTimeline = () => {
+  const [isNarrow, setIsNarrow] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1023px)");
+    const updateLayout = () => setIsNarrow(mediaQuery.matches);
+
+    updateLayout();
+    mediaQuery.addEventListener("change", updateLayout);
+
+    return () => mediaQuery.removeEventListener("change", updateLayout);
+  }, []);
+
+  return isNarrow;
+};
 
 const TimelineMarker = ({ experience, isFirst, isLast, isMobileLayout }) => {
   const lineClass = "w-[3px] flex-1 bg-[#5d55fa]";
@@ -98,8 +114,7 @@ const ExperienceRow = ({ experience, index, isLast, isMobileLayout }) => {
 };
 
 const Experience = () => {
-  const theme = useTheme();
-  const isMobileLayout = useMediaQuery(theme.breakpoints.down("lg"));
+  const isMobileLayout = useIsNarrowTimeline();
 
   return (
     <>
