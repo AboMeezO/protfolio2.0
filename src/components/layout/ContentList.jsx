@@ -66,6 +66,11 @@ const ContentList = ({
             <h1 className={`${styles.sectionHeadText} font-extrabold`}>
               {title}
             </h1>
+            {description && (
+              <p className="mx-auto mt-4 max-w-3xl text-secondary text-[15px] sm:text-[17px] leading-[28px]">
+                {description}
+              </p>
+            )}
           </motion.div>
         </div>
 
@@ -75,9 +80,7 @@ const ContentList = ({
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="flex-1 bg-tertiary py-3 px-8 rounded-xl outline-none text-white font-bold shadow-md shadow-primary flex items-center justify-center gap-2 uppercase tracking-widest text-xs transition-all active:scale-95"
-            >
-              {/* <span className="text-purple-500">⚡</span> */}
-              {showFilters ? "Close Filters" : "Filter Results"}
+            >              {showFilters ? "Close Filters" : "Filter Results"}
             </button>
             {(selectedCategory !== "All" ||
               selectedTech !== "All" ||
@@ -143,9 +146,7 @@ const ContentList = ({
                       </option>
                     ))}
                   </select>
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-secondary">
-                    ▼
-                  </div>
+                  <span className="absolute right-4 top-1/2 h-2 w-2 -translate-y-1/2 rotate-45 border-b-2 border-r-2 border-secondary pointer-events-none" />
                 </div>
               </div>
 
@@ -242,9 +243,7 @@ const ContentList = ({
                                 </option>
                               ))}
                             </select>
-                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-secondary">
-                              ▼
-                            </div>
+                            <span className="absolute right-4 top-1/2 h-2 w-2 -translate-y-1/2 rotate-45 border-b-2 border-r-2 border-secondary pointer-events-none" />
                           </div>
                         </div>
 

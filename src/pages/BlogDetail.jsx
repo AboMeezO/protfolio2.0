@@ -32,12 +32,18 @@ const BlogDetail = () => {
           {blog.description}
         </motion.p>
         <motion.div variants={fadeIn("up", "spring", 0.2, 0.75)} className="mt-10 green-pink-gradient p-[1px] rounded-2xl">
-          <img
-            src={blog.cover}
-            alt={blog.title}
-            loading="lazy"
-            className="w-full h-[430px] object-cover rounded-2xl"
-          />
+          {blog.cover ? (
+            <img
+              src={blog.cover}
+              alt={blog.title}
+              loading="lazy"
+              className="w-full h-[430px] object-cover rounded-2xl"
+            />
+          ) : (
+            <div className="w-full h-[430px] bg-tertiary rounded-2xl flex justify-center items-center">
+              <p className="text-secondary text-[14px]">No preview</p>
+            </div>
+          )}
         </motion.div>
         <div className="mt-10">
           <MarkdownRenderer>

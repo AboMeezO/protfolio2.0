@@ -8,6 +8,7 @@ import { fadeIn, textVariant } from "../utils/motion";
 
 const BlogsPreview = () => {
   const latestBlogs = blogs.slice(0, 3);
+  if (latestBlogs.length === 0) return null;
 
   return (
     <>
