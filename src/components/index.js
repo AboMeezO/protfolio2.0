@@ -16,9 +16,11 @@ import CanvasLoader from "./Loader";
 import EasterEgg from "./EasterEgg";
 import ErrorBoundary from "./ErrorBoundary";
 import BlogsPreview from "./BlogsPreview";
+import MiniMusicDock from "./MiniMusicDock";
 
 export {
   BlogsPreview,
+  MiniMusicDock,
   EasterEgg,
   Hero,
   Navbar,

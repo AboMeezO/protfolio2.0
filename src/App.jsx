@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import {
+  MiniMusicDock,
   Navbar,
 } from "./components";
 import BarbaTransitions from "./components/BarbaTransitions";
@@ -27,6 +28,7 @@ const App = () => {
         <ScrollToTop />
         <BarbaTransitions />
         <Navbar />
+        <MiniMusicDock />
         <div data-barba="wrapper">
           <main data-barba="container" data-barba-namespace="portfolio">
             <Suspense fallback={<div className="bg-primary min-h-screen" />}>
