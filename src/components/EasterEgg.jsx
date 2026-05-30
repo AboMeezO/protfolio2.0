@@ -1,146 +1,99 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
-// دالة لتحويل شيفرة مورس إلى نص
-const MorseCodeToText = (morse) => {
-  const morseCode = {
-    ".-": "A",
-    "-...": "B",
-    "-.-.": "C",
-    "-..": "D",
-    ".": "E",
-    "..-.": "F",
-    "--.": "G",
-    "....": "H",
-    "..": "I",
-    ".---": "J",
-    "-.-": "K",
-    ".-..": "L",
-    "--": "M",
-    "-.": "N",
-    "---": "O",
-    ".--.": "P",
-    "--.-": "Q",
-    ".-.": "R",
-    "...": "S",
-    "-": "T",
-    "..-": "U",
-    "...-": "V",
-    ".--": "W",
-    "-..-": "X",
-    "-.--": "Y",
-    "--..": "Z",
-    "-----": "0",
-    ".----": "1",
-    "..---": "2",
-    "...--": "3",
-    "....-": "4",
-    ".....": "5",
-    "-....": "6",
-    "--...": "7",
-    "---..": "8",
-    "----.": "9",
-  };
-  return morse
+const morseCode = {
+  ".-": "A",
+  "-...": "B",
+  "-.-.": "C",
+  "-..": "D",
+  ".": "E",
+  "..-.": "F",
+  "--.": "G",
+  "....": "H",
+  "..": "I",
+  ".---": "J",
+  "-.-": "K",
+  ".-..": "L",
+  "--": "M",
+  "-.": "N",
+  "---": "O",
+  ".--.": "P",
+  "--.-": "Q",
+  ".-.": "R",
+  "...": "S",
+  "-": "T",
+  "..-": "U",
+  "...-": "V",
+  ".--": "W",
+  "-..-": "X",
+  "-.--": "Y",
+  "--..": "Z",
+  "-----": "0",
+  ".----": "1",
+  "..---": "2",
+  "...--": "3",
+  "....-": "4",
+  ".....": "5",
+  "-....": "6",
+  "--...": "7",
+  "---..": "8",
+  "----.": "9",
+};
+
+const morseCodeToText = (morse) =>
+  morse
     .split(" ")
     .map((code) => morseCode[code] || "")
     .join("");
-};
 
 const EasterEgg = ({ secretCode, mdFilePath }) => {
   const [input, setInput] = useState("");
   const [showCard, setShowCard] = useState(false);
   const [markdownContent, setMarkdownContent] = useState("");
 
-  // تحميل المحتوى من ملف Markdown
   useEffect(() => {
     fetch(mdFilePath)
       .then((response) => {
-        if (response.ok) {
-          return response.text();
-        } else {
-          throw new Error("Failed to load markdown file");
-        }
+        if (!response.ok) throw new Error("Failed to load markdown file");
+        return response.text();
       })
       .then((text) => setMarkdownContent(text))
       .catch((error) => console.error(error));
   }, [mdFilePath]);
 
-  // الاستماع لضغطات الكيبورد
   useEffect(() => {
-    const handleKeyPress = (e) => {
-      const key = e.key;
+    const handleKeyPress = (event) => {
+      const { key } = event;
+      if (key !== "." && key !== "-" && key !== " ") return;
 
-      // نسمح بكتابة نقاط وشرطات فقط (شيفرة مورس)
-      if (key === "." || key === "-" || key === " ") {
-        setInput((prevInput) => {
-          const newInput = prevInput + key;
+      setInput((previousInput) => {
+        const newInput = previousInput + key;
+        const morseMessage = morseCodeToText(newInput.trim());
 
-          // تحويل الشيفرة المدخلة إلى نص باستخدام MorseCodeToText
-          const morseMessage = MorseCodeToText(newInput.trim());
+        if (morseMessage.toUpperCase() === secretCode.toUpperCase()) {
+          setShowCard(true);
+        }
 
-          // مقارنة النص المحول مع الكود السري
-          if (morseMessage.toUpperCase() === secretCode.toUpperCase()) {
-            setShowCard(true); // عرض الـCard إذا كانت المدخلات تطابق الكود السري
-          }
-          return newInput;
-        });
-      }
+        return newInput;
+      });
     };
 
     window.addEventListener("keypress", handleKeyPress);
     return () => window.removeEventListener("keypress", handleKeyPress);
   }, [secretCode]);
 
-  return (
-    <>
-      {showCard && (
-        <div className="easter-egg-card" style={styles.card}>
-          <div style={styles.cardContent}>
-            <ReactMarkdown>{markdownContent}</ReactMarkdown>
-            <button style={styles.closeBtn} onClick={() => setShowCard(false)}>
-              Close
-            </button>
-          </div>
-        </div>
-      )}
-    </>
-  );
-};
+  if (!showCard) return null;
 
-// أساليب تصميم الـCard
-const styles = {
-  card: {
-    color: "black",
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 9999,
-  },
-  cardContent: {
-    backgroundColor: "white",
-    padding: "20px",
-    borderRadius: "8px",
-    maxWidth: "80%",
-    maxHeight: "80%",
-    overflowY: "auto",
-    textAlign: "center",
-  },
-  closeBtn: {
-    marginTop: "20px",
-    padding: "10px 20px",
-    backgroundColor: "#333",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
+  return (
+    <div className="easter-egg-card">
+      <div className="cardContent">
+        <ReactMarkdown>{markdownContent}</ReactMarkdown>
+        <button className="closeBtn" onClick={() => setShowCard(false)}>
+          Close
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default EasterEgg;

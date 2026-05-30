@@ -8,13 +8,26 @@ import { github } from "../assets";
 import EarthCanvas from "./canvas/Earth";
 
 const socialIcons = {
-  linkedin: undefined,
   youtube: siYoutube,
   instagram: siInstagram,
   gmail: siGmail,
 };
 
-const SimpleIcon = ({ name, color }) => {
+const SimpleIcon = ({ name }) => {
+  if (name === "linkedin") {
+    return (
+      <svg
+        role="img"
+        viewBox="0 0 24 24"
+        fill="#0A66C2"
+        className="w-5 h-5 object-contain"
+      >
+        <title>LinkedIn</title>
+        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28h-.01ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0Z" />
+      </svg>
+    );
+  }
+
   const icon = socialIcons[name];
   if (!icon) return null;
   return (
@@ -42,6 +55,7 @@ const Contact = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null);
 
   const handleChange = (e) => {
     const { target } = e;
@@ -56,6 +70,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    setStatus(null);
 
     emailjs
       .send(
@@ -73,7 +88,10 @@ const Contact = () => {
       .then(
         () => {
           setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
+          setStatus({
+            type: "success",
+            message: "Thank you. I will get back to you as soon as possible.",
+          });
 
           setForm({
             name: "",
@@ -84,8 +102,10 @@ const Contact = () => {
         (error) => {
           setLoading(false);
           console.error(error);
-
-          alert("Ahh, something went wrong. Please try again.");
+          setStatus({
+            type: "error",
+            message: "Something went wrong. Please try again.",
+          });
         },
       );
   };
@@ -146,6 +166,16 @@ const Contact = () => {
           >
             {loading ? "Sending..." : "Send"}
           </button>
+
+          {status && (
+            <p
+              className={`rounded-xl bg-tertiary px-5 py-3 text-[14px] font-medium ${
+                status.type === "success" ? "text-[#00cea8]" : "text-[#ff8a8a]"
+              }`}
+            >
+              {status.message}
+            </p>
+          )}
         </form>
 
         <div className="mt-10 flex flex-col gap-4">
