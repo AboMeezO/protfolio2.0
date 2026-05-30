@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { styles } from "../styles";
 import { navLinks } from "../constants";
-import { logo, menu, close } from "../assets";
+import { logo } from "../assets";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
@@ -26,6 +26,43 @@ const Navbar = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = toggle ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [toggle]);
+
+  const mobileLinks = [
+    ...navLinks.map((nav) => ({
+      id: nav.id,
+      title: nav.title,
+      href: isHome ? `#${nav.id}` : `/#${nav.id}`,
+      isRoute: false,
+      isActive: active === nav.title,
+    })),
+    {
+      id: "projects",
+      title: "Projects",
+      href: "/projects",
+      isRoute: true,
+      isActive: location.pathname.startsWith("/projects"),
+    },
+    {
+      id: "blogs",
+      title: "Blogs",
+      href: "/blogs",
+      isRoute: true,
+      isActive: location.pathname.startsWith("/blogs"),
+    },
+  ];
+
+  const closeMobileMenu = (title = "") => {
+    setToggle(false);
+    if (title) setActive(title);
+  };
 
   return (
     <nav
@@ -84,44 +121,74 @@ const Navbar = () => {
         </ul>
 
         <div className="sm:hidden flex flex-1 justify-end items-center">
-          <img
-            src={toggle ? close : menu}
-            alt="menu"
-            className="w-[28px] h-[28px] object-contain"
-            onClick={() => setToggle(!toggle)}
-          />
+          <button
+            type="button"
+            aria-label={toggle ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={toggle}
+            onClick={() => setToggle((current) => !current)}
+            className="relative z-40 flex h-11 w-11 items-center justify-center rounded-full bg-tertiary shadow-card"
+          >
+            <span
+              className={`absolute h-[2px] w-5 rounded-full bg-white transition-all duration-300 ${
+                toggle ? "translate-y-0 rotate-45" : "-translate-y-1.5"
+              }`}
+            />
+            <span
+              className={`absolute h-[2px] w-5 rounded-full bg-white transition-all duration-300 ${
+                toggle ? "opacity-0" : "opacity-100"
+              }`}
+            />
+            <span
+              className={`absolute h-[2px] w-5 rounded-full bg-white transition-all duration-300 ${
+                toggle ? "translate-y-0 -rotate-45" : "translate-y-1.5"
+              }`}
+            />
+          </button>
 
           <div
-            className={`${
-              !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
+            className={`mobile-nav-overlay fixed inset-0 z-30 flex flex-col justify-between bg-primary/80 px-6 pb-10 pt-28 backdrop-blur-xl transition-all duration-500 ease-out ${
+              toggle
+                ? "pointer-events-auto translate-y-0 opacity-100"
+                : "pointer-events-none -translate-y-6 opacity-0"
+            }`}
           >
-            <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
-              {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                    active === nav.title ? "text-white" : "text-secondary"
-                  }`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
-                >
-                  <a href={isHome ? `#${nav.id}` : `/#${nav.id}`}>{nav.title}</a>
-                </li>
-              ))}
-              <li className="font-poppins font-medium cursor-pointer text-[16px] text-secondary">
-                <Link to="/projects" onClick={() => setToggle(!toggle)}>
-                  Projects
-                </Link>
-              </li>
-              <li className="font-poppins font-medium cursor-pointer text-[16px] text-secondary">
-                <Link to="/blogs" onClick={() => setToggle(!toggle)}>
-                  Blogs
-                </Link>
-              </li>
-            </ul>
+            <div className="relative z-10">
+              <ul className="flex list-none flex-col gap-3">
+                {mobileLinks.map((nav, index) => {
+                  const linkClassName = `mobile-nav-link ${
+                    nav.isActive ? "mobile-nav-link--active" : ""
+                  }`;
+
+                  return (
+                    <li
+                      key={nav.id}
+                      className="mobile-nav-item"
+                      style={{ "--nav-delay": `${index * 70}ms` }}
+                    >
+                      {nav.isRoute ? (
+                        <Link
+                          to={nav.href}
+                          className={linkClassName}
+                          onClick={() => closeMobileMenu(nav.title)}
+                        >
+                          {nav.title}
+                        </Link>
+                      ) : (
+                        <a
+                          href={nav.href}
+                          className={linkClassName}
+                          onClick={() => closeMobileMenu(nav.title)}
+                        >
+                          {nav.title}
+                        </a>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            <div aria-hidden="true" />
           </div>
         </div>
       </div>
