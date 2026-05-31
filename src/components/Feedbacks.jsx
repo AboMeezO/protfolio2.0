@@ -7,6 +7,8 @@ import { fadeIn, textVariant } from "../utils/motion";
 import { testimonials } from "../constants";
 import Marquee from "./ui/Marquee";
 
+const arabicTextPattern = /[\u0600-\u06ff]/;
+
 const FeedbackCard = ({
   index,
   testimonial,
@@ -14,35 +16,47 @@ const FeedbackCard = ({
   designation,
   company,
   image,
-}) => (
-  <div className="bg-black-200 p-6 sm:p-10 rounded-3xl w-[280px] xs:w-[320px] shrink-0">
-    <p className="text-white font-black text-[32px] sm:text-[48px]">"</p>
+}) => {
+  const isArabic = arabicTextPattern.test(testimonial);
 
-    <div className="mt-1">
-      <p className="text-white tracking-wider text-[14px] sm:text-[18px]">
-        {testimonial}
-      </p>
+  return (
+    <div
+      className="bg-black-200 p-6 sm:p-10 rounded-3xl w-[280px] xs:w-[320px] shrink-0"
+      dir={isArabic ? "rtl" : "ltr"}
+      lang={isArabic ? "ar" : "en"}
+    >
+      <p className="text-white font-black text-[32px] sm:text-[48px]">"</p>
 
-      <div className="mt-7 flex justify-between items-center gap-1">
-        <div className="flex-1 flex flex-col">
-          <p className="text-white font-medium text-[14px] sm:text-[16px]">
-            <span className="blue-text-gradient">@</span> {name}
-          </p>
-          <p className="mt-1 text-secondary text-[10px] sm:text-[12px]">
-            {designation} of {company}
-          </p>
+      <div className="mt-1">
+        <p
+          className={`text-white text-[14px] sm:text-[18px] leading-7 sm:leading-8 ${
+            isArabic ? "font-arabic text-right" : "tracking-wider"
+          }`}
+        >
+          {testimonial}
+        </p>
+
+        <div className="mt-7 flex justify-between items-center gap-1">
+          <div className="flex-1 flex flex-col">
+            <p className="text-white font-medium text-[14px] sm:text-[16px]">
+              <span className="blue-text-gradient">@</span> {name}
+            </p>
+            <p className="mt-1 text-secondary text-[10px] sm:text-[12px]">
+              {designation} of {company}
+            </p>
+          </div>
+
+          <img
+            src={image}
+            alt={`feedback_by-${name}`}
+            // crossOrigin="anonymous"
+            className="w-10 h-10 rounded-full object-cover"
+          />
         </div>
-
-        <img
-          src={image}
-          alt={`feedback_by-${name}`}
-          // crossOrigin="anonymous"
-          className="w-10 h-10 rounded-full object-cover"
-        />
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Feedbacks = () => {
   return (
