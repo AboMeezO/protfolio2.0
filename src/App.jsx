@@ -1,10 +1,8 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import {
-  MiniMusicDock,
-  Navbar,
-} from "./components";
+import MiniMusicDock from "./components/MiniMusicDock";
+import Navbar from "./components/Navbar";
 import BarbaTransitions from "./components/BarbaTransitions";
 import ScrollToTop from "./components/ScrollToTop";
 import { blogs } from "./utils/content";

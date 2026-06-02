@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
-import { ComputersCanvas } from "./canvas";
+import ComputersCanvas from "./canvas/Computers";
 import ErrorBoundary from "./ErrorBoundary";
-import { SectionWrapper } from "../hoc";
 
 const Hero = () => {
   return (
