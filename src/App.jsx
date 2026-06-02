@@ -7,6 +7,7 @@ import {
 } from "./components";
 import BarbaTransitions from "./components/BarbaTransitions";
 import ScrollToTop from "./components/ScrollToTop";
+import { blogs } from "./utils/content";
 
 const Home = lazy(() => import("./pages/Home"));
 const Blogs = lazy(() => import("./pages/Blogs"));
@@ -14,6 +15,7 @@ const BlogDetail = lazy(() => import("./pages/BlogDetail"));
 const Projects = lazy(() => import("./pages/Projects"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const hasBlogs = blogs.length > 0;
 
 const App = () => {
   return (
@@ -34,8 +36,8 @@ const App = () => {
             <Suspense fallback={<div className="bg-primary min-h-screen" />}>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/blogs" element={<Blogs />} />
-                <Route path="/blogs/:slug" element={<BlogDetail />} />
+                {hasBlogs && <Route path="/blogs" element={<Blogs />} />}
+                {hasBlogs && <Route path="/blogs/:slug" element={<BlogDetail />} />}
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/projects/:slug" element={<ProjectDetail />} />
                 <Route path="*" element={<NotFound />} />

@@ -13,6 +13,14 @@ const socialIcons = {
   gmail: siGmail,
 };
 
+const initialForm = {
+  name: "",
+  email: "",
+  message: "",
+};
+
+const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
 const SimpleIcon = ({ name }) => {
   if (name === "linkedin") {
     return (
@@ -48,11 +56,7 @@ import { slideIn } from "../utils/motion";
 
 const Contact = () => {
   const formRef = useRef();
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [form, setForm] = useState(initialForm);
 
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);
@@ -69,6 +73,25 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const trimmedForm = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      message: form.message.trim(),
+    };
+
+    if (
+      trimmedForm.name.length < 2 ||
+      !isValidEmail(trimmedForm.email) ||
+      trimmedForm.message.length < 10
+    ) {
+      setStatus({
+        type: "error",
+        message: "Something went wrong. Please try again.",
+      });
+      return;
+    }
+
     setLoading(true);
     setStatus(null);
 
@@ -77,11 +100,11 @@ const Contact = () => {
         import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
         {
-          from_name: form.name,
+          from_name: trimmedForm.name,
           to_name: "AboMeezO",
-          from_email: form.email,
+          from_email: trimmedForm.email,
           to_email: "abomeezo2@gmail.com",
-          message: form.message,
+          message: trimmedForm.message,
         },
         import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
       )
@@ -93,11 +116,7 @@ const Contact = () => {
             message: "Thank you. I will get back to you as soon as possible.",
           });
 
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
+          setForm(initialForm);
         },
         (error) => {
           setLoading(false);
@@ -133,8 +152,12 @@ const Contact = () => {
               name="name"
               value={form.name}
               onChange={handleChange}
+              required
+              minLength={2}
+              maxLength={80}
+              autoComplete="name"
               placeholder="What's your good name?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg border border-transparent font-medium outline-none transition-all focus:border-[#915eff] focus:ring-2 focus:ring-[#915eff]/40"
             />
           </label>
           <label className="flex flex-col">
@@ -144,8 +167,11 @@ const Contact = () => {
               name="email"
               value={form.email}
               onChange={handleChange}
+              required
+              maxLength={120}
+              autoComplete="email"
               placeholder="What's your web address?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg border border-transparent font-medium outline-none transition-all focus:border-[#915eff] focus:ring-2 focus:ring-[#915eff]/40"
             />
           </label>
           <label className="flex flex-col">
@@ -155,14 +181,18 @@ const Contact = () => {
               name="message"
               value={form.message}
               onChange={handleChange}
+              required
+              minLength={10}
+              maxLength={2000}
               placeholder="What you want to say?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg border border-transparent font-medium outline-none transition-all focus:border-[#915eff] focus:ring-2 focus:ring-[#915eff]/40"
             />
           </label>
 
           <button
             type="submit"
-            className="bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary"
+            disabled={loading}
+            className="bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary transition-all focus:ring-2 focus:ring-[#915eff]/50 disabled:cursor-not-allowed disabled:opacity-70"
           >
             {loading ? "Sending..." : "Send"}
           </button>

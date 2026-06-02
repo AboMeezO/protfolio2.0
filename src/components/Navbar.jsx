@@ -4,6 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo } from "../assets";
+import { blogs } from "../utils/content";
+
+const hasBlogs = blogs.length > 0;
 
 const Navbar = () => {
   const [active, setActive] = useState("");
@@ -50,13 +53,17 @@ const Navbar = () => {
       isRoute: true,
       isActive: location.pathname.startsWith("/projects"),
     },
-    {
-      id: "blogs",
-      title: "Blogs",
-      href: "/blogs",
-      isRoute: true,
-      isActive: location.pathname.startsWith("/blogs"),
-    },
+    ...(hasBlogs
+      ? [
+          {
+            id: "blogs",
+            title: "Blogs",
+            href: "/blogs",
+            isRoute: true,
+            isActive: location.pathname.startsWith("/blogs"),
+          },
+        ]
+      : []),
   ];
 
   const closeMobileMenu = (title = "") => {
@@ -110,13 +117,15 @@ const Navbar = () => {
           >
             <Link to="/projects">Projects</Link>
           </li>
-          <li
-            className={`${
-              location.pathname.startsWith("/blogs") ? "text-white" : "text-secondary"
-            } hover:text-white text-[18px] font-medium cursor-pointer`}
-          >
-            <Link to="/blogs">Blogs</Link>
-          </li>
+          {hasBlogs && (
+            <li
+              className={`${
+                location.pathname.startsWith("/blogs") ? "text-white" : "text-secondary"
+              } hover:text-white text-[18px] font-medium cursor-pointer`}
+            >
+              <Link to="/blogs">Blogs</Link>
+            </li>
+          )}
         </ul>
 
         <div className="sm:hidden flex flex-1 justify-end items-center">
