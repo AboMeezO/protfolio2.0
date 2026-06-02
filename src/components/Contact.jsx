@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
@@ -20,6 +20,32 @@ const initialForm = {
 };
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+const useNearViewport = (rootMargin = "500px") => {
+  const ref = useRef(null);
+  const [isNearViewport, setIsNearViewport] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || isNearViewport) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsNearViewport(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin },
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [isNearViewport, rootMargin]);
+
+  return [ref, isNearViewport];
+};
 
 const SimpleIcon = ({ name }) => {
   if (name === "linkedin") {
@@ -56,6 +82,7 @@ import { slideIn } from "../utils/motion";
 
 const Contact = () => {
   const formRef = useRef();
+  const [earthRef, shouldRenderEarth] = useNearViewport();
   const [form, setForm] = useState(initialForm);
 
   const [loading, setLoading] = useState(false);
@@ -265,9 +292,10 @@ const Contact = () => {
       <motion.div
         variants={slideIn("right", "tween", 0.2, 1)}
         className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
+        ref={earthRef}
       >
         <ErrorBoundary>
-          <EarthCanvas />
+          {shouldRenderEarth && <EarthCanvas />}
         </ErrorBoundary>
       </motion.div>
     </div>
