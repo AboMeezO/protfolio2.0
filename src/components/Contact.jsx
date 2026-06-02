@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
 import { siYoutube, siInstagram, siGmail } from "simple-icons";
@@ -98,7 +97,7 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const trimmedForm = {
@@ -122,8 +121,10 @@ const Contact = () => {
     setLoading(true);
     setStatus(null);
 
-    emailjs
-      .send(
+    try {
+      const { default: emailjs } = await import("@emailjs/browser");
+
+      await emailjs.send(
         import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
         {
@@ -134,26 +135,23 @@ const Contact = () => {
           message: trimmedForm.message,
         },
         import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
-      )
-      .then(
-        () => {
-          setLoading(false);
-          setStatus({
-            type: "success",
-            message: "Thank you. I will get back to you as soon as possible.",
-          });
-
-          setForm(initialForm);
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
-          setStatus({
-            type: "error",
-            message: "Something went wrong. Please try again.",
-          });
-        },
       );
+
+      setLoading(false);
+      setStatus({
+        type: "success",
+        message: "Thank you. I will get back to you as soon as possible.",
+      });
+
+      setForm(initialForm);
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+      setStatus({
+        type: "error",
+        message: "Something went wrong. Please try again.",
+      });
+    }
   };
 
   return (
