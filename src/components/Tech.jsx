@@ -118,14 +118,11 @@ const BrandIcon = ({ technology, large = false }) => {
 };
 
 const shellConfigs = [
-  { key: "outer-core", radius: 318, iconSize: 82, duration: 43, reverse: false, large: true, depth: 0, angles: [-92, -16, 58, 154, 232] },
-  { key: "frontend-shapers", radius: 274, iconSize: 70, duration: 36, reverse: true, large: false, depth: 22, angles: [-142, -36, 74, 172] },
-  { key: "motion-data", radius: 230, iconSize: 62, duration: 29, reverse: false, large: false, depth: 46, angles: [-118, -8, 88, 184, 274] },
-  { key: "state-field", radius: 188, iconSize: 56, duration: 24, reverse: true, large: false, depth: 72, angles: [-156, 24, 214] },
-  { key: "backend-services", radius: 154, iconSize: 50, duration: 20, reverse: false, large: false, depth: 98, angles: [-74, 32, 146, 252] },
-  { key: "deploy-data", radius: 120, iconSize: 44, duration: 17, reverse: true, large: false, depth: 124, angles: [-136, -14, 108, 220] },
-  { key: "tooling-core", radius: 96, iconSize: 38, duration: 14, reverse: false, large: false, depth: 150, angles: [-96, 14, 140, 236] },
-  { key: "inner-core", radius: 0, iconSize: 34, duration: 11, reverse: true, large: false, depth: 174, centered: true, angles: [0] },
+  { key: "primary-ring", radius: 318, iconSize: 76, duration: 46, reverse: false, large: true, depth: 0, angles: [-96, -38, 22, 84, 148, 214, 278] },
+  { key: "secondary-ring", radius: 252, iconSize: 64, duration: 38, reverse: true, large: false, depth: 34, angles: [-128, -72, -18, 38, 96, 156, 218, 286] },
+  { key: "tertiary-ring", radius: 184, iconSize: 54, duration: 30, reverse: false, large: false, depth: 72, angles: [-150, -92, -34, 28, 88, 146, 208, 268] },
+  { key: "inner-ring", radius: 112, iconSize: 46, duration: 23, reverse: true, large: false, depth: 112, angles: [-118, -28, 64, 154, 244] },
+  { key: "core-ring", radius: 54, iconSize: 40, duration: 18, reverse: false, large: false, depth: 150, angles: [-90, 30, 150] },
 ];
 
 const orbitMotionConfig = {
@@ -205,67 +202,53 @@ const Tech = () => {
         categoryMap.Frontend?.find((item) => item.name === "React"),
         categoryMap.Frontend?.find((item) => item.name === "Next.js"),
         categoryMap.Frontend?.find((item) => item.name === "Tailwind CSS"),
-        categoryMap.Frontend?.find((item) => item.name === "TypeScript"),
+        categoryMap.Tooling?.find((item) => item.name === "TypeScript"),
         categoryMap.Backend?.find((item) => item.name === "NestJS"),
+        categoryMap.Backend?.find((item) => item.name === "ExpressJS"),
+        categoryMap.Deployments?.find((item) => item.name === "Docker"),
       ].filter(Boolean),
     },
     {
       ...shellConfigs[1],
       items: [
         categoryMap.Frontend?.find((item) => item.name === "TanStack Start"),
+        categoryMap.Frontend?.find((item) => item.name === "TanStack Router"),
+        categoryMap.Frontend?.find((item) => item.name === "React Query"),
+        categoryMap.Frontend?.find((item) => item.name === "TanStack Query"),
         categoryMap.Frontend?.find((item) => item.name === "GSAP"),
+        categoryMap.Frontend?.find((item) => item.name === "Framer Motion"),
         categoryMap.Frontend?.find((item) => item.name === "shadcn/ui"),
-        categoryMap.Backend?.find((item) => item.name === "ExpressJS"),
+        categoryMap.Frontend?.find((item) => item.name === "Barba.js"),
       ].filter(Boolean),
     },
     {
       ...shellConfigs[2],
       items: [
-        categoryMap.Frontend?.find((item) => item.name === "TanStack Router"),
-        categoryMap.Frontend?.find((item) => item.name === "Framer Motion"),
-        categoryMap.Frontend?.find((item) => item.name === "React Query"),
         categoryMap.Backend?.find((item) => item.name === "Prisma ORM"),
-        categoryMap.Deployments?.find((item) => item.name === "Docker"),
+        categoryMap.Frontend?.find((item) => item.name === "Jotai"),
+        categoryMap.Backend?.find((item) => item.name === "Passport.js"),
+        categoryMap.Backend?.find((item) => item.name === "Discord.js"),
+        categoryMap.Backend?.find((item) => item.name === "Sequelize ORM"),
+        categoryMap.Backend?.find((item) => item.name === "Zod"),
+        categoryMap.Data?.find((item) => item.name === "PostgreSQL"),
+        categoryMap.Data?.find((item) => item.name === "SQLite"),
       ].filter(Boolean),
     },
     {
       ...shellConfigs[3],
       items: [
-        categoryMap.Frontend?.find((item) => item.name === "Barba.js"),
-        categoryMap.Frontend?.find((item) => item.name === "TanStack Query"),
-        categoryMap.Frontend?.find((item) => item.name === "Jotai"),
+        categoryMap.Deployments?.find((item) => item.name === "Railway"),
+        categoryMap.Deployments?.find((item) => item.name === "Vercel"),
+        categoryMap.Deployments?.find((item) => item.name === "GitHub CI"),
+        categoryMap.Deployments?.find((item) => item.name === "ReviveNode"),
+        categoryMap.Tooling?.find((item) => item.name === "Git"),
       ].filter(Boolean),
     },
     {
       ...shellConfigs[4],
       items: [
-        categoryMap.Backend?.find((item) => item.name === "Passport.js"),
-        categoryMap.Backend?.find((item) => item.name === "Discord.js"),
-        categoryMap.Backend?.find((item) => item.name === "Sequelize ORM"),
-        categoryMap.Backend?.find((item) => item.name === "Zod"),
-      ].filter(Boolean),
-    },
-    {
-      ...shellConfigs[5],
-      items: [
-        ...(categoryMap.Data || []),
-        categoryMap.Deployments?.find((item) => item.name === "Railway"),
-        categoryMap.Deployments?.find((item) => item.name === "Vercel"),
-      ].filter(Boolean),
-    },
-    {
-      ...shellConfigs[6],
-      items: [
-        categoryMap.Deployments?.find((item) => item.name === "GitHub CI"),
-        categoryMap.Deployments?.find((item) => item.name === "ReviveNode"),
-        categoryMap.Tooling?.find((item) => item.name === "Git"),
-        categoryMap.Tooling?.find((item) => item.name === "Java"),
-      ].filter(Boolean),
-    },
-    {
-      ...shellConfigs[7],
-      items: [
         categoryMap.Tooling?.find((item) => item.name === "Electron.js"),
+        categoryMap.Tooling?.find((item) => item.name === "Java"),
       ].filter(Boolean),
     },
   ].filter((shell) => shell.items.length > 0);
