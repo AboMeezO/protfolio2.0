@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import {
@@ -148,15 +148,29 @@ const orbitMotionConfig = {
   },
 };
 
-const TechIcon = ({ technology, large = false }) => (
-  <div
-    className={`bg-tertiary rounded-full flex justify-center items-center ${
+const TechIcon = ({ technology, large = false, onActivate, onEnter, onLeave, registerRef }) => (
+  <button
+    type="button"
+    className={`tech-icon-button bg-tertiary rounded-full flex justify-center items-center ${
       large ? "w-20 h-20" : "w-12 h-12"
     }`}
     title={technology.name}
+    aria-label={technology.name}
+    data-tech-icon-button="true"
+    ref={(node) => registerRef(technology.name, node)}
+    onClick={(event) => {
+      event.stopPropagation();
+      onActivate(technology);
+    }}
+    onPointerEnter={() => onEnter(technology)}
+    onPointerLeave={onLeave}
+    onMouseEnter={() => onEnter(technology)}
+    onMouseLeave={onLeave}
+    onFocus={() => onEnter(technology)}
+    onBlur={onLeave}
   >
     <BrandIcon technology={technology} large={large} />
-  </div>
+  </button>
 );
 
 const MobileCategoryList = ({ category }) => (
@@ -189,13 +203,24 @@ const MobileCategoryList = ({ category }) => (
 
 const Tech = () => {
   const techSectionRef = useRef(null);
+  const orbitStageRef = useRef(null);
   const orbitSystemRef = useRef(null);
+  const techIconRefs = useRef(new Map());
   const orbitActiveRef = useRef(false);
   const orbitOutroRef = useRef(null);
-  const categoryMap = Object.fromEntries(
-    technologyCategories.map((category) => [category.name, category.items])
+  const [hoveredTechnology, setHoveredTechnology] = useState(null);
+  const [pinnedTechnology, setPinnedTechnology] = useState(null);
+  const [tooltipPosition, setTooltipPosition] = useState(null);
+  const activeTechnology = hoveredTechnology || pinnedTechnology;
+  const activeShellKey = activeTechnology?.shellKey || null;
+  const categoryMap = useMemo(
+    () =>
+      Object.fromEntries(
+        technologyCategories.map((category) => [category.name, category.items])
+      ),
+    []
   );
-  const shells = [
+  const shells = useMemo(() => [
     {
       ...shellConfigs[0],
       items: [
@@ -251,7 +276,81 @@ const Tech = () => {
         categoryMap.Tooling?.find((item) => item.name === "Java"),
       ].filter(Boolean),
     },
-  ].filter((shell) => shell.items.length > 0);
+  ].filter((shell) => shell.items.length > 0)
+    .map((shell) => ({
+      ...shell,
+      items: shell.items.map((item) => ({ ...item, shellKey: shell.key })),
+    })),
+    [categoryMap]
+  );
+
+  const registerTechIcon = (name, node) => {
+    if (node) {
+      techIconRefs.current.set(name, node);
+    } else {
+      techIconRefs.current.delete(name);
+    }
+  };
+
+  const updateTooltipPosition = (technology) => {
+    const stage = orbitStageRef.current;
+    const target = technology ? techIconRefs.current.get(technology.name) : null;
+    if (!stage || !target) {
+      setTooltipPosition(null);
+      return;
+    }
+
+    const stageRect = stage.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+
+    const nextPosition = {
+      x: targetRect.left - stageRect.left + targetRect.width / 2,
+      y: targetRect.top - stageRect.top + targetRect.height / 2,
+    };
+
+    setTooltipPosition((currentPosition) => {
+      if (
+        currentPosition &&
+        Math.abs(currentPosition.x - nextPosition.x) < 0.5 &&
+        Math.abs(currentPosition.y - nextPosition.y) < 0.5
+      ) {
+        return currentPosition;
+      }
+
+      return nextPosition;
+    });
+  };
+
+  useEffect(() => {
+    if (!activeTechnology) {
+      setTooltipPosition(null);
+      return undefined;
+    }
+
+    let animationFrame;
+    const trackTooltip = () => {
+      updateTooltipPosition(activeTechnology);
+      animationFrame = window.requestAnimationFrame(trackTooltip);
+    };
+
+    trackTooltip();
+
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, [activeTechnology]);
+
+  useEffect(() => {
+    const handleDocumentPointerDown = (event) => {
+      if (event.target.closest("[data-tech-icon-button]")) return;
+      if (event.target.closest(".tech-tooltip")) return;
+      setPinnedTechnology(null);
+    };
+
+    document.addEventListener("pointerdown", handleDocumentPointerDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handleDocumentPointerDown);
+    };
+  }, []);
 
   useEffect(() => {
     const section = techSectionRef.current;
@@ -359,29 +458,73 @@ const Tech = () => {
         variants={fadeIn("up", "spring", 0.2, 0.75)}
         className="mt-20 hidden sm:block"
       >
-        <div className="tech-orbit-stage relative mx-auto h-[760px] w-full overflow-hidden">
+        <div
+          ref={orbitStageRef}
+          className="tech-orbit-stage relative mx-auto h-[760px] w-full overflow-hidden"
+        >
           <div ref={orbitSystemRef} className="tech-orbit-system">
             {shells.map((entry) => (
               <OrbitingCircles
                 key={entry.key}
                 radius={entry.radius}
                 iconSize={entry.iconSize}
-              duration={entry.duration}
-              reverse={entry.reverse}
-              depth={entry.depth}
-              angles={entry.angles}
-              centered={entry.centered}
-            >
+                duration={entry.duration}
+                reverse={entry.reverse}
+                depth={entry.depth}
+                angles={entry.angles}
+                centered={entry.centered}
+                isSlowed={activeShellKey === entry.key}
+              >
                 {entry.items.map((technology) => (
                   <TechIcon
                     key={technology.name}
                     technology={technology}
                     large={entry.large}
+                    registerRef={registerTechIcon}
+                    onActivate={(selectedTechnology) =>
+                      setPinnedTechnology(selectedTechnology)
+                    }
+                    onEnter={setHoveredTechnology}
+                    onLeave={() => setHoveredTechnology(null)}
                   />
                 ))}
               </OrbitingCircles>
             ))}
           </div>
+          <motion.div
+            className="tech-tooltip pointer-events-none absolute z-20 max-w-[280px]"
+            initial={false}
+            animate={{
+              x: tooltipPosition ? tooltipPosition.x : 0,
+              y: tooltipPosition ? tooltipPosition.y : 0,
+              opacity: activeTechnology && tooltipPosition ? 1 : 0,
+              scale: activeTechnology && tooltipPosition ? 1 : 0.92,
+            }}
+            transition={{ type: "spring", stiffness: 220, damping: 24, mass: 0.8 }}
+            style={{ left: 0, top: 0 }}
+          >
+            <div className="tech-tooltip__content">
+              <motion.div
+                key={activeTechnology?.name || "empty"}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+              >
+                <p className="text-white text-[15px] font-bold">
+                  {activeTechnology?.name}
+                </p>
+                <p className="mt-1 text-secondary text-[12px] leading-5">
+                  {activeTechnology?.experience}
+                </p>
+                {activeTechnology &&
+                  pinnedTechnology?.name === activeTechnology.name && (
+                  <p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-[#00cea8]">
+                    Pinned
+                  </p>
+                )}
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </motion.div>
 
