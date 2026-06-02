@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import barba from "@barba/core";
 
 const BarbaTransitions = () => {
   const location = useLocation();
@@ -8,19 +7,30 @@ const BarbaTransitions = () => {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    barba.init({
-      preventRunning: true,
-      prevent: () => true,
-      transitions: [
-        {
-          name: "react-router-safe-transition",
-          leave() {},
-          enter() {},
-        },
-      ],
+    let barbaInstance;
+    let cancelled = false;
+
+    import("@barba/core").then(({ default: barba }) => {
+      if (cancelled) return;
+
+      barbaInstance = barba;
+      barba.init({
+        preventRunning: true,
+        prevent: () => true,
+        transitions: [
+          {
+            name: "react-router-safe-transition",
+            leave() {},
+            enter() {},
+          },
+        ],
+      });
     });
 
-    return () => barba.destroy();
+    return () => {
+      cancelled = true;
+      barbaInstance?.destroy();
+    };
   }, []);
 
   useEffect(() => {
