@@ -247,6 +247,8 @@ const Contact = () => {
               <img
                 src={github}
                 alt="github"
+                loading="lazy"
+                decoding="async"
                 className="w-5 h-5 object-contain"
               />
               GitHub

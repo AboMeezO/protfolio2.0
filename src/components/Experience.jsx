@@ -38,6 +38,8 @@ const TimelineMarker = ({ experience, isFirst, isLast, isMobileLayout }) => {
         <img
           src={experience.icon}
           alt={experience.company_name}
+          loading="lazy"
+          decoding="async"
           className="h-[65%] w-[65%] rounded-md object-contain"
         />
       </div>

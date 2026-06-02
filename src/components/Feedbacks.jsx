@@ -49,6 +49,8 @@ const FeedbackCard = ({
           <img
             src={image}
             alt={`feedback_by-${name}`}
+            loading="lazy"
+            decoding="async"
             // crossOrigin="anonymous"
             className="w-10 h-10 rounded-full object-cover"
           />

@@ -27,7 +27,13 @@ const ServiceCard = ({ index, title, icon }) => (
           transition-transform duration-700 hover:scale-105
         "
       >
-        <img src={icon} alt={title} className="w-16 h-16 object-contain" />
+        <img
+          src={icon}
+          alt={title}
+          loading="lazy"
+          decoding="async"
+          className="w-16 h-16 object-contain"
+        />
 
         <h3 className="text-white text-[20px] font-bold text-center">
           {title}
