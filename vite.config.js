@@ -47,6 +47,27 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return undefined;
+
+          if (
+            id.includes("three") ||
+            id.includes("@react-three") ||
+            id.includes("maath")
+          ) {
+            return "three-vendor";
+          }
+          if (id.includes("@mdx-js") || id.includes("react-markdown")) {
+            return "markdown-vendor";
+          }
+          if (id.includes("react-router-dom")) return "router-vendor";
+          if (id.includes("react-dom") || id.includes("react")) return "react-vendor";
+          if (id.includes("framer-motion") || id.includes("gsap")) {
+            return "motion-vendor";
+          }
+          if (id.includes("simple-icons")) return "icons-vendor";
+          if (id.includes("@barba")) return "transition-vendor";
+        },
       },
     },
     chunkSizeWarningLimit: 1100,
