@@ -1,8 +1,10 @@
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { styles } from "../../styles";
 import { staggerContainer } from "../../utils/motion";
-import { StarsCanvas } from "../canvas";
 import ErrorBoundary from "../ErrorBoundary";
+
+const StarsCanvas = lazy(() => import("../canvas/Stars"));
 
 const PageWrapper = ({ children }) => (
   <div className="relative z-0 bg-primary min-h-screen w-full">
@@ -25,7 +27,9 @@ const PageWrapper = ({ children }) => (
     
     <div className="fixed inset-0 z-[-1] pointer-events-none">
       <ErrorBoundary>
-        <StarsCanvas />
+        <Suspense fallback={null}>
+          <StarsCanvas />
+        </Suspense>
       </ErrorBoundary>
     </div>
   </div>
