@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo } from "../assets";
-import { blogs } from "../utils/content";
+import { blogs } from "../utils/blogs";
 
 const hasBlogs = blogs.length > 0;
 

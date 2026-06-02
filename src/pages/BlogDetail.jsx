@@ -5,7 +5,7 @@ import MarkdownRenderer from "../components/markdown/MarkdownRenderer";
 import MediaGallery from "../components/gallery/MediaGallery";
 import NotFound from "./NotFound";
 import Seo from "../components/Seo";
-import { getBlogBySlug } from "../utils/content";
+import { getBlogBySlug } from "../utils/blogs";
 import { styles } from "../styles";
 import { fadeIn, textVariant } from "../utils/motion";
 

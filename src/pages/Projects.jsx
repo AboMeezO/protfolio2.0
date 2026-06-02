@@ -1,6 +1,6 @@
 import ContentList from "../components/layout/ContentList";
 import ProjectCard from "../components/cards/ProjectCard";
-import { projects } from "../utils/content";
+import { projects } from "../utils/projects";
 
 const projectCategories = [
   "Web Development",

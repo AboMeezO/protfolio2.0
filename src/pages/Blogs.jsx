@@ -1,6 +1,6 @@
 import ContentList from "../components/layout/ContentList";
 import BlogCard from "../components/cards/BlogCard";
-import { blogs } from "../utils/content";
+import { blogs } from "../utils/blogs";
 
 const blogCategories = ["Engineering", "Design", "Tutorials"];
 

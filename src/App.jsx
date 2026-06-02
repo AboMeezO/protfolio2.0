@@ -5,7 +5,7 @@ import MiniMusicDock from "./components/MiniMusicDock";
 import Navbar from "./components/Navbar";
 import BarbaTransitions from "./components/BarbaTransitions";
 import ScrollToTop from "./components/ScrollToTop";
-import { blogs } from "./utils/content";
+import { blogs } from "./utils/blogs";
 
 const Home = lazy(() => import("./pages/Home"));
 const Blogs = lazy(() => import("./pages/Blogs"));

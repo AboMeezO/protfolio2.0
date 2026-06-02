@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
-import { blogs } from "../utils/content";
+import { blogs } from "../utils/blogs";
 import BlogCard from "./cards/BlogCard";
 import SectionCta from "./ui/SectionCta";
 import { fadeIn, textVariant } from "../utils/motion";
