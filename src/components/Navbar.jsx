@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { styles } from "../styles";
-import { navLinks } from "../constants";
-import { logo } from "../assets";
+import { navLinks } from "../constants/navigation";
+import logo from "../assets/AboMeezO.jpg";
 import { blogs } from "../utils/blogs";
 
 const hasBlogs = blogs.length > 0;
