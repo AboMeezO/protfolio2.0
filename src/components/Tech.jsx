@@ -151,7 +151,6 @@ const orbitMotionConfig = {
 const TechIcon = ({
   technology,
   large = false,
-  isHeld = false,
   onActivate,
   onEnter,
   onLeave,
@@ -161,7 +160,7 @@ const TechIcon = ({
     type="button"
     className={`tech-icon-button bg-tertiary rounded-full flex justify-center items-center ${
       large ? "w-20 h-20" : "w-12 h-12"
-    } ${isHeld ? "tech-icon-button--held" : ""}`}
+    }`}
     title={technology.name}
     aria-label={technology.name}
     data-tech-icon-button="true"
@@ -181,17 +180,6 @@ const TechIcon = ({
   >
     <BrandIcon technology={technology} large={large} />
   </button>
-);
-
-const FloatingTechIcon = ({ technology, large = false }) => (
-  <div
-    className={`tech-floating-icon bg-tertiary rounded-full flex justify-center items-center ${
-      large ? "w-20 h-20" : "w-12 h-12"
-    }`}
-    aria-hidden="true"
-  >
-    <BrandIcon technology={technology} large={large} />
-  </div>
 );
 
 const MobileCategoryList = ({ category }) => (
@@ -227,18 +215,14 @@ const Tech = () => {
   const orbitStageRef = useRef(null);
   const orbitSystemRef = useRef(null);
   const techIconRefs = useRef(new Map());
+  const orbitItemStatesRef = useRef(new Map());
   const orbitActiveRef = useRef(false);
   const orbitOutroRef = useRef(null);
-  const releaseTimerRef = useRef(null);
   const [hoveredTechnology, setHoveredTechnology] = useState(null);
   const [pinnedTechnology, setPinnedTechnology] = useState(null);
   const [tooltipPosition, setTooltipPosition] = useState(null);
-  const [heldIcon, setHeldIcon] = useState(null);
-  const [releaseIcon, setReleaseIcon] = useState(null);
   const activeTechnology = hoveredTechnology || pinnedTechnology;
-  const activeTooltipPosition = hoveredTechnology && heldIcon
-    ? heldIcon.position
-    : tooltipPosition;
+  const activeTooltipPosition = tooltipPosition;
   const categoryMap = useMemo(
     () =>
       Object.fromEntries(
@@ -318,6 +302,16 @@ const Tech = () => {
     }
   };
 
+  const syncOrbitItemState = (technology, mode) => {
+    const state = orbitItemStatesRef.current.get(technology.name);
+    if (!state) return;
+
+    state.mode = mode;
+    if (mode === "held") {
+      state.heldAngle = state.currentAngle;
+    }
+  };
+
   const updateTooltipPosition = (technology) => {
     const stage = orbitStageRef.current;
     const target = technology ? techIconRefs.current.get(technology.name) : null;
@@ -364,28 +358,9 @@ const Tech = () => {
     return () => window.cancelAnimationFrame(animationFrame);
   }, [activeTechnology]);
 
-  const handleTechEnter = (technology, large = false) => {
-    const stage = orbitStageRef.current;
-    const target = techIconRefs.current.get(technology.name);
-    if (stage && target) {
-      const stageRect = stage.getBoundingClientRect();
-      const targetRect = target.getBoundingClientRect();
-      const position = {
-        x: targetRect.left - stageRect.left + targetRect.width / 2,
-        y: targetRect.top - stageRect.top + targetRect.height / 2,
-      };
-
-      if (releaseTimerRef.current) {
-        window.clearTimeout(releaseTimerRef.current);
-        releaseTimerRef.current = null;
-      }
-
-      setReleaseIcon(null);
-      setHeldIcon({ technology, large, position });
-      setTooltipPosition(position);
-    } else {
-      updateTooltipPosition(technology);
-    }
+  const handleTechEnter = (technology) => {
+    syncOrbitItemState(technology, "held");
+    updateTooltipPosition(technology);
     setHoveredTechnology(technology);
   };
 
@@ -395,31 +370,7 @@ const Tech = () => {
   };
 
   const handleTechLeave = () => {
-    if (hoveredTechnology && heldIcon) {
-      const stage = orbitStageRef.current;
-      const target = techIconRefs.current.get(hoveredTechnology.name);
-
-      if (stage && target) {
-        const stageRect = stage.getBoundingClientRect();
-        const targetRect = target.getBoundingClientRect();
-        setReleaseIcon({
-          technology: heldIcon.technology,
-          large: heldIcon.large,
-          from: heldIcon.position,
-          to: {
-            x: targetRect.left - stageRect.left + targetRect.width / 2,
-            y: targetRect.top - stageRect.top + targetRect.height / 2,
-          },
-        });
-
-        releaseTimerRef.current = window.setTimeout(() => {
-          setReleaseIcon(null);
-          releaseTimerRef.current = null;
-        }, 520);
-      }
-    }
-
-    setHeldIcon(null);
+    if (hoveredTechnology) syncOrbitItemState(hoveredTechnology, "catching");
     setHoveredTechnology(null);
   };
 
@@ -437,12 +388,100 @@ const Tech = () => {
     };
   }, []);
 
-  useEffect(
-    () => () => {
-      if (releaseTimerRef.current) window.clearTimeout(releaseTimerRef.current);
-    },
-    []
-  );
+  useEffect(() => {
+    const section = techSectionRef.current;
+    if (!section) return undefined;
+
+    const items = Array.from(section.querySelectorAll("[data-orbit-item]"));
+    const states = new Map();
+    const startedAt = performance.now();
+    let previousTime = startedAt;
+    let animationFrame;
+    let interval;
+
+    const normalizeAngle = (angle) => ((angle % 360) + 360) % 360;
+    const directionalDistance = (from, to, direction) => {
+      const current = normalizeAngle(from);
+      const target = normalizeAngle(to);
+      return direction === 1
+        ? (target - current + 360) % 360
+        : (current - target + 360) % 360;
+    };
+    const applyTransform = (item, angle, radius) => {
+      const depth = item.dataset.depth;
+      item.style.transform = radius === 0
+        ? "translateZ(var(--item-hover-depth))"
+        : `rotate(${angle}deg) translate(${radius}px) rotate(${-1 * angle}deg) translateZ(var(--item-hover-depth))`;
+      item.dataset.depth = depth;
+    };
+
+    items.forEach((item) => {
+      const name = item.dataset.techName;
+      if (!name) return;
+
+      states.set(name, {
+        item,
+        baseAngle: Number(item.dataset.baseAngle),
+        currentAngle: Number(item.dataset.baseAngle),
+        duration: Number(item.dataset.duration),
+        direction: Number(item.dataset.direction),
+        radius: Number(item.dataset.radius),
+        mode: "normal",
+        heldAngle: Number(item.dataset.baseAngle),
+      });
+    });
+    orbitItemStatesRef.current = states;
+
+    const updateOrbitItems = (time) => {
+      const elapsed = (time - startedAt) / 1000;
+      const delta = Math.min((time - previousTime) / 1000, 0.08);
+      previousTime = time;
+
+      states.forEach((state) => {
+        const normalSpeed = 360 / state.duration;
+        const idealAngle =
+          state.baseAngle + state.direction * normalSpeed * elapsed;
+
+        if (state.mode === "held") {
+          state.currentAngle = state.heldAngle;
+        } else if (state.mode === "catching") {
+          const remaining = directionalDistance(
+            state.currentAngle,
+            idealAngle,
+            state.direction
+          );
+          const catchStep = normalSpeed * 4.2 * delta;
+
+          if (remaining <= catchStep || remaining > 300) {
+            state.currentAngle = idealAngle;
+            state.mode = "normal";
+          } else {
+            state.currentAngle += state.direction * catchStep;
+          }
+        } else {
+          state.currentAngle = idealAngle;
+        }
+
+        applyTransform(state.item, state.currentAngle, state.radius);
+      });
+    };
+
+    const animateOrbitItems = (time) => {
+      updateOrbitItems(time);
+      animationFrame = window.requestAnimationFrame(animateOrbitItems);
+    };
+
+    animationFrame = window.requestAnimationFrame(animateOrbitItems);
+    interval = window.setInterval(() => {
+      updateOrbitItems(performance.now());
+    }, 1000 / 30);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      window.clearInterval(interval);
+      orbitItemStatesRef.current = new Map();
+    };
+  }, []);
 
   useEffect(() => {
     const section = techSectionRef.current;
@@ -451,6 +490,7 @@ const Tech = () => {
 
     const shells = gsap.utils.toArray(".orbiting-circle", system);
     const items = gsap.utils.toArray(".orbit-item", system);
+    const iconButtons = gsap.utils.toArray(".tech-icon-button", system);
     const enter = () => {
       if (orbitActiveRef.current) return;
       orbitActiveRef.current = true;
@@ -458,7 +498,7 @@ const Tech = () => {
         clearTimeout(orbitOutroRef.current);
         orbitOutroRef.current = null;
       }
-      gsap.killTweensOf([system, ...shells, ...items]);
+      gsap.killTweensOf([system, ...shells, ...items, ...iconButtons]);
       gsap.to(system, {
         ...orbitMotionConfig.systemHover,
         delay: orbitMotionConfig.introDelay,
@@ -476,7 +516,13 @@ const Tech = () => {
       gsap.to(items, {
         "--item-hover-depth": (index, target) =>
           `${Number(target.dataset.depth) * orbitMotionConfig.itemDepthMultiplier}px`,
-        scale: orbitMotionConfig.itemHoverScale,
+        delay: orbitMotionConfig.introDelay,
+        duration: orbitMotionConfig.introDuration,
+        ease: "back.out(1.5)",
+        stagger: { each: 0.008, from: "center" },
+      });
+      gsap.to(iconButtons, {
+        "--tech-icon-scale": orbitMotionConfig.itemHoverScale,
         delay: orbitMotionConfig.introDelay,
         duration: orbitMotionConfig.introDuration,
         ease: "back.out(1.5)",
@@ -489,7 +535,7 @@ const Tech = () => {
       if (orbitOutroRef.current) clearTimeout(orbitOutroRef.current);
       orbitOutroRef.current = setTimeout(() => {
         orbitOutroRef.current = null;
-        gsap.killTweensOf([system, ...shells, ...items]);
+        gsap.killTweensOf([system, ...shells, ...items, ...iconButtons]);
         gsap.to(system, {
           rotateX: 0,
           rotateY: 0,
@@ -506,7 +552,11 @@ const Tech = () => {
         });
         gsap.to(items, {
           "--item-hover-depth": (index, target) => `${Number(target.dataset.depth)}px`,
-          scale: 1,
+          duration: orbitMotionConfig.itemOutroDuration,
+          ease: orbitMotionConfig.introEase,
+        });
+        gsap.to(iconButtons, {
+          "--tech-icon-scale": 1,
           duration: orbitMotionConfig.itemOutroDuration,
           ease: orbitMotionConfig.introEase,
         });
@@ -571,7 +621,6 @@ const Tech = () => {
                     key={technology.name}
                     technology={technology}
                     large={entry.large}
-                    isHeld={heldIcon?.technology.name === technology.name}
                     registerRef={registerTechIcon}
                     onActivate={handleTechActivate}
                     onEnter={handleTechEnter}
@@ -581,58 +630,6 @@ const Tech = () => {
               </OrbitingCircles>
             ))}
           </div>
-          <AnimatePresence>
-            {heldIcon && (
-              <motion.div
-                className="tech-held-icon pointer-events-none absolute z-20"
-                initial={false}
-                animate={{
-                  left: `${heldIcon.position.x}px`,
-                  top: `${heldIcon.position.y}px`,
-                  opacity: 1,
-                  scale: 1.04,
-                }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.18, ease: "easeOut" }}
-              >
-                <FloatingTechIcon
-                  technology={heldIcon.technology}
-                  large={heldIcon.large}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-          <AnimatePresence>
-            {releaseIcon && (
-              <motion.div
-                className="tech-held-icon pointer-events-none absolute z-20"
-                initial={{
-                  left: `${releaseIcon.from.x}px`,
-                  top: `${releaseIcon.from.y}px`,
-                  opacity: 1,
-                  scale: 1.04,
-                }}
-                animate={{
-                  left: `${releaseIcon.to.x}px`,
-                  top: `${releaseIcon.to.y}px`,
-                  opacity: 0,
-                  scale: 1,
-                }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  left: { duration: 0.48, ease: [0.22, 1, 0.36, 1] },
-                  top: { duration: 0.48, ease: [0.22, 1, 0.36, 1] },
-                  opacity: { duration: 0.28, delay: 0.2 },
-                  scale: { duration: 0.48, ease: "easeOut" },
-                }}
-              >
-                <FloatingTechIcon
-                  technology={releaseIcon.technology}
-                  large={releaseIcon.large}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
           <AnimatePresence>
             {activeTechnology && activeTooltipPosition && (
               <motion.div

@@ -435,9 +435,6 @@
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
-  animation-name: orbit-spin;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
   pointer-events: none;
 }
 
@@ -474,7 +471,8 @@
   cursor: pointer;
   padding: 0;
   pointer-events: auto;
-  transform: translateZ(10px);
+  --tech-icon-scale: 1;
+  transform: translateZ(10px) scale(var(--tech-icon-scale));
   box-shadow:
     0 8px 18px rgba(0, 0, 0, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -495,23 +493,6 @@
 .tech-icon-button:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.72);
   outline-offset: 4px;
-}
-
-.tech-icon-button--held {
-  opacity: 0;
-}
-
-.tech-held-icon {
-  transform: translate3d(-50%, -50%, 0);
-  filter: brightness(1.08);
-}
-
-.tech-floating-icon {
-  border: 0;
-  box-shadow:
-    0 14px 28px rgba(0, 0, 0, 0.34),
-    0 0 18px rgba(255, 255, 255, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 .tech-tooltip {

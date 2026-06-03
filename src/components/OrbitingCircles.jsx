@@ -25,8 +25,7 @@ const OrbitingCircles = ({
       <div
         className="orbit-plane"
         style={{
-          animationDuration: `${duration}s`,
-          animationDirection: reverse ? "reverse" : "normal",
+          "--orbit-duration": `${duration}s`,
         }}
       >
         {!centered && <div className="orbit-ring" />}
@@ -36,7 +35,7 @@ const OrbitingCircles = ({
           const itemDepth = depth + 18 + index * 5;
           const itemTransform = centered
             ? `translateZ(var(--item-hover-depth))`
-            : `rotate(${angle}deg) translate(${radius}px) rotate(-${angle}deg) translateZ(var(--item-hover-depth))`;
+            : `rotate(${angle}deg) translate(${radius}px) rotate(${-1 * angle}deg) translateZ(var(--item-hover-depth))`;
 
           return (
             <div
@@ -51,7 +50,13 @@ const OrbitingCircles = ({
                 "--item-hover-depth": `${itemDepth}px`,
                 transform: itemTransform,
               }}
+              data-orbit-item="true"
               data-depth={itemDepth}
+              data-radius={centered ? 0 : radius}
+              data-base-angle={angle}
+              data-duration={duration}
+              data-direction={reverse ? -1 : 1}
+              data-tech-name={child.props?.technology?.name || ""}
             >
               {child}
             </div>
