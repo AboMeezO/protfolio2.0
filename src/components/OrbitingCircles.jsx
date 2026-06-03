@@ -8,7 +8,6 @@ const OrbitingCircles = ({
   startAngle = 0,
   angles,
   centered = false,
-  isSlowed = false,
 }) => {
   const items = Array.isArray(children) ? children : [children];
 
@@ -24,7 +23,7 @@ const OrbitingCircles = ({
       data-depth={depth}
     >
       <div
-        className={`orbit-plane ${isSlowed ? "orbit-plane--slow" : ""}`}
+        className="orbit-plane"
         style={{
           animationDuration: `${duration}s`,
           animationDirection: reverse ? "reverse" : "normal",

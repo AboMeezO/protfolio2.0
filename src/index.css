@@ -428,6 +428,7 @@
   transform: translate3d(-50%, -50%, var(--orbit-hover-depth));
   transform-style: preserve-3d;
   will-change: transform;
+  pointer-events: none;
 }
 
 .orbit-plane {
@@ -437,10 +438,7 @@
   animation-name: orbit-spin;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-}
-
-.orbit-plane--slow {
-  animation-play-state: paused;
+  pointer-events: none;
 }
 
 .orbit-ring {
@@ -460,6 +458,7 @@
   justify-content: center;
   transform-style: preserve-3d;
   will-change: transform;
+  pointer-events: none;
 }
 
 .orbit-item > div {
@@ -474,6 +473,7 @@
   border: 0;
   cursor: pointer;
   padding: 0;
+  pointer-events: auto;
   transform: translateZ(10px);
   box-shadow:
     0 8px 18px rgba(0, 0, 0, 0.18),
@@ -495,6 +495,23 @@
 .tech-icon-button:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.72);
   outline-offset: 4px;
+}
+
+.tech-icon-button--held {
+  opacity: 0;
+}
+
+.tech-held-icon {
+  transform: translate3d(-50%, -50%, 0);
+  filter: brightness(1.08);
+}
+
+.tech-floating-icon {
+  border: 0;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.34),
+    0 0 18px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 .tech-tooltip {

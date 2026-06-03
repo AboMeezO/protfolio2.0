@@ -148,27 +148,50 @@ const orbitMotionConfig = {
   },
 };
 
-const TechIcon = ({ technology, large = false, onActivate, onEnter, onLeave, registerRef }) => (
+const TechIcon = ({
+  technology,
+  large = false,
+  isHeld = false,
+  onActivate,
+  onEnter,
+  onLeave,
+  registerRef,
+}) => (
   <button
     type="button"
     className={`tech-icon-button bg-tertiary rounded-full flex justify-center items-center ${
       large ? "w-20 h-20" : "w-12 h-12"
-    }`}
+    } ${isHeld ? "tech-icon-button--held" : ""}`}
     title={technology.name}
     aria-label={technology.name}
     data-tech-icon-button="true"
     ref={(node) => registerRef(technology.name, node)}
+    onPointerDown={(event) => {
+      event.stopPropagation();
+      onActivate(technology);
+    }}
     onClick={(event) => {
       event.stopPropagation();
       onActivate(technology);
     }}
-    onPointerEnter={() => onEnter(technology)}
+    onPointerEnter={() => onEnter(technology, large)}
     onPointerLeave={onLeave}
-    onFocus={() => onEnter(technology)}
+    onFocus={() => onEnter(technology, large)}
     onBlur={onLeave}
   >
     <BrandIcon technology={technology} large={large} />
   </button>
+);
+
+const FloatingTechIcon = ({ technology, large = false }) => (
+  <div
+    className={`tech-floating-icon bg-tertiary rounded-full flex justify-center items-center ${
+      large ? "w-20 h-20" : "w-12 h-12"
+    }`}
+    aria-hidden="true"
+  >
+    <BrandIcon technology={technology} large={large} />
+  </div>
 );
 
 const MobileCategoryList = ({ category }) => (
@@ -206,11 +229,16 @@ const Tech = () => {
   const techIconRefs = useRef(new Map());
   const orbitActiveRef = useRef(false);
   const orbitOutroRef = useRef(null);
+  const releaseTimerRef = useRef(null);
   const [hoveredTechnology, setHoveredTechnology] = useState(null);
   const [pinnedTechnology, setPinnedTechnology] = useState(null);
   const [tooltipPosition, setTooltipPosition] = useState(null);
+  const [heldIcon, setHeldIcon] = useState(null);
+  const [releaseIcon, setReleaseIcon] = useState(null);
   const activeTechnology = hoveredTechnology || pinnedTechnology;
-  const activeShellKey = activeTechnology?.shellKey || null;
+  const activeTooltipPosition = hoveredTechnology && heldIcon
+    ? heldIcon.position
+    : tooltipPosition;
   const categoryMap = useMemo(
     () =>
       Object.fromEntries(
@@ -336,14 +364,63 @@ const Tech = () => {
     return () => window.cancelAnimationFrame(animationFrame);
   }, [activeTechnology]);
 
-  const handleTechEnter = (technology) => {
-    updateTooltipPosition(technology);
+  const handleTechEnter = (technology, large = false) => {
+    const stage = orbitStageRef.current;
+    const target = techIconRefs.current.get(technology.name);
+    if (stage && target) {
+      const stageRect = stage.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const position = {
+        x: targetRect.left - stageRect.left + targetRect.width / 2,
+        y: targetRect.top - stageRect.top + targetRect.height / 2,
+      };
+
+      if (releaseTimerRef.current) {
+        window.clearTimeout(releaseTimerRef.current);
+        releaseTimerRef.current = null;
+      }
+
+      setReleaseIcon(null);
+      setHeldIcon({ technology, large, position });
+      setTooltipPosition(position);
+    } else {
+      updateTooltipPosition(technology);
+    }
     setHoveredTechnology(technology);
   };
 
   const handleTechActivate = (technology) => {
     updateTooltipPosition(technology);
     setPinnedTechnology(technology);
+  };
+
+  const handleTechLeave = () => {
+    if (hoveredTechnology && heldIcon) {
+      const stage = orbitStageRef.current;
+      const target = techIconRefs.current.get(hoveredTechnology.name);
+
+      if (stage && target) {
+        const stageRect = stage.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+        setReleaseIcon({
+          technology: heldIcon.technology,
+          large: heldIcon.large,
+          from: heldIcon.position,
+          to: {
+            x: targetRect.left - stageRect.left + targetRect.width / 2,
+            y: targetRect.top - stageRect.top + targetRect.height / 2,
+          },
+        });
+
+        releaseTimerRef.current = window.setTimeout(() => {
+          setReleaseIcon(null);
+          releaseTimerRef.current = null;
+        }, 520);
+      }
+    }
+
+    setHeldIcon(null);
+    setHoveredTechnology(null);
   };
 
   useEffect(() => {
@@ -359,6 +436,13 @@ const Tech = () => {
       document.removeEventListener("pointerdown", handleDocumentPointerDown);
     };
   }, []);
+
+  useEffect(
+    () => () => {
+      if (releaseTimerRef.current) window.clearTimeout(releaseTimerRef.current);
+    },
+    []
+  );
 
   useEffect(() => {
     const section = techSectionRef.current;
@@ -481,24 +565,76 @@ const Tech = () => {
                 depth={entry.depth}
                 angles={entry.angles}
                 centered={entry.centered}
-                isSlowed={activeShellKey === entry.key}
               >
                 {entry.items.map((technology) => (
                   <TechIcon
                     key={technology.name}
                     technology={technology}
                     large={entry.large}
+                    isHeld={heldIcon?.technology.name === technology.name}
                     registerRef={registerTechIcon}
                     onActivate={handleTechActivate}
                     onEnter={handleTechEnter}
-                    onLeave={() => setHoveredTechnology(null)}
+                    onLeave={handleTechLeave}
                   />
                 ))}
               </OrbitingCircles>
             ))}
           </div>
           <AnimatePresence>
-            {activeTechnology && tooltipPosition && (
+            {heldIcon && (
+              <motion.div
+                className="tech-held-icon pointer-events-none absolute z-20"
+                initial={false}
+                animate={{
+                  left: `${heldIcon.position.x}px`,
+                  top: `${heldIcon.position.y}px`,
+                  opacity: 1,
+                  scale: 1.04,
+                }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
+              >
+                <FloatingTechIcon
+                  technology={heldIcon.technology}
+                  large={heldIcon.large}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <AnimatePresence>
+            {releaseIcon && (
+              <motion.div
+                className="tech-held-icon pointer-events-none absolute z-20"
+                initial={{
+                  left: `${releaseIcon.from.x}px`,
+                  top: `${releaseIcon.from.y}px`,
+                  opacity: 1,
+                  scale: 1.04,
+                }}
+                animate={{
+                  left: `${releaseIcon.to.x}px`,
+                  top: `${releaseIcon.to.y}px`,
+                  opacity: 0,
+                  scale: 1,
+                }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  left: { duration: 0.48, ease: [0.22, 1, 0.36, 1] },
+                  top: { duration: 0.48, ease: [0.22, 1, 0.36, 1] },
+                  opacity: { duration: 0.28, delay: 0.2 },
+                  scale: { duration: 0.48, ease: "easeOut" },
+                }}
+              >
+                <FloatingTechIcon
+                  technology={releaseIcon.technology}
+                  large={releaseIcon.large}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <AnimatePresence>
+            {activeTechnology && activeTooltipPosition && (
               <motion.div
                 className="tech-tooltip pointer-events-none absolute z-20 max-w-[280px]"
                 initial={{ opacity: 0, scale: 0.96 }}
@@ -512,8 +648,8 @@ const Tech = () => {
                   scale: { duration: 0.22, ease: "easeOut" },
                 }}
                 style={{
-                  left: `${tooltipPosition.x}px`,
-                  top: `${tooltipPosition.y}px`,
+                  left: `${activeTooltipPosition.x}px`,
+                  top: `${activeTooltipPosition.y}px`,
                 }}
               >
                 <div className="tech-tooltip__content">
