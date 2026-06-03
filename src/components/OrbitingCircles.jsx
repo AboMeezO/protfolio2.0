@@ -10,6 +10,13 @@ const OrbitingCircles = ({
   centered = false,
 }) => {
   const items = Array.isArray(children) ? children : [children];
+  const centeredOffsets = [
+    { x: -18, y: -12 },
+    { x: 14, y: -14 },
+    { x: 0, y: 0 },
+    { x: -10, y: 18 },
+    { x: 18, y: 14 },
+  ];
 
   return (
     <div
@@ -32,9 +39,12 @@ const OrbitingCircles = ({
         {items.map((child, index) => {
           const angle =
             angles?.[index] ?? startAngle + (360 / items.length) * index;
-          const itemDepth = depth + 18 + index * 5;
+          const itemDepth = centered ? 0 : depth + 18 + index * 5;
+          const centeredOffset = centered
+            ? centeredOffsets[index % centeredOffsets.length]
+            : { x: 0, y: 0 };
           const itemTransform = centered
-            ? `translateZ(var(--item-hover-depth))`
+            ? `translate(${centeredOffset.x}px, ${centeredOffset.y}px) translate3d(0, 0, 0)`
             : `rotate(${angle}deg) translate(${radius}px) rotate(${-1 * angle}deg) translateZ(var(--item-hover-depth))`;
 
           return (
@@ -56,6 +66,8 @@ const OrbitingCircles = ({
               data-base-angle={angle}
               data-duration={duration}
               data-direction={reverse ? -1 : 1}
+              data-center-x={centeredOffset.x}
+              data-center-y={centeredOffset.y}
               data-tech-name={child.props?.technology?.name || ""}
             >
               {child}

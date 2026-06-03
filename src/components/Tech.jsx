@@ -122,7 +122,7 @@ const shellConfigs = [
   { key: "secondary-ring", radius: 252, iconSize: 64, duration: 38, reverse: true, large: false, depth: 34, angles: [-128, -72, -18, 38, 96, 156, 218, 286] },
   { key: "tertiary-ring", radius: 184, iconSize: 54, duration: 30, reverse: false, large: false, depth: 72, angles: [-150, -92, -34, 28, 88, 146, 208, 268] },
   { key: "inner-ring", radius: 126, iconSize: 46, duration: 23, reverse: true, large: false, depth: 112, angles: [-118, -28, 64, 154, 244] },
-  { key: "core-ring", radius: 0, iconSize: 40, duration: 18, reverse: false, large: false, depth: 150, centered: true },
+  { key: "core-ring", radius: 0, iconSize: 40, duration: 18, reverse: false, large: false, depth: 0, centered: true },
 ];
 
 const orbitMotionConfig = {
@@ -409,8 +409,10 @@ const Tech = () => {
     };
     const applyTransform = (item, angle, radius) => {
       const depth = item.dataset.depth;
+      const centerX = Number(item.dataset.centerX || 0);
+      const centerY = Number(item.dataset.centerY || 0);
       item.style.transform = radius === 0
-        ? "translateZ(var(--item-hover-depth))"
+        ? `translate(${centerX}px, ${centerY}px) translate3d(0, 0, 0)`
         : `rotate(${angle}deg) translate(${radius}px) rotate(${-1 * angle}deg) translateZ(var(--item-hover-depth))`;
       item.dataset.depth = depth;
     };
