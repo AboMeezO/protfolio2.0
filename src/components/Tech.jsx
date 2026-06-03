@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import gsap from "gsap";
 import {
   siDiscord,
@@ -121,8 +121,8 @@ const shellConfigs = [
   { key: "primary-ring", radius: 318, iconSize: 76, duration: 46, reverse: false, large: true, depth: 0, angles: [-96, -38, 22, 84, 148, 214, 278] },
   { key: "secondary-ring", radius: 252, iconSize: 64, duration: 38, reverse: true, large: false, depth: 34, angles: [-128, -72, -18, 38, 96, 156, 218, 286] },
   { key: "tertiary-ring", radius: 184, iconSize: 54, duration: 30, reverse: false, large: false, depth: 72, angles: [-150, -92, -34, 28, 88, 146, 208, 268] },
-  { key: "inner-ring", radius: 112, iconSize: 46, duration: 23, reverse: true, large: false, depth: 112, angles: [-118, -28, 64, 154, 244] },
-  { key: "core-ring", radius: 54, iconSize: 40, duration: 18, reverse: false, large: false, depth: 150, angles: [-90, 30, 150] },
+  { key: "inner-ring", radius: 126, iconSize: 46, duration: 23, reverse: true, large: false, depth: 112, angles: [-118, -28, 64, 154, 244] },
+  { key: "core-ring", radius: 68, iconSize: 40, duration: 18, reverse: false, large: false, depth: 150, angles: [-90, 30, 150] },
 ];
 
 const orbitMotionConfig = {
@@ -164,8 +164,6 @@ const TechIcon = ({ technology, large = false, onActivate, onEnter, onLeave, reg
     }}
     onPointerEnter={() => onEnter(technology)}
     onPointerLeave={onLeave}
-    onMouseEnter={() => onEnter(technology)}
-    onMouseLeave={onLeave}
     onFocus={() => onEnter(technology)}
     onBlur={onLeave}
   >
@@ -266,12 +264,12 @@ const Tech = () => {
         categoryMap.Deployments?.find((item) => item.name === "Vercel"),
         categoryMap.Deployments?.find((item) => item.name === "GitHub CI"),
         categoryMap.Deployments?.find((item) => item.name === "ReviveNode"),
-        categoryMap.Tooling?.find((item) => item.name === "Git"),
       ].filter(Boolean),
     },
     {
       ...shellConfigs[4],
       items: [
+        categoryMap.Tooling?.find((item) => item.name === "Git"),
         categoryMap.Tooling?.find((item) => item.name === "Electron.js"),
         categoryMap.Tooling?.find((item) => item.name === "Java"),
       ].filter(Boolean),
@@ -337,6 +335,16 @@ const Tech = () => {
 
     return () => window.cancelAnimationFrame(animationFrame);
   }, [activeTechnology]);
+
+  const handleTechEnter = (technology) => {
+    updateTooltipPosition(technology);
+    setHoveredTechnology(technology);
+  };
+
+  const handleTechActivate = (technology) => {
+    updateTooltipPosition(technology);
+    setPinnedTechnology(technology);
+  };
 
   useEffect(() => {
     const handleDocumentPointerDown = (event) => {
@@ -481,50 +489,57 @@ const Tech = () => {
                     technology={technology}
                     large={entry.large}
                     registerRef={registerTechIcon}
-                    onActivate={(selectedTechnology) =>
-                      setPinnedTechnology(selectedTechnology)
-                    }
-                    onEnter={setHoveredTechnology}
+                    onActivate={handleTechActivate}
+                    onEnter={handleTechEnter}
                     onLeave={() => setHoveredTechnology(null)}
                   />
                 ))}
               </OrbitingCircles>
             ))}
           </div>
-          <motion.div
-            className="tech-tooltip pointer-events-none absolute z-20 max-w-[280px]"
-            initial={false}
-            animate={{
-              x: tooltipPosition ? tooltipPosition.x : 0,
-              y: tooltipPosition ? tooltipPosition.y : 0,
-              opacity: activeTechnology && tooltipPosition ? 1 : 0,
-              scale: activeTechnology && tooltipPosition ? 1 : 0.92,
-            }}
-            transition={{ type: "spring", stiffness: 220, damping: 24, mass: 0.8 }}
-            style={{ left: 0, top: 0 }}
-          >
-            <div className="tech-tooltip__content">
+          <AnimatePresence>
+            {activeTechnology && tooltipPosition && (
               <motion.div
-                key={activeTechnology?.name || "empty"}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.22, ease: "easeOut" }}
+                className="tech-tooltip pointer-events-none absolute z-20 max-w-[280px]"
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{
+                  opacity: { duration: 0.18, ease: "easeOut" },
+                  scale: { duration: 0.22, ease: "easeOut" },
+                }}
+                style={{
+                  left: `${tooltipPosition.x}px`,
+                  top: `${tooltipPosition.y}px`,
+                }}
               >
-                <p className="text-white text-[15px] font-bold">
-                  {activeTechnology?.name}
-                </p>
-                <p className="mt-1 text-secondary text-[12px] leading-5">
-                  {activeTechnology?.experience}
-                </p>
-                {activeTechnology &&
-                  pinnedTechnology?.name === activeTechnology.name && (
-                  <p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-[#00cea8]">
-                    Pinned
-                  </p>
-                )}
+                <div className="tech-tooltip__content">
+                  <motion.div
+                    key={activeTechnology.name}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 6 }}
+                    transition={{ duration: 0.22, ease: "easeOut" }}
+                  >
+                    <p className="text-white text-[15px] font-bold">
+                      {activeTechnology.name}
+                    </p>
+                    <p className="mt-1 text-secondary text-[12px] leading-5">
+                      {activeTechnology.experience}
+                    </p>
+                    {pinnedTechnology?.name === activeTechnology.name && (
+                      <p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-[#00cea8]">
+                        Pinned
+                      </p>
+                    )}
+                  </motion.div>
+                </div>
               </motion.div>
-            </div>
-          </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.div>
 
