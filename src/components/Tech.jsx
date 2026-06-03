@@ -122,7 +122,7 @@ const shellConfigs = [
   { key: "secondary-ring", radius: 252, iconSize: 64, duration: 38, reverse: true, large: false, depth: 34, angles: [-128, -72, -18, 38, 96, 156, 218, 286] },
   { key: "tertiary-ring", radius: 184, iconSize: 54, duration: 30, reverse: false, large: false, depth: 72, angles: [-150, -92, -34, 28, 88, 146, 208, 268] },
   { key: "inner-ring", radius: 126, iconSize: 46, duration: 23, reverse: true, large: false, depth: 112, angles: [-118, -28, 64, 154, 244] },
-  { key: "core-ring", radius: 68, iconSize: 40, duration: 18, reverse: false, large: false, depth: 150, angles: [-90, -18, 54, 126, 198] },
+  { key: "core-ring", radius: 28, iconSize: 40, duration: 18, reverse: false, large: false, depth: 150, angles: [-92, -38, 8, 42, 96] },
 ];
 
 const orbitMotionConfig = {
