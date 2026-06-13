@@ -28,4 +28,3 @@ dist-ssr
 # vscode
 .vscode
 .cursor/worktrees.json
-pnpm-lock.yaml
