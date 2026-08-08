@@ -86,8 +86,7 @@ const Lightbox = ({ items, activeIndex, onClose, onMove }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.96 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="flex items-center justify-center w-full h-full"
-            onClick={(e) => e.stopPropagation()}
+            className="flex items-center justify-center"
           >
             {item.type === "video" ? (
               <video
@@ -96,6 +95,7 @@ const Lightbox = ({ items, activeIndex, onClose, onMove }) => {
                 autoPlay
                 preload="metadata"
                 className="lightbox__media"
+                onClick={(e) => e.stopPropagation()}
               />
             ) : (
               <img
@@ -103,6 +103,7 @@ const Lightbox = ({ items, activeIndex, onClose, onMove }) => {
                 alt={item.alt || ""}
                 className="lightbox__media"
                 draggable={false}
+                onClick={(e) => e.stopPropagation()}
               />
             )}
           </motion.div>
