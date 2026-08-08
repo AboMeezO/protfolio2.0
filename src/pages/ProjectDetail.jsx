@@ -6,7 +6,7 @@ import MediaGallery from "../components/gallery/MediaGallery";
 import NotFound from "./NotFound";
 import Seo from "../components/Seo";
 import { getProjectBySlug } from "../utils/projects";
-import { fadeIn, textVariant, staggerContainer } from "../utils/motion";
+import { fadeIn, textVariant } from "../utils/motion";
 
 const ProjectDetail = () => {
   const { slug } = useParams();
