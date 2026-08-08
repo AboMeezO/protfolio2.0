@@ -773,6 +773,65 @@
   background: linear-gradient(135deg, #00cea8, #bf61ff);
 }
 
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.article-meta__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #aaa6c3;
+  font-size: 14px;
+}
+
+.article-meta__item svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.article-prose {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.article-divider {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(170, 166, 195, 0.15),
+    rgba(145, 94, 255, 0.15),
+    rgba(170, 166, 195, 0.15),
+    transparent
+  );
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #aaa6c3;
+  background: rgba(21, 16, 48, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.tag-chip:hover {
+  color: #ffffff;
+  border-color: rgba(145, 94, 255, 0.25);
+  background: rgba(21, 16, 48, 0.8);
+}
+
 @keyframes orbit-spin {
   from {
     transform: rotate(0deg);
