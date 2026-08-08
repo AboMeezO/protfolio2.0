@@ -111,27 +111,22 @@ const ProjectDetail = () => {
                 variants={fadeIn("up", "spring", 0.3, 0.75)}
                 className="mt-20"
               >
-                <span className="section-label">
-                  <span className="section-label__dot" />
-                  Key Features
-                </span>
-                <div className="mt-6 grid sm:grid-cols-2 gap-4">
+                <h2 className="text-white font-bold text-[20px] sm:text-[24px]">
+                  What it does
+                </h2>
+                <div className="feature-rail mt-8">
                   {project.features.map((feature, index) => (
                     <motion.div
                       key={feature}
-                      variants={fadeIn("up", "spring", index * 0.1, 0.5)}
-                      className="feature-card"
+                      variants={fadeIn("up", "spring", index * 0.08, 0.5)}
+                      className="feature-item"
                     >
-                      <div className="relative z-10 flex items-start gap-4">
-                        <div className="feature-card__icon">
-                          <span className="text-[13px] font-bold green-text-gradient">
-                            {String(index + 1).padStart(2, "0")}
-                          </span>
-                        </div>
-                        <p className="text-white-100 text-[15px] leading-[1.6] font-medium pt-2">
-                          {feature}
-                        </p>
-                      </div>
+                      <span className="feature-item__ghost">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <p className="text-white-100 text-[16px] sm:text-[18px] leading-[1.65] font-medium">
+                        {feature}
+                      </p>
                     </motion.div>
                   ))}
                 </div>
@@ -143,23 +138,24 @@ const ProjectDetail = () => {
                 variants={fadeIn("up", "spring", 0.4, 0.75)}
                 className="mt-16"
               >
-                <span className="section-label">
-                  <span className="section-label__dot" />
-                  Links & Resources
-                </span>
-                <div className="mt-6 flex flex-wrap gap-3">
+                <h2 className="text-secondary text-[12px] font-semibold uppercase tracking-[0.14em] mb-5">
+                  Available at
+                </h2>
+                <div className="links-strip">
                   {project.links.map((link) => (
                     <a
                       key={link.href}
                       href={link.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="cta-link"
+                      className="links-strip__item"
                     >
-                      <span>{link.label}</span>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="relative z-10">
-                        <path d="M7 17L17 7" /><path d="M7 7h10v10" />
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
                       </svg>
+                      {link.label}
                     </a>
                   ))}
                 </div>

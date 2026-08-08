@@ -154,11 +154,11 @@ const BlogDetail = () => {
           className="article-prose mt-16 pb-8"
         >
           <div className="article-divider mb-8" />
-          <Link to="/blogs" className="cta-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="relative z-10">
+          <Link to="/blogs" className="breadcrumb-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M19 12H5" /><path d="m12 19-7-7 7-7" />
             </svg>
-            <span>Back to all articles</span>
+            Back to all articles
           </Link>
         </motion.div>
       </div>
