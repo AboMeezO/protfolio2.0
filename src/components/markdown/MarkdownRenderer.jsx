@@ -2,75 +2,84 @@ import { MDXProvider } from "@mdx-js/react";
 
 const components = {
   h1: (props) => (
-    <h1 className="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px] mt-10" {...props} />
+    <h1 className="text-white font-black md:text-[48px] sm:text-[40px] xs:text-[34px] text-[28px] mt-16 leading-[1.1]" {...props} />
   ),
   h2: (props) => (
-    <h2 className="text-white font-bold text-[24px] mt-10" {...props} />
+    <h2 className="text-white font-bold text-[24px] sm:text-[28px] mt-14 leading-[1.2]" {...props} />
   ),
   h3: (props) => (
-    <h3 className="text-white font-bold text-[20px] mt-8" {...props} />
+    <h3 className="text-white font-bold text-[18px] sm:text-[20px] mt-10 leading-[1.3]" {...props} />
   ),
   p: (props) => (
-    <p className="mt-4 text-secondary text-[17px] leading-[30px]" {...props} />
+    <p className="mt-5 text-secondary text-[16px] sm:text-[17px] leading-[1.8]" {...props} />
   ),
   a: (props) => (
     <a
-      className="text-white hover:text-secondary transition-colors duration-300"
+      className="text-[#00cea8] hover:text-white font-medium transition-colors duration-300 underline decoration-[#00cea8]/30 underline-offset-4 hover:decoration-white/50"
       target={props.href?.startsWith("http") ? "_blank" : undefined}
       rel={props.href?.startsWith("http") ? "noreferrer" : undefined}
       {...props}
     />
   ),
   ul: (props) => (
-    <ul className="mt-4 text-secondary text-[17px] leading-[30px] list-disc pl-6" {...props} />
+    <ul className="mt-5 text-secondary text-[16px] sm:text-[17px] leading-[1.8] list-none pl-0 space-y-3" {...props} />
   ),
   ol: (props) => (
-    <ol className="mt-4 text-secondary text-[17px] leading-[30px] list-decimal pl-6" {...props} />
+    <ol className="mt-5 text-secondary text-[16px] sm:text-[17px] leading-[1.8] list-none pl-0 space-y-3 counter-reset-item" {...props} />
   ),
-  li: (props) => <li className="mt-2" {...props} />,
+  li: (props) => (
+    <li className="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-[11px] before:w-[6px] before:h-[6px] before:rounded-full before:bg-gradient-to-r before:from-[#00cea8] before:to-[#bf61ff]" {...props} />
+  ),
   blockquote: (props) => (
-    <blockquote className="mt-6 green-pink-gradient p-[1px] rounded-[20px]">
-      <div className="bg-tertiary rounded-[20px] py-5 px-5 text-secondary text-[17px] leading-[30px]" {...props} />
+    <blockquote className="mt-8 relative">
+      <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-full bg-gradient-to-b from-[#00cea8] to-[#bf61ff]" />
+      <div className="bg-tertiary/50 rounded-r-2xl py-5 px-6 ml-4 text-secondary text-[16px] sm:text-[17px] leading-[1.8] italic" {...props} />
     </blockquote>
   ),
   table: (props) => (
-    <div className="mt-6 overflow-x-auto bg-tertiary rounded-2xl p-5">
+    <div className="mt-8 overflow-x-auto rounded-2xl border border-white/5">
       <table className="w-full text-secondary text-[14px]" {...props} />
     </div>
   ),
   th: (props) => (
-    <th className="text-white font-bold text-left py-2 px-4 border-b border-secondary" {...props} />
+    <th className="text-white font-semibold text-left py-3 px-5 bg-tertiary/80 border-b border-white/5" {...props} />
   ),
   td: (props) => (
-    <td className="py-2 px-4 border-b border-secondary" {...props} />
+    <td className="py-3 px-5 border-b border-white/5" {...props} />
   ),
   code: ({ className, children, ...props }) => {
     const isBlock = className;
     if (!isBlock) {
       return (
-        <code className="bg-tertiary text-white text-[14px] rounded-md px-2 py-1" {...props}>
+        <code className="bg-tertiary/80 text-[#00cea8] text-[13px] sm:text-[14px] rounded-lg px-2 py-0.5 font-mono border border-white/5" {...props}>
           {children}
         </code>
       );
     }
 
     return (
-      <code className={`${className} text-white text-[14px]`} {...props}>
+      <code className={`${className} text-white text-[13px] sm:text-[14px] font-mono`} {...props}>
         {children}
       </code>
     );
   },
   pre: (props) => (
-    <pre className="mt-6 bg-tertiary rounded-2xl p-5 overflow-x-auto text-white text-[14px]" {...props} />
+    <pre className="mt-8 bg-tertiary/80 rounded-2xl p-5 sm:p-6 overflow-x-auto text-white text-[13px] sm:text-[14px] border border-white/5 shadow-lg" {...props} />
   ),
   img: (props) => (
-    <span className="mt-6 block green-pink-gradient p-[1px] rounded-2xl">
+    <span className="mt-8 block relative rounded-2xl overflow-hidden border border-white/5">
       <img
         loading="lazy"
-        className="w-full h-full object-cover rounded-2xl bg-tertiary"
+        className="w-full h-full object-cover bg-tertiary"
         {...props}
       />
     </span>
+  ),
+  strong: (props) => (
+    <strong className="text-white font-semibold" {...props} />
+  ),
+  hr: () => (
+    <hr className="my-12 border-0 h-[1px] bg-gradient-to-r from-transparent via-[#aaa6c3]/20 to-transparent" />
   ),
 };
 
