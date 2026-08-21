@@ -22,13 +22,13 @@ const components = {
     />
   ),
   ul: (props) => (
-    <ul className="mt-5 text-secondary text-[16px] sm:text-[17px] leading-[1.8] list-none pl-0 space-y-3" {...props} />
+    <ul className="markdown-list markdown-list--unordered mt-5 text-secondary text-[16px] sm:text-[17px] leading-[1.8] list-none pl-0 space-y-3" {...props} />
   ),
   ol: (props) => (
-    <ol className="mt-5 text-secondary text-[16px] sm:text-[17px] leading-[1.8] list-none pl-0 space-y-3 counter-reset-item" {...props} />
+    <ol className="markdown-list markdown-list--ordered mt-5 text-secondary text-[16px] sm:text-[17px] leading-[1.8] list-none pl-0 space-y-3" {...props} />
   ),
   li: (props) => (
-    <li className="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-[11px] before:w-[6px] before:h-[6px] before:rounded-full before:bg-gradient-to-r before:from-[#00cea8] before:to-[#bf61ff]" {...props} />
+    <li className="markdown-list-item" {...props} />
   ),
   blockquote: (props) => (
     <blockquote className="mt-8 relative">

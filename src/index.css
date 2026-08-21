@@ -911,6 +911,40 @@
   background: linear-gradient(135deg, #00cea8, #bf61ff);
 }
 
+.markdown-list-item {
+  position: relative;
+  padding-left: 24px;
+}
+
+.markdown-list--unordered > .markdown-list-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #00cea8, #bf61ff);
+}
+
+.markdown-list--ordered {
+  counter-reset: markdown-list-item;
+}
+
+.markdown-list--ordered > .markdown-list-item {
+  counter-increment: markdown-list-item;
+}
+
+.markdown-list--ordered > .markdown-list-item::before {
+  content: counter(markdown-list-item) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00cea8;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
 .article-meta {
   display: flex;
   align-items: center;
