@@ -30,36 +30,47 @@ const MediaGallery = ({ items = [], fallbackCover, title }) => {
 
   return (
     <div className="mt-20">
-      <h2 className="text-white font-bold text-[24px]">Media Gallery</h2>
-      <div className="mt-6 flex flex-wrap gap-7">
-        {visibleItems.map((item, index) => (
-          <motion.button
-            key={`${item.src}-${index}`}
-            variants={fadeIn("up", "spring", index * 0.1, 0.75)}
-            className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full text-left"
-            onClick={() => setActiveIndex(index)}
-          >
-            <div className="relative w-full h-[230px]">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-white font-bold text-[20px] sm:text-[24px]">
+          Gallery
+        </h2>
+        <span className="text-secondary text-[12px] font-medium">
+          {visibleItems.length} {visibleItems.length === 1 ? "item" : "items"}
+        </span>
+      </div>
+      <div className="gallery-fade">
+        <div className="gallery-strip">
+          {visibleItems.map((item, index) => (
+            <motion.button
+              key={`${item.src}-${index}`}
+              variants={fadeIn("up", "spring", index * 0.06, 0.5)}
+              className="gallery-frame"
+              onClick={() => setActiveIndex(index)}
+            >
               {item.type === "video" ? (
                 <video
                   src={item.src}
                   preload="metadata"
-                  className="w-full h-full object-cover rounded-2xl"
+                  className="gallery-frame__img"
                 />
               ) : (
                 <img
                   src={item.src}
                   alt={item.alt || title}
                   loading="lazy"
-                  className="w-full h-full object-cover rounded-2xl"
+                  className="gallery-frame__img"
                 />
               )}
-            </div>
-            {item.caption && (
-              <p className="mt-4 text-secondary text-[14px]">{item.caption}</p>
-            )}
-          </motion.button>
-        ))}
+              {item.caption && (
+                <div className="gallery-frame__caption">
+                  <p className="text-secondary text-[12px] leading-[1.5] italic">
+                    {item.caption}
+                  </p>
+                </div>
+              )}
+            </motion.button>
+          ))}
+        </div>
       </div>
 
       {activeIndex !== null && (
